@@ -1,0 +1,8 @@
+{
+  "name": "cocinapp",
+  "app_id": "25d5884b",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
