@@ -1,18 +1,52 @@
 <ion-header>
-  <ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+  <ion-navbar color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Inicio!</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-slides pager>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <ion-slide style="background-color: white">
+        <img src="././assets/imgs/fork.png" alt="">
+      <p style="font-size:50px">Bienvenido a CocinAPP</p>
+      <p >Si no sabes que hacer con los ingredientes que tenes en tu casa y no queres gastar en delivery, esta es la herramienta que estabas buscando.</p>
+
+    </ion-slide>
+
+    <ion-slide style="background-color: white">
+        <img src="././assets/imgs/recetas.png" alt="">
+      <p style="font-size:40px">Recetas utiles</p>
+      <p>Variedad de recetas muy faciles de preparar con videos de nuestros especialistas, para que cocinar sea facil y divertido.</p>
+      <button ion-button round outline color="danger" name="Listas">Recetas</button>
+    </ion-slide>
+
+    <ion-slide style="background-color: white">
+        <img src="././assets/imgs/nota.png" alt="">
+      <p style="font-size:40px">Dejanos tus recetas</p>
+      <p>Tambien podes hacer que tu receta se haga conocida, que nadie se pierda esa comida que tanto te gusta.</p>
+        <button ion-button round outline color="danger" name="Recetas">Compartir receta</button>
+    </ion-slide>
+
+  </ion-slides>
+
+ <!-- this fab is placed at bottom right -->
+ <ion-fab bottom right >
+   <button ion-fab mini color="dark">Share</button>
+   <ion-fab-list side="top">
+     <button ion-fab color="primary" ><ion-icon name="logo-facebook"></ion-icon></button>
+     <button ion-fab color="primary"><ion-icon name="logo-twitter"></ion-icon></button>
+
+   </ion-fab-list>
+   <ion-fab-list side="left">
+    <button ion-fab color="danger"><ion-icon name="logo-youtube"></ion-icon></button>
+   </ion-fab-list>
+ </ion-fab>
+
+
 </ion-content>
