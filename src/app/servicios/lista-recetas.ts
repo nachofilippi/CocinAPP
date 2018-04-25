@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Lista } from '../clases/listas';
 
+
 @Injectable()
 export class ListaRecetasServicios {
 
@@ -38,6 +39,11 @@ export class ListaRecetasServicios {
   agregarLista(lista: Lista) {
     this.listas.push(lista);
     this.actualizarData();
+  }
+
+  eliminarLista( idx:number){
+      this.listas.splice(idx,1);
+      this.actualizarData();
   }
 
 }

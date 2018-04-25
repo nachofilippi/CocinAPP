@@ -20,31 +20,34 @@
 
 
   <!-- titulo y cantidad de elementos -->
-  <ion-card *ngFor="let lista of _listaRecetasServicios.listas">
-    <ion-item color="light" class="text-center">
+  <ion-card *ngFor="let lista of _listaRecetasServicios.listas; let i = index">
+    <ion-item color="light" class="text-center" (click)="verDetalle(lista,i)">
       <h2> {{ lista.nombre }}</h2>
       <ion-note item-right color="dark">
         ({{lista.items.length}} items)
       </ion-note>
+      <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline"></ion-icon>
+      <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista(i)"></ion-icon>
     </ion-item>
 
     <!-- elementos -->
     <ion-list>
-      <ion-item *ngFor="let item of lista.items  | slice:0:2">
-        <ion-label>{{item.nombre}}</ion-label>
-        <ion-checkbox color="danger" checked="false"></ion-checkbox>
+      <ion-item *ngFor="let item of lista.items  | slice:0:2" (click)="actualizar(item)">
+        <ion-icon item-left *ngIf="item.completado" ios="ios-checkmark-circle" md="md-checkmark-circle" color="danger"></ion-icon>
+        <ion-icon item-left *ngIf="!item.completado" ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="danger"></ion-icon>
+        <ion-label [class.tachado]="item.completado">{{item.nombre}}</ion-label>
       </ion-item>
 
-    <ion-item class="text-center" *ngIf="lista.items.length > 2">
+      <ion-item class="text-center" *ngIf="lista.items.length > 2">
         <ion-icon color="red" name="arrow-dropdown"></ion-icon>
-    </ion-item>
+      </ion-item>
 
     </ion-list>
   </ion-card>
 
-<!-- boton de agregar -->
+  <!-- boton de agregar -->
   <ion-fab bottom right>
-    <button ion-fab color="dark" (click)="irAgregar()">
+    <button ion-fab color="dark" (click)="showConfirm()">
         <ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

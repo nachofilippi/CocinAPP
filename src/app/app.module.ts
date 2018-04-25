@@ -15,6 +15,7 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AgregarComponent} from '../pages/agregar/agregar.component';
+import { DetalleComponent } from '../pages/detalle/detalle.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AgregarComponent} from '../pages/agregar/agregar.component';
     HomePage,
     ListPage,
     AgregarComponent,
-    PlaceHolderPipe
+    PlaceHolderPipe,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { AgregarComponent} from '../pages/agregar/agregar.component';
     MyApp,
     HomePage,
     ListPage,
-    AgregarComponent
+    AgregarComponent,
+    DetalleComponent
   ],
   providers: [
     StatusBar,

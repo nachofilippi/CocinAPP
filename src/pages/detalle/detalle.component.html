@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalle de la receta</ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+</ion-header>
+
+<ion-content padding>
+    <ion-card >
+  <ion-card-header >
+      <ion-item color="light">
+          <h1 class="text-center">{{lista.nombre}}</h1>
+      </ion-item>
+  </ion-card-header>
+
+  <ion-card-content>
+      <ion-list>
+     <ion-item *ngFor="let item of lista.items" Descripcion>
+         Descripcion
+     </ion-item>
+     </ion-list>
+  </ion-card-content>
+</ion-card>
+
+</ion-content>
