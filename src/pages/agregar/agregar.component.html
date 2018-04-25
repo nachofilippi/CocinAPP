@@ -23,7 +23,7 @@
 
       <ion-item>
         <ion-label floating>Ingredientes:</ion-label>
-        <ion-input type="text" [(ngModel)]="nombreItem" name="nombreItem"></ion-input>
+        <ion-input (keyup.enter)="agregar()" type="text" [(ngModel)]="nombreItem" name="nombreItem"></ion-input>
       </ion-item>
       <!-- <ion-list>
         <ion-item>
@@ -77,7 +77,7 @@
   </ion-card>
 
 <!-- Items agregar -->
-  <ion-card>
+  <ion-card *ngIf="items.length > 0">
     <ion-card-header>
       <ion-label>Ingredientes agregados</ion-label>
     </ion-card-header>
@@ -87,9 +87,10 @@
           <button ion-button color="dark" clear>
               {{ item.nombre }}
           </button>
-          <button ion-button outline item-right color="danger" >
+          <button (click)="borrarItem(i)"
+              ion-button outline item-right color="danger" >
               <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-             Borrar item ( {{i}} )
+             Borrar item
           </button>
         </ion-item>
       </ion-list>
@@ -97,7 +98,8 @@
   </ion-card>
 
 <!-- Boton agregar -->
-  <button ion-button icon left color="danger" outline class="button-block">
+  <button (click)="agregarLista()"
+      ion-button icon left color="danger" outline class="button-block">
       <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
        Crear Lista
 </button>
