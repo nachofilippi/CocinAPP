@@ -21,13 +21,14 @@
 
   <!-- titulo y cantidad de elementos -->
   <ion-card *ngFor="let lista of _listaRecetasServicios.listas; let i = index">
-    <ion-item color="light" class="text-center" (click)="verDetalle(lista,i)">
+    <ion-item color="light" class="text-center" >
       <h2> {{ lista.nombre }}</h2>
       <ion-note item-right color="dark">
         ({{lista.items.length}} items)
       </ion-note>
-      <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline"></ion-icon>
-      <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista(i)"></ion-icon>
+
+      <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline" (click)="verDetalle(lista,i)"></ion-icon>
+      <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
     </ion-item>
 
     <!-- elementos -->

@@ -64,7 +64,7 @@ export class ListPage implements OnInit {
       console.log(i.completado);
   }
 
-  borrarLista( i:number ){
+  borrarLista(){
       let confirm = this.alertCtrl.create({
       title: 'Borrar lista',
       message: 'Esta seguro que usted desea borrar la lista?',
@@ -72,8 +72,7 @@ export class ListPage implements OnInit {
         {
           text: 'Eliminar',
           handler: () => {
-              this._listaRecetasServicios.eliminarLista(i);
-              this.navCtrl.pop();
+             this._listaRecetasServicios.eliminarLista(this.idx);
             console.log('Eliminar');
           }
         }

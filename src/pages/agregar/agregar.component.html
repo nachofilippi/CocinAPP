@@ -25,53 +25,7 @@
         <ion-label floating>Ingredientes:</ion-label>
         <ion-input (keyup.enter)="agregar()" type="text" [(ngModel)]="nombreItem" name="nombreItem"></ion-input>
       </ion-item>
-      <!-- <ion-list>
-        <ion-item>
-          <ion-label>Carnes de vaca</ion-label>
-          <ion-select [(ngModel)]="carnesVaca" multiple="true" cancelText="Cancelar" okText="Aceptar">
-            <ion-option value="Asado" >Asado</ion-option>
-            <ion-option value="Bife de lomo">Bife de lomo</ion-option>
-            <ion-option value="Vacio" >Vacio</ion-option>
-            <ion-option value="Colita de cuadril">Colita de cuadril</ion-option>
-            <ion-option value="Entraña">Entraña</ion-option>
-            <ion-option value="Bondiola">Bondiola</ion-option>
-            <ion-option value="Ojo de bife">Ojo de bife</ion-option>
-            <ion-option value="Tapa de lomo">Tapa de lomo</ion-option>
-            <ion-option value="Paleta">Paleta</ion-option>
-            <ion-option value="Peceto">Peceto</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-item>
-          <ion-label>Vegetales</ion-label>
-          <ion-select [(ngModel)]="vegetales" multiple="true" cancelText="Cancelar" okText="Aceptar">
-            <ion-option value="Brocoli" >Brocoli</ion-option>
-            <ion-option value="Acelga" >Acelga</ion-option>
-            <ion-option value="Aji" >Aji</ion-option>
-            <ion-option value="Apio" >Apio</ion-option>
-            <ion-option value="Lechuga" >Lechuga</ion-option>
-            <ion-option value="Cebolla" >Cebolla</ion-option>
-            <ion-option value="Zanahoria" >Zanahoria</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-item>
-          <ion-label>Quesos</ion-label>
-          <ion-select [(ngModel)]="quesos" multiple="true" cancelText="Cancelar" okText="Aceptar">
-            <ion-option value="Muzzarella" >Muzzarella</ion-option>
-            <ion-option value="Azul" >Azul</ion-option>
-            <ion-option value="Cuatro quesos" >Cuatro quesos</ion-option>
-            <ion-option value="Gouda" >Gouda</ion-option>
-            <ion-option value="Cheddar" >Cheddar</ion-option>
-            <ion-option value="Provolone" >Provolone</ion-option>
-            <ion-option value="Camembert" >Camembert</ion-option>
-            <ion-option value="Parmesano" >Parmesano</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list> -->
-
+     
       <button (click)="agregar()" ion-button color="danger" outline class="button-block">Agregar</button>
     </ion-card-content>
   </ion-card>
