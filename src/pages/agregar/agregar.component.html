@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ nombreLista | placeholder:'Nueva receta'}} </ion-title>
+    <ion-title>{{ nombreLista | placeholder:'Nueva lista'}} </ion-title>
   </ion-navbar>
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
@@ -11,29 +11,95 @@
 <ion-content padding>
   <ion-card>
 
+<!-- Crear lista de comida -->
     <ion-card-header>
       <ion-item>
-        <ion-label floating>Nombre de receta</ion-label>
-        <ion-input type="text" [(ngModel)]="nombreLista" name="nombreLista"></ion-input>
+        <ion-label floating>Nombre de lista</ion-label>
+        <ion-input (ng-keyup.enter)="agregar()" type="text" [(ngModel)]="nombreLista" name="nombreLista"></ion-input>
       </ion-item>
     </ion-card-header>
 
     <ion-card-content>
 
       <ion-item>
-        <ion-label floating>Ingrediente:</ion-label>
-        <ion-input type="text"[(ngModel)]="nombreItem" name="nombreItem"></ion-input>
+        <ion-label floating>Ingredientes:</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreItem" name="nombreItem"></ion-input>
       </ion-item>
-      <button ion-button color="danger" outline>Agregar</button>
+      <!-- <ion-list>
+        <ion-item>
+          <ion-label>Carnes de vaca</ion-label>
+          <ion-select [(ngModel)]="carnesVaca" multiple="true" cancelText="Cancelar" okText="Aceptar">
+            <ion-option value="Asado" >Asado</ion-option>
+            <ion-option value="Bife de lomo">Bife de lomo</ion-option>
+            <ion-option value="Vacio" >Vacio</ion-option>
+            <ion-option value="Colita de cuadril">Colita de cuadril</ion-option>
+            <ion-option value="Entraña">Entraña</ion-option>
+            <ion-option value="Bondiola">Bondiola</ion-option>
+            <ion-option value="Ojo de bife">Ojo de bife</ion-option>
+            <ion-option value="Tapa de lomo">Tapa de lomo</ion-option>
+            <ion-option value="Paleta">Paleta</ion-option>
+            <ion-option value="Peceto">Peceto</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-label>Vegetales</ion-label>
+          <ion-select [(ngModel)]="vegetales" multiple="true" cancelText="Cancelar" okText="Aceptar">
+            <ion-option value="Brocoli" >Brocoli</ion-option>
+            <ion-option value="Acelga" >Acelga</ion-option>
+            <ion-option value="Aji" >Aji</ion-option>
+            <ion-option value="Apio" >Apio</ion-option>
+            <ion-option value="Lechuga" >Lechuga</ion-option>
+            <ion-option value="Cebolla" >Cebolla</ion-option>
+            <ion-option value="Zanahoria" >Zanahoria</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-label>Quesos</ion-label>
+          <ion-select [(ngModel)]="quesos" multiple="true" cancelText="Cancelar" okText="Aceptar">
+            <ion-option value="Muzzarella" >Muzzarella</ion-option>
+            <ion-option value="Azul" >Azul</ion-option>
+            <ion-option value="Cuatro quesos" >Cuatro quesos</ion-option>
+            <ion-option value="Gouda" >Gouda</ion-option>
+            <ion-option value="Cheddar" >Cheddar</ion-option>
+            <ion-option value="Provolone" >Provolone</ion-option>
+            <ion-option value="Camembert" >Camembert</ion-option>
+            <ion-option value="Parmesano" >Parmesano</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list> -->
+
+      <button (click)="agregar()" ion-button color="danger" outline class="button-block">Agregar</button>
     </ion-card-content>
-
   </ion-card>
 
+<!-- Items agregar -->
   <ion-card>
-
+    <ion-card-header>
+      <ion-label>Ingredientes agregados</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of items; let i = index">
+          <button ion-button color="dark" clear>
+              {{ item.nombre }}
+          </button>
+          <button ion-button outline item-right color="danger" >
+              <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+             Borrar item ( {{i}} )
+          </button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
-    <button ion-button icon left color="danger" outline class="button-block">
-        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
-         Crear Receta
-    </button>
+
+<!-- Boton agregar -->
+  <button ion-button icon left color="danger" outline class="button-block">
+      <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+       Crear Lista
+</button>
+
 </ion-content>
