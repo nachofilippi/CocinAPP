@@ -1,5 +1,5 @@
-<ion-menu [content]="content" >
-  <ion-header >
+<ion-menu [content]="content">
+  <ion-header>
     <ion-toolbar>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
@@ -7,7 +7,14 @@
   </ion-header>
 
   <ion-content class="fuente">
-    <ion-list >
+    <ion-item>
+      <ion-label icon left floating>
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      Buscar</ion-label>
+
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>

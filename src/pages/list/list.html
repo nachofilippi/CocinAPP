@@ -3,30 +3,47 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lista de Ingredientes</ion-title>
+    <ion-title>Lista de Recetas</ion-title>
   </ion-navbar>
-   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
+  <!-- buscador -->
+  <ion-item>
+    <ion-label icon left floating>
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      Buscar</ion-label>
+
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+
+  <!-- titulo y cantidad de elementos -->
   <ion-card *ngFor="let lista of _listaRecetasServicios.listas">
-    <!-- <ion-item>
-    BOTON
-    </ion-item> -->
+    <ion-item color="light" class="text-center">
+      <h2> {{ lista.nombre }}</h2>
+      <ion-note item-right color="dark">
+        ({{lista.items.length}} items)
+      </ion-note>
+    </ion-item>
 
-    <h2></h2>
-
+    <!-- elementos -->
     <ion-list>
-        <ion-item>
-          <ion-label>Lista Comida</ion-label>
-          <ion-checkbox color="danger" checked="false"></ion-checkbox>
-        </ion-item>
-    </ion-list>
+      <ion-item *ngFor="let item of lista.items  | slice:0:2">
+        <ion-label>{{item.nombre}}</ion-label>
+        <ion-checkbox color="danger" checked="false"></ion-checkbox>
+      </ion-item>
 
+    <ion-item class="text-center" *ngIf="lista.items.length > 2">
+        <ion-icon color="red" name="arrow-dropdown"></ion-icon>
+    </ion-item>
+
+    </ion-list>
   </ion-card>
 
-
-  <ion-fab top right edge>
+<!-- boton de agregar -->
+  <ion-fab bottom right>
     <button ion-fab color="dark" (click)="irAgregar()">
         <ion-icon name="add"></ion-icon></button>
   </ion-fab>
