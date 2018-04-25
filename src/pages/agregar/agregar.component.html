@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ nombreLista | placeholder:'Nueva receta'}} </ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+
+    <ion-card-header>
+      <ion-item>
+        <ion-label floating>Nombre de receta</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreLista" name="nombreLista"></ion-input>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label floating>Ingrediente:</ion-label>
+        <ion-input type="text"[(ngModel)]="nombreItem" name="nombreItem"></ion-input>
+      </ion-item>
+      <button ion-button color="danger" outline>Agregar</button>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card>
+
+  </ion-card>
+    <button ion-button icon left color="danger" outline class="button-block">
+        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+         Crear Receta
+    </button>
+</ion-content>

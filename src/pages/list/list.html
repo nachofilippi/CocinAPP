@@ -1,16 +1,33 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lista de Recetas</ion-title>
+    <ion-title>Lista de Ingredientes</ion-title>
   </ion-navbar>
+   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
-    <ul>
-        <li *ngFor= "let lista of _listaRecetasServicios.listas">
-            {{ lista.nombre }}
-        </li>
-    </ul>
+  <ion-card *ngFor="let lista of _listaRecetasServicios.listas">
+    <!-- <ion-item>
+    BOTON
+    </ion-item> -->
+
+    <h2></h2>
+
+    <ion-list>
+        <ion-item>
+          <ion-label>Daenerys Targaryen</ion-label>
+          <ion-checkbox color="danger" checked="true"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+  </ion-card>
+
+
+  <ion-fab top right edge>
+    <button ion-fab color="dark" (click)="irAgregar()">
+        <ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
