@@ -7,13 +7,13 @@
   </ion-header>
 
   <ion-content class="fuente">
-    <ion-item>
+    <!-- <ion-item>
       <ion-label icon left floating>
       <ion-icon ios="ios-search" md="md-search"></ion-icon>
       Buscar</ion-label>
 
       <ion-input type="text"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}

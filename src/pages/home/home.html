@@ -15,31 +15,31 @@
   <ion-slides pager>
 
     <ion-slide style="background-color: white">
-        <img src="././assets/imgs/fork.png" alt="">
+        <img src="././assets/imgs/fork.png" style="width: 70%;" alt="">
       <p style="font-size:50px">Bienvenido a CocinAPP</p>
       <p >Si no sabes que hacer con los ingredientes que tenes en tu casa y no queres gastar en delivery, esta es la herramienta que estabas buscando.</p>
 
     </ion-slide>
 
     <ion-slide style="background-color: white">
-        <img src="././assets/imgs/recetas.png" alt="">
+        <img src="././assets/imgs/recetas.png" style="width: 70%;" alt="">
       <p style="font-size:40px">Recetas utiles</p>
       <p>Variedad de recetas muy faciles de preparar con videos de nuestros especialistas, para que cocinar sea facil y divertido.</p>
-      <button ion-button round outline color="danger" name="Listas" (click)="openPage()">Recetas</button>
+      <button ion-button round outline color="danger" name="Listas" (click)="openPageLista()">Recetas</button>
     </ion-slide>
 
     <ion-slide style="background-color: white">
-        <img src="././assets/imgs/nota.png" alt="">
+        <img src="././assets/imgs/nota.png" style="width: 70%;" alt="">
       <p style="font-size:40px">Dejanos tus recetas</p>
       <p>Tambien podes hacer que tu receta se haga conocida, que nadie se pierda esa comida que tanto te gusta.</p>
-        <button ion-button round outline color="danger" name="Recetas">Compartir receta</button>
+        <button ion-button round outline color="danger" name="Recetas" (click)="openPagerCrearReceta()">Compartir receta</button>
     </ion-slide>
 
   </ion-slides>
 
  <!-- this fab is placed at bottom right -->
  <ion-fab bottom right >
-   <button ion-fab mini color="dark">Share</button>
+   <button ion-fab mini color="dark"> <ion-icon name="share"></ion-icon></button>
    <ion-fab-list side="top">
      <button ion-fab color="primary" ><ion-icon name="logo-facebook"></ion-icon></button>
      <button ion-fab color="primary"><ion-icon name="logo-twitter"></ion-icon></button>

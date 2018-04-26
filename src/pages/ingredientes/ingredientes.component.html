@@ -8,12 +8,14 @@
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 <ion-content padding>
+    <!-- buscador -->
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
       {{ item }}
     </ion-item>
   </ion-list>
+  <!-- ingredientes -->
   <ion-list>
     <ion-item>
       <ion-label>Carnes de vaca</ion-label>
@@ -60,5 +62,9 @@
       </ion-select>
     </ion-item>
   </ion-list>
+  <!-- boton buscar -->
+  <button ion-button outline round block color="danger" >Buscar receta</button>
+
+
 
 </ion-content>

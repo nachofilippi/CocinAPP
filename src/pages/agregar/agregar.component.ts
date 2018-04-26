@@ -13,6 +13,8 @@ export class AgregarComponent implements OnInit {
 
   nombreLista: string = "";
   nombreItem: string = "";
+  cantidadItem: string= "";
+  personasLista: string= "";
 
   items: ListaItem[] = [];
 
@@ -27,12 +29,25 @@ export class AgregarComponent implements OnInit {
     if (this.nombreItem.length == 0) {
       return;
     }
+    if (this.cantidadItem.length == 0) {
+      let alert = this.alertCtrl.create({
+        title: 'Cantidad en gramos',
+        subTitle: 'Debe ingresar un valor mayor a cero',
+        buttons: ['OK']
+      });
+      alert.present();
+      return;
+    }
 
     let item = new ListaItem();
     item.nombre = this.nombreItem;
+    item.cantidad=this.cantidadItem;
+
 
     this.items.push(item);
     this.nombreItem = "";
+    this.cantidadItem= "";
+
   }
 
   borrarItem(idx: number) {
@@ -50,7 +65,17 @@ export class AgregarComponent implements OnInit {
       return;
     }
 
-    let lista = new Lista ( this.nombreLista );
+    if (this.personasLista.length == 0) {
+      let alert = this.alertCtrl.create({
+        title: 'Cantidad de personas',
+        subTitle: 'Debe ingresar la cantidad de personas que comen en la receta',
+        buttons: ['OK']
+      });
+      alert.present();
+      return;
+    }
+
+    let lista = new Lista ( this.nombreLista, this.personasLista );
     lista.items = this.items;
 
     // this._listaRecetas.listas.push(lista);
@@ -58,6 +83,7 @@ export class AgregarComponent implements OnInit {
     this.navCtrl.pop();
 
 
+    console.log(lista);
 
   }
 }
