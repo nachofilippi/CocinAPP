@@ -4,6 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 // servicios
 import { ListaRecetasServicios } from './servicios/lista-recetas';
+import { ServiciosAuthProvider } from '../providers/servicios-auth/servicios-auth';
+
+
 
 // pipes
 import { PlaceHolderPipe } from './pipes/placeholder.pipe';
@@ -21,6 +24,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AgregarComponent} from '../pages/agregar/agregar.component';
 import { DetalleComponent } from '../pages/detalle/detalle.component';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +57,8 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
     StatusBar,
     SplashScreen,
     ListaRecetasServicios,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ServiciosAuthProvider
   ]
 })
 export class AppModule {}
