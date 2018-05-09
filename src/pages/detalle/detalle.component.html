@@ -19,8 +19,9 @@
 
   <ion-card-content>
       <ion-list>
-     <ion-item *ngFor="let item of lista.items" Descripcion>
+     <ion-item *ngFor="let item of lista.items" Descripcion icon-right>
          {{item.nombre}}
+
          ({{item.cantidad}} gr.)
      </ion-item>
      </ion-list>
