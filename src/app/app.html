@@ -19,6 +19,15 @@
         {{p.title}}
       </button>
     </ion-list>
+    <ion-item>
+      <button menuClose ion-item (click)="abrirLogin()">
+     <ion-icon menuClose ios="ios-person" md="md-person" (click)="abrirLogin()"></ion-icon>
+      Login</button>
+      <button menuClose ion-item (click)="abrirCrearUsuario()">
+     <ion-icon menuClose ios="ios-person" md="md-person" (click)="abrirCrearUsuario()"></ion-icon>
+      CrearUsuario</button>
+    </ion-item>
+
   </ion-content>
 
 </ion-menu>

@@ -7,6 +7,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
+import { LoginPage } from '../pages/login/login';
+import { CrearUsuarioPage } from '../pages/crear-usuario/crear-usuario';
 
 @Component({
   templateUrl: 'app.html'
@@ -43,5 +45,12 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  abrirLogin(){
+      this.nav.setRoot(LoginPage);
+  }
+  abrirCrearUsuario(){
+      this.nav.setRoot(CrearUsuarioPage);
   }
 }

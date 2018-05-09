@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-uppercase>Iniciar Sesion</ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header text-center>
+      <img src="../assets/imgs/iniciar.png " alt="">
+    </ion-card-header>
+
+  </ion-card>
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating text-uppercase>Usuario</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating text-uppercase>Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button color="danger" block outline round large>INICIAR SESION</button>
+      <ion-item>
+        DESEA CREAR UN NUEVO USUARIO?
+        <button ion-button color="danger" outline item-end round icon-left medium (click)=irCrear()>
+             <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
+
+     CREAR USUARIO
+       </button>
+      </ion-item>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

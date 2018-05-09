@@ -64,5 +64,5 @@ export class ListPage implements OnInit {
       console.log(i.completado);
   }
 
-  
+
 }
