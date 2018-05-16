@@ -8,7 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
 import { LoginPage } from '../pages/login/login';
-import { CrearUsuarioPage } from '../pages/crear-usuario/crear-usuario';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -50,7 +50,5 @@ export class MyApp {
   abrirLogin(){
       this.nav.setRoot(LoginPage);
   }
-  abrirCrearUsuario(){
-      this.nav.setRoot(CrearUsuarioPage);
-  }
+
 }
