@@ -11,5 +11,6 @@ constructor (nombre: string, personas: string){
         this.nombre= nombre;
         this.completado = false;
         this.personas = personas;
+
     }
 }

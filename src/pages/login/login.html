@@ -16,8 +16,36 @@
 
   </ion-card>
   <ion-list>
+    <button ion-button item-left color="primary" block round large>
+    <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+    &nbsp;
+    iniciar sesion con facebook
+    </button>
+    <button ion-button item-left color="danger" block round large>
+        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>
+        &nbsp;
+        iniciar sesion con google+
+    </button>
+    <button ion-button item-left color="primary" block round large>
+        <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+        &nbsp;
+        iniciar sesion con twitter
+    </button>
 
-    <ion-item>
+<!-- footer terminos y condiciones -->
+    <ion-footer>
+      <ion-toolbar>
+        <ion-item>
+          <ion-label>He leido y acepto las condiciones.</ion-label>
+          <ion-checkbox color="danger" checked="false"></ion-checkbox>
+        </ion-item>
+      </ion-toolbar>
+    </ion-footer>
+
+
+
+
+    <!-- <ion-item>
       <ion-label floating text-uppercase>Usuario</ion-label>
       <ion-input type="input"></ion-input>
     </ion-item>
@@ -29,15 +57,8 @@
 
     <ion-item>
       <button ion-button color="danger" block outline round large>INICIAR SESION</button>
-      <ion-item>
-        DESEA CREAR UN NUEVO USUARIO?
-        <button ion-button color="danger" outline item-end round icon-left medium (click)=irCrear()>
-             <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
 
-     CREAR USUARIO
-       </button>
-      </ion-item>
-    </ion-item>
+    </ion-item> -->
 
   </ion-list>
 

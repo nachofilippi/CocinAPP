@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 // servicios
 import { ListaRecetasServicios } from './servicios/lista-recetas';
-import { ServiciosAuthProvider } from '../providers/servicios-auth/servicios-auth';
+
 
 
 
@@ -17,7 +17,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
 import { LoginPage }  from '../pages/login/login';
-import { CrearUsuarioPage } from '../pages/crear-usuario/crear-usuario';
+
 
 // otras importaciones
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,8 +35,7 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
     AgregarComponent,
     PlaceHolderPipe,
     DetalleComponent,
-    LoginPage,
-    CrearUsuarioPage
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -50,15 +49,12 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
     IngredientesPage,
     AgregarComponent,
     DetalleComponent,
-    LoginPage,
-    CrearUsuarioPage
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    ListaRecetasServicios,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServiciosAuthProvider
+    ListaRecetasServicios
   ]
 })
 export class AppModule {}
