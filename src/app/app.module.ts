@@ -4,7 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 // servicios
 import { ListaRecetasServicios } from './servicios/lista-recetas';
-import { ServiciosAuthProvider } from '../providers/servicios-auth/servicios-auth';
+
 
 
 
@@ -56,9 +56,7 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
   providers: [
     StatusBar,
     SplashScreen,
-    ListaRecetasServicios,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServiciosAuthProvider
+    ListaRecetasServicios
   ]
 })
 export class AppModule {}
