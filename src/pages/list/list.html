@@ -18,18 +18,18 @@
     <ion-input type="text"></ion-input>
   </ion-item>
 
-
+<!-- <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
   <!-- titulo y cantidad de elementos -->
-  <ion-card *ngFor="let lista of _listaRecetasServicios.listas; let i = index">
-    <ion-item color="light" class="text-center">
-      <h2> {{ lista.nombre }}</h2>
-      <ion-icon [hidden]="lista.show" item-right color="red" name="arrow-dropdown" (click)="lista.show=!lista.show;"></ion-icon>
-      <ion-icon [hidden]="!lista.show" item-right color="red" name="arrow-dropup" (click)="lista.show=!lista.show;"></ion-icon>
-
+  <ion-list *ngFor="let lista of _listaRecetasServicios.listas; let i = index">
+    <ion-item color="light" class="text-center" >
+      <ion-thumbnail item-start  >
+        <img src="../assets/imgs/mila_papas.jpg">
+      </ion-thumbnail>
+     <h2> {{ lista.nombre }}</h2>
+      <ion-icon [hidden]="lista.show" name="arrow-dropdown" item-right (click)="lista.show=!lista.show;"></ion-icon>
+      <ion-icon [hidden]="!lista.show" name="arrow-dropup" item-right (click)="lista.show=!lista.show;"></ion-icon>
       <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline" (click)="verDetalle(lista,i)"></ion-icon>
-
     </ion-item>
-
     <!-- elementos -->
     <ion-list [hidden]="!lista.show">
       <ion-item *ngFor="let item of lista.items" (click)="actualizar(item)">
@@ -37,12 +37,8 @@
         <ion-icon item-left *ngIf="!item.completado" ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="danger"></ion-icon>
         <ion-label [class.tachado]="item.completado">{{item.nombre}}</ion-label>
       </ion-item>
-
-
-
-
     </ion-list>
-  </ion-card>
+ </ion-list>
 
   <!-- boton de agregar -->
   <ion-fab bottom right>
