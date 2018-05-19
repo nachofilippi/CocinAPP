@@ -5,6 +5,7 @@ export class Lista  {
     completado: boolean;
     personas: string;
     items: ListaItem[];
+    show: boolean;
     // pasos
     // dificultad
     // tiempo_preparacion
@@ -19,6 +20,7 @@ constructor (nombre: string, personas: string){
         this.nombre= nombre;
         this.completado = false;
         this.personas = personas;
+        this.show=false;
 
     }
 }
