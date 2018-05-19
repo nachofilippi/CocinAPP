@@ -23,6 +23,13 @@
 
     <ion-slide style="background-color: white">
         <img src="././assets/imgs/recetas.png" style="width: 70%;" alt="">
+      <p style="font-size:40px">Selecciona tus ingredientes</p>
+      <p>Facilmente elegi los elementos que tenes a disposicion y te vamos a contar las recetas que podes hacer, selecciona el boton a continuacion y conoce la receta que estas buscando.</p>
+        <button ion-button round outline color="danger" name="Recetas" (click)="openPageIngredientes()">Ingredientes</button>
+    </ion-slide>
+
+    <ion-slide style="background-color: white">
+        <img src="././assets/imgs/recetas.png" style="width: 70%;" alt="">
       <p style="font-size:40px">Recetas utiles</p>
       <p>Variedad de recetas muy faciles de preparar con videos de nuestros especialistas, para que cocinar sea facil y divertido.</p>
       <button ion-button round outline color="danger" name="Listas" (click)="openPageLista()">Recetas</button>
@@ -32,8 +39,10 @@
         <img src="././assets/imgs/nota.png" style="width: 70%;" alt="">
       <p style="font-size:40px">Dejanos tus recetas</p>
       <p>Tambien podes hacer que tu receta se haga conocida, que nadie se pierda esa comida que tanto te gusta.</p>
-        <button ion-button round outline color="danger" name="Recetas" (click)="openPagerCrearReceta()">Compartir receta</button>
+        <button ion-button round outline color="danger" name="Recetas" (click)="openPageCrearReceta()">Compartir receta</button>
     </ion-slide>
+
+
 
   </ion-slides>
 

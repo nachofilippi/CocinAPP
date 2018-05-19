@@ -9,23 +9,69 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card >
-  <ion-card-header >
-      <ion-item color="light">
-          <h1 class="text-center">{{lista.nombre}}</h1>
-          <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
-      </ion-item>
-  </ion-card-header>
+  <!-- titulo -->
+  <ion-card >
+    <ion-item color="light">
+      <h1 class="text-center">{{lista.nombre}}</h1>
+      <h2 class="text-center"> ({{lista.personas}} comensales)</h2>
+      <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
+    </ion-item>
+    <!-- imagen -->
+    <img src="../assets/imgs/mila_papas.jpg">
+    <!-- caracteristicas -->
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <div>dificultad</div>
+            </ion-item>
+            <ion-item>
+                <div>tiempo_preparacion</div>
+            </ion-item>
+            <ion-item>
+                <div>apto_para</div>
+            </ion-item>
+        </ion-col>
+    </ion-row>
 
-  <ion-card-content>
-      <ion-list>
-     <ion-item *ngFor="let item of lista.items" Descripcion icon-right>
-         {{item.nombre}}
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>12</div>
+      </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+        <ion-icon name="thumbs-down"></ion-icon>
+        <div>4</div>
+      </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          creador
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
 
-         ({{item.cantidad}} gramos)
-     </ion-item>
-     </ion-list>
-  </ion-card-content>
-</ion-card>
+  </ion-card>
+  <ion-card>
+      <!-- ingredientes -->
+      <ion-card-content>
+        <ion-list>
+            <ion-title>
+                INGREDIENTES
+            </ion-title>
+          <ion-item *ngFor="let item of lista.items" Descripcion icon-right>
+            {{item.nombre}} ({{item.cantidad}} gramos)
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+  </ion-card>
+  <ion-card>
+      <ion-title color="light">
+        PASOS
+      </ion-title>
+  </ion-card>
 
 </ion-content>

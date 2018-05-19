@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CrearUsuarioPage } from '../crear-usuario/crear-usuario';
-import { NavController } from 'ionic-angular';
+
 
 @Component({
   selector: 'app-login',
@@ -8,14 +7,11 @@ import { NavController } from 'ionic-angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private navCtrl: NavController ) {
+  constructor( ) {
   }
 
   ngOnInit() { }
 
-  irCrear(){
-      this.navCtrl.push(CrearUsuarioPage);
-  }
 
 
 

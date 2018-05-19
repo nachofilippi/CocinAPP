@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 <ion-content padding>
-    <!-- buscador -->
+  <!-- buscador -->
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
@@ -18,25 +18,35 @@
   <!-- ingredientes -->
   <ion-list>
     <ion-item>
-      <ion-label>Carnes de vaca</ion-label>
-      <ion-select [(ngModel)]="carnesVaca" multiple="true" cancelText="Cancelar" okText="Aceptar">
-        <ion-option value="Asado">Asado</ion-option>
-        <ion-option value="Bife de lomo">Bife de lomo</ion-option>
-        <ion-option value="Vacio">Vacio</ion-option>
-        <ion-option value="Colita de cuadril">Colita de cuadril</ion-option>
-        <ion-option value="Entraña">Entraña</ion-option>
-        <ion-option value="Bondiola">Bondiola</ion-option>
-        <ion-option value="Ojo de bife">Ojo de bife</ion-option>
-        <ion-option value="Tapa de lomo">Tapa de lomo</ion-option>
-        <ion-option value="Paleta">Paleta</ion-option>
-        <ion-option value="Peceto">Peceto</ion-option>
+      <ion-label>Comensales</ion-label>
+      <ion-select [(ngModel)]="comensales" multiple="true" cancelText="Cancelar" okText="Aceptar">
+        <ion-option value="uno_Persona">1 persona</ion-option>
+        <ion-option value="dos_Persona">2 persona</ion-option>
+        <ion-option value="tres_Persona">3 persona</ion-option>
+        <ion-option value="cuatro_Persona">4 persona</ion-option>
+        <ion-option value="cinco_Persona">5 persona</ion-option>
+        <ion-option value="seis_Persona">6 persona</ion-option>
+        <ion-option value="siete_Persona">7 persona</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-list>
     <ion-item>
-      <ion-label>Vegetales</ion-label>
-      <ion-select [(ngModel)]="vegetales" multiple="true" cancelText="Cancelar" okText="Aceptar">
+      <ion-label>Categorias</ion-label>
+      <ion-select [(ngModel)]="categorias" multiple="true" cancelText="Cancelar" okText="Aceptar">
+        <ion-option value="Carnes de vaca">Carnes de vaca</ion-option>
+        <ion-option value="Vegetales">Vegetales</ion-option>
+        <ion-option value="Carnes de pollo">Carnes de pollo</ion-option>
+        <ion-option value="Carnes de pescado">Carnes de pescado</ion-option>
+        <ion-option value="Quesos">Quesos</ion-option>
+        <ion-option value="Fiambres">Fiambres</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label>Ingredientes</ion-label>
+      <ion-select [(ngModel)]="ingredientes" multiple="true" cancelText="Cancelar" okText="Aceptar">
         <ion-option value="Brocoli">Brocoli</ion-option>
         <ion-option value="Acelga">Acelga</ion-option>
         <ion-option value="Aji">Aji</ion-option>
@@ -44,13 +54,6 @@
         <ion-option value="Lechuga">Lechuga</ion-option>
         <ion-option value="Cebolla">Cebolla</ion-option>
         <ion-option value="Zanahoria">Zanahoria</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <ion-label>Quesos</ion-label>
-      <ion-select [(ngModel)]="quesos" multiple="true" cancelText="Cancelar" okText="Aceptar">
         <ion-option value="Muzzarella">Muzzarella</ion-option>
         <ion-option value="Azul">Azul</ion-option>
         <ion-option value="Cuatro quesos">Cuatro quesos</ion-option>
@@ -59,11 +62,13 @@
         <ion-option value="Provolone">Provolone</ion-option>
         <ion-option value="Camembert">Camembert</ion-option>
         <ion-option value="Parmesano">Parmesano</ion-option>
+        <!-- <ion-option [(ngRepeat)]="ingredientes" value="Ingredientes">{{ingredientes}}</ion-option> -->
       </ion-select>
     </ion-item>
   </ion-list>
+
   <!-- boton buscar -->
-  <button ion-button outline round block color="danger" >Buscar receta</button>
+  <button ion-button outline round block color="danger">Buscar receta</button>
 
 
 
