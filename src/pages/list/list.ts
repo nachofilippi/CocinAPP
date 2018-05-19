@@ -18,6 +18,8 @@ import { Lista, ListaItem } from '../../app/clases/index';
 export class ListPage implements OnInit {
     lista:Lista;
     idx:number;
+    statusDificultad: boolean = false;
+    statusTiempo: boolean = false;
 
   constructor(private _listaRecetasServicios: ListaRecetasServicios,
     private navCtrl: NavController,
@@ -63,6 +65,7 @@ export class ListPage implements OnInit {
 
       console.log(i.completado);
   }
+
 
 
 }
