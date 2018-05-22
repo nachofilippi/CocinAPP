@@ -81,6 +81,7 @@
         <img src="../assets/imgs/mila_papas.jpg">
       </ion-thumbnail>
       <h2> {{ lista.nombre }}</h2>
+      <h3>estrellas</h3>
       <ion-icon [hidden]="lista.show" name="arrow-dropdown" item-right (click)="lista.show=!lista.show;"></ion-icon>
       <ion-icon [hidden]="!lista.show" name="arrow-dropup" item-right (click)="lista.show=!lista.show;"></ion-icon>
       <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline" (click)="verDetalle(lista,i)"></ion-icon>
