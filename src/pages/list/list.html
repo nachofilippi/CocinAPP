@@ -1,48 +1,46 @@
 <ion-header>
-  <ion-navbar color="danger">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Lista de Recetas</ion-title>
-  </ion-navbar>
-  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+    <ion-navbar color="danger">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Lista de Recetas</ion-title>
+    </ion-navbar>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
-  <!-- buscador -->
-  <ion-item>
-    <ion-label icon left floating>
-      <ion-icon ios="ios-search" md="md-search"></ion-icon>
-      Buscar</ion-label>
+    <!-- buscador -->
+    <ion-item>
+        <ion-label icon left floating>
+            <ion-icon ios="ios-search" md="md-search"></ion-icon>
+            Buscar</ion-label>
 
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-
-  <!-- titulo y cantidad de elementos -->
-  <ion-list *ngFor="let lista of _listaRecetasServicios.listas; let i = index">
-    <ion-item color="light" class="text-center" >
-      <ion-thumbnail item-start  >
-        <img src="../assets/imgs/mila_papas.jpg">
-      </ion-thumbnail>
-     <h2> {{ lista.nombre }}</h2>
-      <ion-icon [hidden]="lista.show" name="arrow-dropdown" item-right (click)="lista.show=!lista.show;"></ion-icon>
-      <ion-icon [hidden]="!lista.show" name="arrow-dropup" item-right (click)="lista.show=!lista.show;"></ion-icon>
-      <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline" (click)="verDetalle(lista,i)"></ion-icon>
+        <ion-input type="text"></ion-input>
     </ion-item>
-    <!-- elementos -->
-    <ion-list [hidden]="!lista.show">
-      <ion-item *ngFor="let item of lista.items" (click)="actualizar(item)">
-        <ion-icon item-left *ngIf="item.completado" ios="ios-checkmark-circle" md="md-checkmark-circle" color="danger"></ion-icon>
-        <ion-icon item-left *ngIf="!item.completado" ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="danger"></ion-icon>
-        <ion-label [class.tachado]="item.completado">{{item.nombre}}</ion-label>
-      </ion-item>
-    </ion-list>
- </ion-list>
 
-  <!-- boton de agregar -->
-  <ion-fab bottom right>
-    <button ion-fab color="dark" (click)="showConfirm()">
-        <ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+
+    <!-- titulo y cantidad de elementos -->
+    <ion-list *ngFor="let receta of recetas">
+        <ion-item color="light" class="text-center" >
+            <ion-thumbnail item-start  >
+                <img src="{{receta.imagenes[0]}}">
+            </ion-thumbnail>
+            <h2> {{ receta.nombre }}</h2>
+            <ion-icon [hidden]="receta.open" name="arrow-dropdown" item-right (click)="receta.open=!receta.open;"></ion-icon>
+            <ion-icon [hidden]="!receta.open" name="arrow-dropup" item-right (click)="receta.open=!receta.open;"></ion-icon>
+            <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline" (click)="verDetalle(lista,i)"></ion-icon>
+        </ion-item>
+        <!-- elementos -->
+        <ion-list [hidden]="!receta.open">
+            <ion-item *ngFor="let item of receta.ingredientes" (click)="actualizar(item)">
+                <ion-label>{{item.ingrediente.nombre}}</ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-list>
+
+    <!-- boton de agregar -->
+    <ion-fab bottom right>
+        <button ion-fab color="dark" (click)="showConfirm()">
+            <ion-icon name="add"></ion-icon></button>
+    </ion-fab>
 </ion-content>
