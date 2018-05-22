@@ -16,15 +16,21 @@ import { Lista, ListaItem } from '../../app/clases/index';
   templateUrl: 'list.html'
 })
 export class ListPage implements OnInit {
-    lista:Lista;
-    idx:number;
-    statusDificultad: boolean = false;
-    statusTiempo: boolean = false;
+  lista: Lista;
+  idx: number;
+  statusDificultad: boolean = false;
+  statusTiempo: boolean = false;
+  dificultad: number = 1;
+  tiempo: any = { lower: 10, upper: 120 };
+
+  onChange(ev: any) {
+    console.log('Changed', ev);
+  }
 
   constructor(private _listaRecetasServicios: ListaRecetasServicios,
     private navCtrl: NavController,
     public alertCtrl: AlertController
-    ) { }
+  ) { }
 
   ngOnInit() { }
 
@@ -46,7 +52,7 @@ export class ListPage implements OnInit {
         {
           text: 'Aceptar',
           handler: () => {
-             this.irAgregar();
+            this.irAgregar();
             console.log('Aceptar cliqueado');
           }
         }
@@ -55,15 +61,15 @@ export class ListPage implements OnInit {
     confirm.present();
   }
 
-  verDetalle(lista, idx){
-      this.navCtrl.push(DetalleComponent, {lista,idx} );
+  verDetalle(lista, idx) {
+    this.navCtrl.push(DetalleComponent, { lista, idx });
   }
 
-  actualizar( i:ListaItem ){
-      i.completado =  !i.completado;
-      this._listaRecetasServicios.actualizarData();
+  actualizar(i: ListaItem) {
+    i.completado = !i.completado;
+    this._listaRecetasServicios.actualizarData();
 
-      console.log(i.completado);
+    console.log(i.completado);
   }
 
 
