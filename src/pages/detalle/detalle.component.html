@@ -10,7 +10,7 @@
 
 <ion-content padding>
   <!-- titulo -->
-  <ion-card >
+  <ion-card>
     <ion-item color="light">
       <h1 class="text-center">{{lista.nombre}}</h1>
       <h2 class="text-center"> ({{lista.personas}} comensales)</h2>
@@ -20,58 +20,62 @@
     <img src="../assets/imgs/mila_papas.jpg">
     <!-- caracteristicas -->
     <ion-row>
-        <ion-col>
-            <ion-item>
-                <div>dificultad</div>
-            </ion-item>
-            <ion-item>
-                <div>tiempo_preparacion</div>
-            </ion-item>
-            <ion-item>
-                <div>apto_para</div>
-            </ion-item>
-        </ion-col>
+      <ion-col>
+        <ion-item>
+          <div>dificultad</div>
+        </ion-item>
+        <ion-item>
+          <div>tiempo_preparacion</div>
+        </ion-item>
+        <ion-item>
+          <div>apto_para</div>
+        </ion-item>
+      </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>12</div>
-      </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-down"></ion-icon>
-        <div>4</div>
-      </button>
-      </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          creador
-        </ion-note>
-      </ion-col>
-    </ion-row>
-    <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
+    <!-- estrellas -->
+    <ion-item text-center>
 
+        <button ion-button clear small *ngFor="let star of stars;let i= index" (click)="clickStart(i)">
+            <ion-icon *ngIf="star.click" name="star" color="danger" ></ion-icon>
+            <ion-icon *ngIf="!star.click" name="star-outline" color="danger"></ion-icon>
+        </button>
+
+          <!-- <ion-col center text-center>
+            <ion-note>
+              creador
+            </ion-note>
+          </ion-col> -->
+    </ion-item>
+    <!-- video -->
+    <ion-list>
+        <ion-list-header class="label text-center">
+          Video
+          <ion-icon [hidden]="video" name="arrow-dropdown" item-right (click)="video=!video;"></ion-icon>
+          <ion-icon [hidden]="!video" name="arrow-dropup" item-right (click)="video=!video;"></ion-icon>
+      </ion-list-header>
+        <ion-item [hidden]="!video" text-center>
+            <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
+        </ion-item>
+    </ion-list>
   </ion-card>
   <ion-card>
-      <!-- ingredientes -->
-      <ion-card-content>
-        <ion-list>
-            <ion-title>
-                INGREDIENTES
-            </ion-title>
-          <ion-item *ngFor="let item of lista.items" Descripcion icon-right>
-            {{item.nombre}} ({{item.cantidad}} gramos)
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
+    <!-- ingredientes -->
+    <ion-card-content>
+      <ion-list>
+        <ion-title>
+          INGREDIENTES
+        </ion-title>
+        <ion-item *ngFor="let item of lista.items" Descripcion icon-right>
+          {{item.nombre}} ({{item.cantidad}} gramos)
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
   <ion-card>
-      <ion-title color="light">
-        PASOS
-      </ion-title>
+    <ion-title color="light">
+      PASOS
+    </ion-title>
   </ion-card>
 
 </ion-content>
