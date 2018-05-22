@@ -27,7 +27,7 @@
       <ion-badge item-end color="danger">{{dificultad}}</ion-badge>
     </ion-list-header>
     <ion-item [hidden]="!statusDificultad">
-      <ion-range pin="true" min="1" max="5" step="1" snaps="true" [(ngModel)]="dificultad" color="dark">
+      <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" [(ngModel)]="dificultad" color="danger">
         <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
         <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
         <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
