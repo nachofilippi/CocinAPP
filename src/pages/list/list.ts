@@ -1,77 +1,80 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { ListaRecetasServicios } from '../../app/servicios/lista-recetas';
+import {ListaRecetasServicios} from '../../app/servicios/lista-recetas';
 
-import { NavController } from 'ionic-angular';
-import { AgregarComponent } from '../agregar/agregar.component';
-import { AlertController } from 'ionic-angular';
-import { DetalleComponent } from '../detalle/detalle.component';
+import {NavController} from 'ionic-angular';
+import {AgregarComponent} from '../agregar/agregar.component';
+import {AlertController} from 'ionic-angular';
+import {DetalleComponent} from '../detalle/detalle.component';
 
-import { Lista, ListaItem } from '../../app/clases/index';
+import {ListaItem} from '../../app/clases/index';
+import {RestProvider} from '../../providers/rest/rest';
 
 
 
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+    selector: 'page-list',
+    templateUrl: 'list.html'
 })
 export class ListPage implements OnInit {
-  lista: Lista;
-  idx: number;
-  statusDificultad: boolean = false;
-  statusTiempo: boolean = false;
-  dificultad: number = 1;
-  tiempo: any = { lower: 10, upper: 120 };
+    statusDificultad: boolean = false;
+    statusTiempo: boolean = false;
+    dificultad: number = 1;
+    tiempo: any = {lower: 10, upper: 120};
+    recetas: any;
+    enfermedades: any;
 
-  onChange(ev: any) {
-    console.log('Changed', ev);
-  }
+    onChange(ev: any) {
+        console.log('Changed', ev);
+    }
 
-  constructor(private _listaRecetasServicios: ListaRecetasServicios,
-    private navCtrl: NavController,
-    public alertCtrl: AlertController
-  ) { }
+    constructor(private _listaRecetasServicios: ListaRecetasServicios,
+        private navCtrl: NavController,
+        public alertCtrl: AlertController,
+        public rest: RestProvider
+    ) {}
 
-  ngOnInit() { }
+    ngOnInit() {
+        this.rest.getRecetas().subscribe(data => {this.recetas = data}, Error => {console.log(Error)});
+        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, Error => {console.log(Error)});
+    }
 
-  irAgregar() {
-    this.navCtrl.push(AgregarComponent)
-  }
+    irAgregar() {
+        this.navCtrl.push(AgregarComponent)
+    }
 
-  showConfirm() {
-    let confirm = this.alertCtrl.create({
-      title: 'Crear nueva receta',
-      message: 'Desea usted crear una nueva receta propia?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          handler: () => {
-            console.log('Cancelar cliqueado');
-          }
-        },
-        {
-          text: 'Aceptar',
-          handler: () => {
-            this.irAgregar();
-            console.log('Aceptar cliqueado');
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
+    showConfirm() {
+        let confirm = this.alertCtrl.create({
+            title: 'Crear nueva receta',
+            message: 'Desea usted crear una nueva receta propia?',
+            buttons: [
+                {
+                    text: 'Cancelar',
+                    handler: () => {
+                        console.log('Cancelar cliqueado');
+                    }
+                },
+                {
+                    text: 'Aceptar',
+                    handler: () => {
+                        this.irAgregar();
+                        console.log('Aceptar cliqueado');
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
 
-  verDetalle(lista, idx) {
-    this.navCtrl.push(DetalleComponent, { lista, idx });
-  }
+    verDetalle(lista, idx) {
+        this.navCtrl.push(DetalleComponent, {lista, idx});
+    }
 
-  actualizar(i: ListaItem) {
-    i.completado = !i.completado;
-    this._listaRecetasServicios.actualizarData();
+    actualizar(i: ListaItem) {
+        i.completado = !i.completado;
+        this._listaRecetasServicios.actualizarData();
 
-    console.log(i.completado);
-  }
-
-
+        console.log(i.completado);
+    }
 
 }

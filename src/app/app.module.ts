@@ -5,9 +5,6 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 // servicios
 import { ListaRecetasServicios } from './servicios/lista-recetas';
 
-
-
-
 // pipes
 import { PlaceHolderPipe } from './pipes/placeholder.pipe';
 
@@ -24,7 +21,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AgregarComponent} from '../pages/agregar/agregar.component';
 import { DetalleComponent } from '../pages/detalle/detalle.component';
-
+import { HttpClientModule } from  '@angular/common/http';
+import { RestProvider } from '../providers/rest/rest';
 
 @NgModule({
   declarations: [
@@ -40,6 +38,7 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -54,7 +53,8 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
   providers: [
     StatusBar,
     SplashScreen,
-    ListaRecetasServicios
+    ListaRecetasServicios,
+    RestProvider
   ]
 })
 export class AppModule {}
