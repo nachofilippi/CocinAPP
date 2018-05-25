@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
 import { LoginPage } from '../pages/login/login';
+import {OfflineProvider} from '../providers/rest/offline';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public offline: OfflineProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -38,6 +39,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.offline.init();
+      
     });
   }
 

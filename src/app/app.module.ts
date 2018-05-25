@@ -23,6 +23,7 @@ import { AgregarComponent} from '../pages/agregar/agregar.component';
 import { DetalleComponent } from '../pages/detalle/detalle.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import { OfflineProvider } from '../providers/rest/offline';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { RestProvider } from '../providers/rest/rest';
     StatusBar,
     SplashScreen,
     ListaRecetasServicios,
-    RestProvider
+    RestProvider,
+    OfflineProvider
   ]
 })
 export class AppModule {}
