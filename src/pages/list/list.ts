@@ -22,6 +22,7 @@ export class ListPage implements OnInit {
   statusTiempo: boolean = false;
   dificultad: number = 1;
   tiempo: any = { lower: 10, upper: 120 };
+  filtros: boolean = false;
 
   onChange(ev: any) {
     console.log('Changed', ev);
