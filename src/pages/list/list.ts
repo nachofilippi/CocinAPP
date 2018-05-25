@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {ListaRecetasServicios} from '../../app/servicios/lista-recetas';
 
@@ -16,7 +16,7 @@ import {RestProvider} from '../../providers/rest/rest';
     selector: 'page-list',
     templateUrl: 'list.html'
 })
-export class ListPage implements OnInit {
+export class ListPage {
     statusDificultad: boolean = false;
     statusTiempo: boolean = false;
     dificultad: number = 1;
@@ -34,9 +34,9 @@ export class ListPage implements OnInit {
         public rest: RestProvider
     ) {}
 
-    ngOnInit() {
-        this.rest.getRecetas().subscribe(data => {this.recetas = data}, Error => {console.log(Error)});
-        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, Error => {console.log(Error)});
+    ionViewWillEnter() {
+        this.rest.getRecetas().subscribe(data => {this.recetas = data}, offline => {this.recetas = offline;});
+        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
     }
 
     irAgregar() {
