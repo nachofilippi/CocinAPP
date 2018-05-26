@@ -25,6 +25,9 @@ import { HttpClientModule } from  '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { OfflineProvider } from '../providers/rest/offline';
 
+import { Facebook } from '@ionic-native/facebook';
+import { GooglePlus } from '@ionic-native/google-plus';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -56,7 +59,9 @@ import { OfflineProvider } from '../providers/rest/offline';
     SplashScreen,
     ListaRecetasServicios,
     RestProvider,
-    OfflineProvider
+    OfflineProvider,
+    Facebook,
+    GooglePlus
   ]
 })
 export class AppModule {}
