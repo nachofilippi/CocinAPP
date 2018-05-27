@@ -27,6 +27,7 @@ import { OfflineProvider } from '../providers/rest/offline';
 
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { LoginProvider } from '../providers/login/login';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
     RestProvider,
     OfflineProvider,
     Facebook,
-    GooglePlus
+    GooglePlus,
+    LoginProvider
   ]
 })
 export class AppModule {}

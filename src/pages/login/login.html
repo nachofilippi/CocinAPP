@@ -3,40 +3,37 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title text-uppercase>{{titulo}}</ion-title>
+        <ion-title text-uppercase>{{usuario.nombre?"Mi perfil":"Iniciar sesión"}}</ion-title>
     </ion-navbar>
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
-<ion-content padding *ngIf="logueado">
-    <ion-card>
-        <ion-card-content>
-            <ion-item>{{nombre + ' '+apellido}}
-            </ion-item>
-            <ion-item>{{email}}
-            </ion-item>
-            <ion-item><img src="{{foto}}">
-            </ion-item>
-        </ion-card-content>
-    </ion-card>
-</ion-content>
 
-<ion-content padding *ngIf="!logueado">
+<ion-content padding>
+    <ion-list *ngIf="logueado">
+        <ion-item>{{usuario.nombre}}</ion-item>
+        <ion-item>{{usuario.email}}</ion-item>
+        <ion-item><img src="{{usuario.foto}}" class="foto-perfil"></ion-item>
+        <button ion-button item-left color="primary" block round large (click)="logout()">
+                <ion-icon name="exit"></ion-icon>&nbsp;
+            Cerrar sesión
+        </button>
+    </ion-list>
     <ion-list>
-        <button ion-button item-left color="primary" block round large (click)="loginFacebook()">
-                <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+        <button *ngIf="!logueado" ion-button item-left color="primary" block round large (click)="loginFb()">
+            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
             &nbsp;
             Iniciar sesión con facebook
         </button>
-        <button ion-button item-left color="danger" block round large (click)="loginGoogle()">
-                <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>
-            &nbsp;
-            Iniciar sesión con google+
-        </button>
-<!--        <button ion-button item-left color="primary" block round large>
-            <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
-            &nbsp;
-            Iniciar sesión con twitter
-        </button>-->
+        <!--        <button ion-button item-left color="danger" block round large (click)="loginGoogle()">
+                        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>
+                    &nbsp;
+                    Iniciar sesión con google+
+                </button>-->
+        <!--        <button ion-button item-left color="primary" block round large>
+                    <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+                    &nbsp;
+                    Iniciar sesión con twitter
+                </button>-->
 
         <!-- <ion-item>
           <ion-label floating text-uppercase>Usuario</ion-label>
@@ -52,30 +49,6 @@
           <button ion-button color="danger" block outline round large>INICIAR SESION</button>
     
         </ion-item> -->
-
     </ion-list>
 
 </ion-content>
-
-<!--<ion-content padding>
-    <div *ngIf="logueado; else facebookLogin">
-        <h2>Hi, {{usuarios.name}} ({{usuarios.email}})</h2>
-        <p>
-            Gender: {{usuarios.gender}}
-        </p>
-        <p>
-            <img src="{{usuarios.picture.data.url}}" width="100" alt="{{usuarios.name}}" />
-        </p>
-        <p>
-            <button ion-button icon-right (click)="logout()">
-                    Logout
-        </button>
-    </p>
-    </div>
-    <ng-template #facebookLogin>
-        <button ion-button icon-right (click)="login()">
-                Login with
-                <ion-icon name="logo-facebook"></ion-icon>
-        </button>
-    </ng-template>
-</ion-content>-->
