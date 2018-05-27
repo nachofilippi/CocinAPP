@@ -1,18 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoginProvider} from '../../providers/login/login';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: 'login.html'
+    selector: 'app-login',
+    templateUrl: 'login.html'
 })
 export class LoginPage implements OnInit {
 
-  constructor( ) {
-  }
+    logueado: boolean = false;
+    usuario: any = {};
 
-  ngOnInit() { }
+    constructor(private login: LoginProvider) {
 
+    }
 
+    ngOnInit() {
+        this.login.checkLogin().then((usuario) => {this.logueado = true; this.usuario = usuario}, () => this.loginFb());
+    }
 
+    logout() {
+        this.login.logout().then(() => this.logueado = false);
+    }
+    loginFb() {
+        this.login.loginFacebook().then(usuario => {this.usuario = usuario; this.logueado = true;});
 
+    }
 }

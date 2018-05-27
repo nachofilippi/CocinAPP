@@ -1,65 +1,54 @@
 <ion-header>
-  <ion-navbar color="danger">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title text-uppercase>Iniciar Sesion</ion-title>
-  </ion-navbar>
-  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+    <ion-navbar color="danger">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title text-uppercase>{{usuario.nombre?"Mi perfil":"Iniciar sesión"}}</ion-title>
+    </ion-navbar>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
-    <ion-card-header text-center>
-      <img src="../assets/imgs/iniciar.png " alt="">
-    </ion-card-header>
+    <ion-list *ngIf="logueado">
+        <ion-item>{{usuario.nombre}}</ion-item>
+        <ion-item>{{usuario.email}}</ion-item>
+        <ion-item><img src="{{usuario.foto}}" class="foto-perfil"></ion-item>
+        <button ion-button item-left color="primary" block round large (click)="logout()">
+                <ion-icon name="exit"></ion-icon>&nbsp;
+            Cerrar sesión
+        </button>
+    </ion-list>
+    <ion-list>
+        <button *ngIf="!logueado" ion-button item-left color="primary" block round large (click)="loginFb()">
+            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
+            &nbsp;
+            Iniciar sesión con facebook
+        </button>
+        <!--        <button ion-button item-left color="danger" block round large (click)="loginGoogle()">
+                        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>
+                    &nbsp;
+                    Iniciar sesión con google+
+                </button>-->
+        <!--        <button ion-button item-left color="primary" block round large>
+                    <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+                    &nbsp;
+                    Iniciar sesión con twitter
+                </button>-->
 
-  </ion-card>
-  <ion-list>
-    <button ion-button item-left color="primary" block round large>
-    <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-    &nbsp;
-    iniciar sesion con facebook
-    </button>
-    <button ion-button item-left color="danger" block round large>
-        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>
-        &nbsp;
-        iniciar sesion con google+
-    </button>
-    <button ion-button item-left color="primary" block round large>
-        <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
-        &nbsp;
-        iniciar sesion con twitter
-    </button>
-
-<!-- footer terminos y condiciones -->
-    <ion-footer>
-      <ion-toolbar>
-        <ion-item>
-          <ion-label>He leido y acepto las condiciones.</ion-label>
-          <ion-checkbox color="danger" checked="false"></ion-checkbox>
+        <!-- <ion-item>
+          <ion-label floating text-uppercase>Usuario</ion-label>
+          <ion-input type="input"></ion-input>
         </ion-item>
-      </ion-toolbar>
-    </ion-footer>
-
-
-
-
-    <!-- <ion-item>
-      <ion-label floating text-uppercase>Usuario</ion-label>
-      <ion-input type="input"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating text-uppercase>Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <button ion-button color="danger" block outline round large>INICIAR SESION</button>
-
-    </ion-item> -->
-
-  </ion-list>
+    
+        <ion-item>
+          <ion-label floating text-uppercase>Contraseña</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <button ion-button color="danger" block outline round large>INICIAR SESION</button>
+    
+        </ion-item> -->
+    </ion-list>
 
 </ion-content>
