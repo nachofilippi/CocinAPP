@@ -14,6 +14,7 @@ export class DetalleComponent implements OnInit {
   lista: Lista;
   stars: any;
   video: boolean = false;
+  ingredientes: boolean = false;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public _listaRecetasServicios: ListaRecetasServicios) {

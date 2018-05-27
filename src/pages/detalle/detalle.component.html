@@ -47,26 +47,28 @@
             </ion-note>
           </ion-col> -->
     </ion-item>
-    <!-- video -->
-    <ion-list>
-        <ion-list-header class="label text-center">
-          Video
-          <ion-icon [hidden]="video" name="arrow-dropdown" item-right (click)="video=!video;"></ion-icon>
-          <ion-icon [hidden]="!video" name="arrow-dropup" item-right (click)="video=!video;"></ion-icon>
-      </ion-list-header>
-        <ion-item [hidden]="!video" text-center>
-            <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
-        </ion-item>
-    </ion-list>
   </ion-card>
   <ion-card>
     <!-- ingredientes -->
     <ion-card-content>
+        <!-- video -->
+        <ion-list>
+            <ion-title class="label text-center">
+              VIDEO
+              <ion-icon [hidden]="video" name="arrow-dropdown" item-right (click)="video=!video;"></ion-icon>
+              <ion-icon [hidden]="!video" name="arrow-dropup" item-right (click)="video=!video;"></ion-icon>
+          </ion-title>
+            <ion-item [hidden]="!video" text-center>
+                <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
+            </ion-item>
+        </ion-list>
       <ion-list>
-        <ion-title>
+        <ion-title class="label text-center">
           INGREDIENTES
-        </ion-title>
-        <ion-item *ngFor="let item of lista.items" Descripcion icon-right>
+          <ion-icon [hidden]="ingredientes" name="arrow-dropdown" item-right (click)="ingredientes=!ingredientes;"></ion-icon>
+          <ion-icon [hidden]="!ingredientes" name="arrow-dropup" item-right (click)="ingredientes=!ingredientes;"></ion-icon>
+      </ion-title>
+        <ion-item [hidden]="!ingredientes" *ngFor="let item of lista.items" Descripcion icon-right>
           {{item.nombre}} ({{item.cantidad}} gramos)
         </ion-item>
       </ion-list>
@@ -77,5 +79,18 @@
       PASOS
     </ion-title>
   </ion-card>
+
+  <!-- this fab is placed at bottom right -->
+  <ion-fab bottom right >
+    <button ion-fab mini color="dark"> <ion-icon name="share"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="primary" ><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab color="primary"><ion-icon name="logo-twitter"></ion-icon></button>
+
+    </ion-fab-list>
+    <ion-fab-list side="left">
+     <button ion-fab color="danger"><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 
 </ion-content>
