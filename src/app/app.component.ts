@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
 import { LoginPage } from '../pages/login/login';
+import { FavoritosPage } from '../pages/favoritos/favoritos';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MyApp {
     this.pages = [
       { title: 'Inicio', component: HomePage },
       { title: 'Lista de Recetas', component: ListPage },
-      { title: 'Ingredientes', component:IngredientesPage}
+      { title: 'Ingredientes', component:IngredientesPage},
+      { title: 'Favoritos', component: FavoritosPage}
     ];
 
   }

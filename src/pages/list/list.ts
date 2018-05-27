@@ -11,6 +11,7 @@ import { Lista, ListaItem } from '../../app/clases/index';
 
 
 
+
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'

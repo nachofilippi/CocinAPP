@@ -12,6 +12,8 @@
   <!-- titulo -->
   <ion-card>
     <ion-item color="light">
+      <ion-icon item-start *ngIf="!lista.favorito" name="star-outline" color="danger" (click)="agregarFavorito()"></ion-icon>
+      <ion-icon item-start *ngIf="lista.favorito" name="star" color="danger" (click)="eliminarFavorito()"></ion-icon>
       <h1 class="text-center">{{lista.nombre}}</h1>
       <h2 class="text-center"> ({{lista.personas}} comensales)</h2>
       <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>

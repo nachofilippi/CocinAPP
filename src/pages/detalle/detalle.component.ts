@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Lista } from '../../app/clases/index';
+import { Lista, ListaItem } from '../../app/clases/index';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ListaRecetasServicios } from '../../app/servicios/lista-recetas';
@@ -15,6 +15,10 @@ export class DetalleComponent implements OnInit {
   stars: any;
   video: boolean = false;
   ingredientes: boolean = false;
+  favorito: boolean;
+  i: ListaItem;
+
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public _listaRecetasServicios: ListaRecetasServicios) {
@@ -61,6 +65,44 @@ export class DetalleComponent implements OnInit {
     this.stars.push({ "click": false });
     this.stars.push({ "click": false });
     this.stars.push({ "click": false });
+  }
+
+  agregarFavorito() {
+    let confirm = this.alertCtrl.create({
+      title: 'Agregar favorito',
+      message: 'Esta seguro que usted desea agregar la receta a su lista de favoritos?',
+      buttons: ['Cancelar',
+        {
+          text: 'Agregar',
+          handler: () => {
+            this.lista.favorito = !this.lista.favorito;
+            this._listaRecetasServicios.actualizarData();
+            console.log(this.lista.favorito);
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  eliminarFavorito() {
+    let confirm = this.alertCtrl.create({
+      title: 'Eliminar favorito',
+      message: 'Esta seguro que usted desea eliminar la receta a su lista de favoritos?',
+      buttons: ['Cancelar',
+        {
+          text: 'Eliminar',
+          handler: () => {
+            this.lista.favorito = !this.lista.favorito;
+            this._listaRecetasServicios.actualizarData();
+            console.log(this.lista.favorito);
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }
