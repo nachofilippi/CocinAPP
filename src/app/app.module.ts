@@ -26,7 +26,6 @@ import { RestProvider } from '../providers/rest/rest';
 import { OfflineProvider } from '../providers/rest/offline';
 
 import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
 import { LoginProvider } from '../providers/login/login';
 
 @NgModule({
@@ -62,7 +61,6 @@ import { LoginProvider } from '../providers/login/login';
     RestProvider,
     OfflineProvider,
     Facebook,
-    GooglePlus,
     LoginProvider
   ]
 })
