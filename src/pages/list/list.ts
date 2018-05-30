@@ -67,8 +67,8 @@ export class ListPage {
         confirm.present();
     }
 
-    verDetalle(lista, idx) {
-        this.navCtrl.push(DetalleComponent, {lista, idx});
+    verDetalle(receta) {
+        this.navCtrl.push(DetalleComponent, {receta});
     }
 
     actualizar(i: ListaItem) {

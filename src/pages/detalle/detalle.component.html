@@ -12,23 +12,30 @@
   <!-- titulo -->
   <ion-card>
     <ion-item color="light">
-      <h1 class="text-center">{{lista.nombre}}</h1>
-      <h2 class="text-center"> ({{lista.personas}} comensales)</h2>
+      <ion-icon item-start *ngIf="!receta.favorito" name="star-outline" color="danger" (click)="agregarFavorito()"></ion-icon>
+      <ion-icon item-start *ngIf="receta.favorito" name="star" color="danger" (click)="eliminarFavorito()"></ion-icon>
+      <h1 class="text-center">{{receta.nombre}}</h1>
+      <h2 class="text-center"> ({{receta.personas}} {{receta.personas>1?"comensales":"comensal"}})</h2>
       <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
     </ion-item>
     <!-- imagen -->
-    <img src="../assets/imgs/mila_papas.jpg">
+    <img src="{{receta.imagenes[0]}}">
     <!-- caracteristicas -->
     <ion-row>
       <ion-col>
         <ion-item>
-          <div>dificultad</div>
+          <div>Dificultad</div>
+          <div item-right>{{receta.dificultad}}</div>
         </ion-item>
         <ion-item>
-          <div>tiempo_preparacion</div>
+          <div>Tiempo de preparación</div>
+          <div item-right>
+              <ion-icon name="time" item-right></ion-icon>
+              {{receta.tiempo}}'
+          </div>
         </ion-item>
         <ion-item>
-          <div>apto_para</div>
+          <div>Apto para</div>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -59,26 +66,40 @@
               <ion-icon [hidden]="!video" name="arrow-dropup" item-right (click)="video=!video;"></ion-icon>
           </ion-title>
             <ion-item [hidden]="!video" text-center>
-                <iframe src="https://www.youtube.com/embed/-SueZvZOps0" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
+                <iframe [src]="receta.video" allow="autoplay; encrypted-media" allowfullscreen text-center></iframe>
             </ion-item>
         </ion-list>
+    </ion-card-content>
+  </ion-card>
+   <ion-card>
+    <!-- ingredientes -->
+    <ion-card-content>
       <ion-list>
         <ion-title class="label text-center">
           INGREDIENTES
           <ion-icon [hidden]="ingredientes" name="arrow-dropdown" item-right (click)="ingredientes=!ingredientes;"></ion-icon>
           <ion-icon [hidden]="!ingredientes" name="arrow-dropup" item-right (click)="ingredientes=!ingredientes;"></ion-icon>
       </ion-title>
-        <ion-item [hidden]="!ingredientes" *ngFor="let item of lista.items" Descripcion icon-right>
-          {{item.nombre}} ({{item.cantidad}} gramos)
+        <ion-item [hidden]="!ingredientes" *ngFor="let item of receta.ingredientes" Descripcion icon-right>
+          {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card>
-    <ion-title color="light">
-      PASOS
-    </ion-title>
-  </ion-card>
+      <ion-card-content>
+          <ion-list>
+              <ion-title class="label text-center">
+                  PASOS
+                  <ion-icon [hidden]="pasos" name="arrow-dropdown" item-right (click)="pasos=!pasos;"></ion-icon>
+                  <ion-icon [hidden]="!pasos" name="arrow-dropup" item-right (click)="pasos=!pasos;"></ion-icon>
+              </ion-title>
+              <ion-item [hidden]="!pasos" *ngFor="let paso of receta.pasos">
+                  {{paso.nombre}}
+          </ion-item>
+      </ion-list>
+  </ion-card-content>
+</ion-card>
 
   <!-- this fab is placed at bottom right -->
   <ion-fab bottom right >

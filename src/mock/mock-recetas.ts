@@ -18,7 +18,7 @@ export const recetas: any =
                 "nombre": "Hola"
             },
             "apto_para": [],
-            "pasos": [{"nombre":"Paso 1", "descripcion": "Hola"}]
+            "pasos": [{"nombre":"Paso 1", "descripcion": "Hola"}, {"nombre":"Paso 2", "descripcion": "Hola"}]
         }
     ];
 

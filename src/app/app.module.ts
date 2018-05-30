@@ -14,6 +14,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
 import { LoginPage }  from '../pages/login/login';
+import { FavoritosPage } from '../pages/favoritos/favoritos';
 
 
 // otras importaciones
@@ -37,7 +38,8 @@ import { LoginProvider } from '../providers/login/login';
     AgregarComponent,
     PlaceHolderPipe,
     DetalleComponent,
-    LoginPage
+    LoginPage,
+    FavoritosPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { LoginProvider } from '../providers/login/login';
     IngredientesPage,
     AgregarComponent,
     DetalleComponent,
-    LoginPage
+    LoginPage,
+    FavoritosPage
   ],
   providers: [
     StatusBar,

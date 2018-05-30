@@ -78,7 +78,7 @@
           <h2> {{ receta.nombre }}</h2>
           <ion-icon [hidden]="receta.open" name="arrow-dropdown" item-right (click)="receta.open=!receta.open;"></ion-icon>
           <ion-icon [hidden]="!receta.open" name="arrow-dropup" item-right (click)="receta.open=!receta.open;"></ion-icon>
-          <ion-icon item-left ios="ios-information-circle-outline" md="md-information-circle-outline" (click)="verDetalle(lista,i)"></ion-icon>
+          <ion-icon name="information-circle" item-left  color="danger" (click)="verDetalle(receta)"></ion-icon>
       </ion-item>
       <!-- elementos -->
       <ion-list [hidden]="!receta.open">
