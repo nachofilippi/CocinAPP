@@ -7,6 +7,7 @@ import { ListaRecetasServicios } from './servicios/lista-recetas';
 
 // pipes
 import { PlaceHolderPipe } from './pipes/placeholder.pipe';
+import {SafeUrlPipe} from '../pipes/safe-url/safe-url';
 
 // paginas
 import { MyApp } from './app.component';
@@ -37,6 +38,7 @@ import { LoginProvider } from '../providers/login/login';
     IngredientesPage,
     AgregarComponent,
     PlaceHolderPipe,
+    SafeUrlPipe,
     DetalleComponent,
     LoginPage,
     FavoritosPage
