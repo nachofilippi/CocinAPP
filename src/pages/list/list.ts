@@ -23,6 +23,7 @@ export class ListPage {
     tiempo: any = {lower: 10, upper: 120};
     recetas: any;
     enfermedades: any;
+    filtros: boolean = false;
 
     onChange(ev: any) {
         console.log('Changed', ev);
@@ -76,5 +77,5 @@ export class ListPage {
 
         console.log(i.completado);
     }
-
+    
 }
