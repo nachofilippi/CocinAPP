@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 
-import {ListaRecetasServicios} from '../../app/servicios/lista-recetas';
-
 import {NavController} from 'ionic-angular';
 import {AgregarComponent} from '../agregar/agregar.component';
 import {AlertController} from 'ionic-angular';
