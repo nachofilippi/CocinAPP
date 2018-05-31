@@ -29,7 +29,7 @@ export class ListPage {
         console.log('Changed', ev);
     }
 
-    constructor(private _listaRecetasServicios: ListaRecetasServicios,
+    constructor(
         private navCtrl: NavController,
         public alertCtrl: AlertController,
         public rest: RestProvider
@@ -53,14 +53,16 @@ export class ListPage {
                     text: 'Cancelar',
                     handler: () => {
                         console.log('Cancelar cliqueado');
-                    }
+                    },
+                    cssClass:'alert-button'
                 },
                 {
                     text: 'Aceptar',
                     handler: () => {
                         this.irAgregar();
                         console.log('Aceptar cliqueado');
-                    }
+                    },
+                    cssClass: 'alert-button'
                 }
             ]
         });
@@ -73,7 +75,6 @@ export class ListPage {
 
     actualizar(i: ListaItem) {
         i.completado = !i.completado;
-        this._listaRecetasServicios.actualizarData();
 
         console.log(i.completado);
     }
