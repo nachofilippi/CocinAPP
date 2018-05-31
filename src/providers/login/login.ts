@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Facebook} from '@ionic-native/facebook';
+import { AlertController } from 'ionic-angular';
 
 
 /*
@@ -14,7 +15,7 @@ export class LoginProvider {
     usuario: any = {};
 
 
-    constructor(public fb: Facebook) {
+    constructor(public fb: Facebook, public alertCtrl: AlertController) {
     }
 
     checkLogin() {
@@ -26,10 +27,37 @@ export class LoginProvider {
                     if (res.status === "connected") {
                         resolve(JSON.parse(localStorage.getItem("usuario")));
                     } else
-                        reject(false);
+                        reject();
                 })
-                .catch(e => {console.log(e); reject(false);});
+                .catch(e => {console.log(e); reject();});
 
+        });
+        return promise;
+    }
+    
+    solicitarLogin() {
+        var promise = new Promise((resolve, reject) => {
+
+            let alert = this.alertCtrl.create({
+                title: 'Inicie sesión',
+                message: 'Para acceder a esta función deberá loguearse previamente',
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        handler: () => {
+                            reject(false);
+                        }
+                    },
+                    {
+                        text: 'Iniciar sesión',
+                        handler: () => {
+                            this.loginFacebook().then((usuario) => resolve(usuario), () => reject(false));
+                        }
+                    }
+                ]
+            });
+            alert.present();
         });
         return promise;
     }

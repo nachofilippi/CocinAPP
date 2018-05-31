@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {AlertController} from 'ionic-angular';
+import {LoginProvider} from '../providers/login/login';
 
 // paginas
 import { HomePage } from '../pages/home/home';
@@ -24,7 +25,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
   proximamente: Array<{title: string, descripcion: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public offline: OfflineProvider, public alertCtrl: AlertController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public offline: OfflineProvider, public alertCtrl: AlertController, public login: LoginProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -60,7 +61,8 @@ export class MyApp {
   }
 
   abrirLogin(){
-      this.nav.setRoot(LoginPage);
+      this.login.checkLogin().then((usr) => this.nav.setRoot(LoginPage, {usr})), () => this.login.solicitarLogin().then(usr => this.nav.setRoot(LoginPage, {usr}), () => this.sinConexión());
+      
   }
   
   alertProximamente(i) {
@@ -72,5 +74,14 @@ export class MyApp {
       alert.present();
 
   }
+  
+  sinConexión() {
+      let alert = this.alertCtrl.create({
+          title: "Sin conexión",
+          subTitle: "Verificá tu conexión a internet para loguearte",
+          buttons: ['OK']
+      });
+      alert.present();
 
+  }
 }
