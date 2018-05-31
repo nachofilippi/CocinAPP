@@ -39,13 +39,14 @@ export class DetalleComponent implements OnInit {
     let confirm = this.alertCtrl.create({
       title: 'Borrar receta',
       message: 'Esta seguro que usted desea borrar la receta?',
-      buttons: ['Cancelar',
+      buttons: [{text:'Cancelar',cssClass:'alert-button'},
         {
           text: 'Eliminar',
           handler: () => {
             console.log('Eliminar');
             this.navCtrl.pop();
-          }
+          },
+          cssClass:'alert-button'
         }
       ]
     });
