@@ -15,12 +15,16 @@
       <ion-input type="text"></ion-input>
     </ion-item> -->
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
-    </ion-list>
+        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                {{p.title}}
+        </button>
+        <button menuClose ion-item *ngFor="let p of proximamente; let i=index" (click)="alertProximamente(i)">
+                {{p.title}}
+                <ion-badge item-right color="danger">Próximamente</ion-badge>
+        </button>
+  </ion-list>
     <ion-item>
-     <button menuClose ion-item (click)="abrirLogin()">
+     <button [disabled]="true" menuClose ion-item (click)="abrirLogin()">
      <ion-icon menuClose ios="ios-person" md="md-person" (click)="abrirlogin()"></ion-icon>
       Mi perfil</button>
 

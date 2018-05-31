@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {AlertController} from 'ionic-angular';
 
 // paginas
 import { HomePage } from '../pages/home/home';
@@ -21,8 +22,9 @@ export class MyApp {
   rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
+  proximamente: Array<{title: string, descripcion: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public offline: OfflineProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public offline: OfflineProvider, public alertCtrl: AlertController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -31,6 +33,11 @@ export class MyApp {
       { title: 'Lista de Recetas', component: ListPage },
       { title: 'Ingredientes', component:IngredientesPage},
       { title: 'Favoritos', component: FavoritosPage}
+    ];
+    
+    this.proximamente = [
+        {title: 'Viandas', 'descripcion': "Proximamente podrás blablabla"},
+        {title: 'Mi semana', 'descripcion': "Proximamente podrás blablabla"}
     ];
 
   }
@@ -54,6 +61,16 @@ export class MyApp {
 
   abrirLogin(){
       this.nav.setRoot(LoginPage);
+  }
+  
+  alertProximamente(i) {
+      let alert = this.alertCtrl.create({
+          title: this.proximamente[i].title,
+          subTitle: this.proximamente[i].descripcion,
+          buttons: ['OK']
+      });
+      alert.present();
+
   }
 
 }
