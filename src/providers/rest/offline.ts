@@ -55,6 +55,37 @@ export class OfflineProvider {
         localStorage.setItem("recetas", JSON.stringify(recetas));
         return receta;
     }
+    
+    postFavorito(favorito: any): any {
+        favorito.favorito = true;
+        let favoritos: any = [];
+        if (localStorage.getItem("favoritos")) {
+            favoritos = JSON.parse(localStorage.getItem("favoritos"));
+        }
+        favoritos.push(favorito);
+        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        return favorito;
+    }
+    
+    deleteFavorito(idReceta): any {
+        let favoritos: any = [];
+        if (localStorage.getItem("favoritos")) {
+            favoritos = JSON.parse(localStorage.getItem("favoritos"));
+        }
+        for (let i = 0; i < favoritos.length; i++) {
+            if (favoritos[i].id == idReceta)
+                favoritos.splice(i, 1);
+        }
+        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    }
+    
+    getFavoritos(mail: string): any {
+        let favoritos: any = [];
+        if (localStorage.getItem("favoritos")) {
+            favoritos = JSON.parse(localStorage.getItem("favoritos"));
+        }
+        return favoritos;
+    }
 
     init() {
         if (!localStorage.getItem("ingredientes")) {
@@ -71,6 +102,10 @@ export class OfflineProvider {
         }
         if (!localStorage.getItem("categorias_ingredientes")) {
             localStorage.setItem("categorias_ingredientes", JSON.stringify(categorias_ingredientes));
+        }
+        if (!localStorage.getItem("favoritos")) {
+            let favoritos: any = [];
+            localStorage.setItem("favoritos", favoritos);
         }
     }
 }

@@ -72,6 +72,33 @@ export class RestProvider {
             })
         );
     }
+    
+    postFavorito(favorito: any): Observable<{}> {
+        let offlineProvider: OfflineProvider = this.offline;
+        return this.http.post(this.baseUrl + '/usuario/favorito', favorito).pipe(map(this.extractData),
+            catchError(function () {
+                return Observable.throw(offlineProvider.postFavorito(favorito));
+            })
+        );
+    }
+    
+    deleteFavorito(idReceta: any): Observable<{}> {
+        let offlineProvider: OfflineProvider = this.offline;
+        return this.http.delete(this.baseUrl + '/usuario/favorito?'+"MAIL DEL USUARIO&idusr").pipe(map(this.extractData),
+            catchError(function () {
+                return Observable.throw(offlineProvider.deleteFavorito(idReceta));
+            })
+        );
+    }
+
+    getFavoritos(): Observable<{}> {
+        let offlineProvider: OfflineProvider = this.offline;
+        return this.http.get(this.baseUrl + '/usuario/favorito/' + "MAIL DEL USUARIO").pipe(map(this.extractData),
+            catchError(function () {
+                return Observable.throw(offlineProvider.getFavoritos("MAIL DEL USUARIO"));
+            })
+        );
+    }
 
     private extractData(res: Response) {
         let body = res;
