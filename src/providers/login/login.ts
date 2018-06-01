@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Facebook} from '@ionic-native/facebook';
+import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 
 /*
@@ -14,7 +16,7 @@ export class LoginProvider {
     usuario: any = {};
 
 
-    constructor(public fb: Facebook) {
+    constructor(public fb: Facebook, public alertCtrl: AlertController, public toastCtrl: ToastController) {
     }
 
     checkLogin() {
@@ -22,14 +24,40 @@ export class LoginProvider {
 
             this.fb.getLoginStatus()
                 .then(res => {
-                    console.log(res);
                     if (res.status === "connected") {
                         resolve(JSON.parse(localStorage.getItem("usuario")));
                     } else
-                        reject(false);
+                        reject();
                 })
-                .catch(e => {console.log(e); reject(false);});
+                .catch(e => {this.sinConexion(); console.log(e); reject();});
 
+        });
+        return promise;
+    }
+    
+    solicitarLogin() {
+        var promise = new Promise((resolve, reject) => {
+
+            let alert = this.alertCtrl.create({
+                title: 'Inicie sesión',
+                message: 'Para acceder a esta función deberá loguearse previamente',
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        handler: () => {
+                            reject(false);
+                        }
+                    },
+                    {
+                        text: 'Iniciar sesión',
+                        handler: () => {
+                            this.loginFacebook().then((usuario) => resolve(usuario), () => reject(false));
+                        }
+                    }
+                ]
+            });
+            alert.present();
         });
         return promise;
     }
@@ -49,6 +77,7 @@ export class LoginProvider {
                                 resolve(this.usuario);
                             })
                             .catch(e => {
+                                this.sinConexion();
                                 console.log(e);
                             });
                     } else {
@@ -56,7 +85,7 @@ export class LoginProvider {
                     }
                     console.log(res);
                 })
-                .catch(e => {console.log(e); reject()});
+                .catch(e => {console.log(e); if (e.errorCode != 4201) this.sinConexion(); reject()});
         });
         return promise;
     }
@@ -72,5 +101,13 @@ export class LoginProvider {
 
         return promise;
     }
-
+    
+    sinConexion() {
+        let toast = this.toastCtrl.create({
+            message: 'Sin conexión a internet',
+            duration: 3000,
+            position: 'bottom'
+        });
+        toast.present();
+    }
 }
