@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list *ngIf="logueado">
+    <ion-list>
         <ion-item>{{usuario.nombre}}</ion-item>
         <ion-item>{{usuario.email}}</ion-item>
         <ion-item><img src="{{usuario.foto}}" class="foto-perfil"></ion-item>
@@ -18,37 +18,4 @@
             Cerrar sesión
         </button>
     </ion-list>
-    <ion-list>
-        <button *ngIf="!logueado" ion-button item-left color="primary" block round large (click)="loginFb()">
-            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon>
-            &nbsp;
-            Iniciar sesión con facebook
-        </button>
-        <!--        <button ion-button item-left color="danger" block round large (click)="loginGoogle()">
-                        <ion-icon ios="logo-googleplus" md="logo-googleplus"></ion-icon>
-                    &nbsp;
-                    Iniciar sesión con google+
-                </button>-->
-        <!--        <button ion-button item-left color="primary" block round large>
-                    <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
-                    &nbsp;
-                    Iniciar sesión con twitter
-                </button>-->
-
-        <!-- <ion-item>
-          <ion-label floating text-uppercase>Usuario</ion-label>
-          <ion-input type="input"></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <ion-label floating text-uppercase>Contraseña</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <button ion-button color="danger" block outline round large>INICIAR SESION</button>
-    
-        </ion-item> -->
-    </ion-list>
-
 </ion-content>

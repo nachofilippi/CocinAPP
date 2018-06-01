@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Facebook} from '@ionic-native/facebook';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 
 /*
@@ -15,7 +16,7 @@ export class LoginProvider {
     usuario: any = {};
 
 
-    constructor(public fb: Facebook, public alertCtrl: AlertController) {
+    constructor(public fb: Facebook, public alertCtrl: AlertController, public toastCtrl: ToastController) {
     }
 
     checkLogin() {
@@ -23,13 +24,12 @@ export class LoginProvider {
 
             this.fb.getLoginStatus()
                 .then(res => {
-                    console.log(res);
                     if (res.status === "connected") {
                         resolve(JSON.parse(localStorage.getItem("usuario")));
                     } else
                         reject();
                 })
-                .catch(e => {console.log(e); reject();});
+                .catch(e => {this.sinConexion(); console.log(e); reject();});
 
         });
         return promise;
@@ -77,6 +77,7 @@ export class LoginProvider {
                                 resolve(this.usuario);
                             })
                             .catch(e => {
+                                this.sinConexion();
                                 console.log(e);
                             });
                     } else {
@@ -84,7 +85,7 @@ export class LoginProvider {
                     }
                     console.log(res);
                 })
-                .catch(e => {console.log(e); reject()});
+                .catch(e => {console.log(e); if (e.errorCode != 4201) this.sinConexion(); reject()});
         });
         return promise;
     }
@@ -100,5 +101,13 @@ export class LoginProvider {
 
         return promise;
     }
-
+    
+    sinConexion() {
+        let toast = this.toastCtrl.create({
+            message: 'Sin conexión a internet',
+            duration: 3000,
+            position: 'bottom'
+        });
+        toast.present();
+    }
 }

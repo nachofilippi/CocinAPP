@@ -61,8 +61,10 @@ export class MyApp {
   }
 
   abrirLogin(){
-      this.login.checkLogin().then((usr) => this.nav.setRoot(LoginPage, {usr})), () => this.login.solicitarLogin().then(usr => this.nav.setRoot(LoginPage, {usr}), () => this.sinConexión());
-      
+      this.login.checkLogin().then((usr) => this.nav.setRoot(LoginPage, {usr}), () => this.solicitarLogin());   
+  }
+  solicitarLogin(){
+      this.login.solicitarLogin().then(usr => this.nav.setRoot(LoginPage, {usr}));
   }
   
   alertProximamente(i) {
@@ -75,13 +77,4 @@ export class MyApp {
 
   }
   
-  sinConexión() {
-      let alert = this.alertCtrl.create({
-          title: "Sin conexión",
-          subTitle: "Verificá tu conexión a internet para loguearte",
-          buttons: ['OK']
-      });
-      alert.present();
-
-  }
 }
