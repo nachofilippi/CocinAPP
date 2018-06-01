@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Lista, ListaItem } from '../../app/clases/index';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { ListaRecetasServicios } from '../../app/servicios/lista-recetas';
+import { ToastController } from 'ionic-angular';
+import { RestProvider } from '../../providers/rest/rest';
 
 
 @Component({
@@ -15,12 +15,10 @@ export class DetalleComponent implements OnInit {
   video: boolean = false;
   ingredientes: boolean = false;
   favorito: boolean;
-  i: ListaItem;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public _listaRecetasServicios: ListaRecetasServicios) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private toastCtrl: ToastController, private rest: RestProvider) {
     this.receta = this.navParams.get("receta");
-
+  
   }
 
   clickStart(num) {
@@ -63,36 +61,25 @@ export class DetalleComponent implements OnInit {
   }
 
   agregarFavorito() {
-    let confirm = this.alertCtrl.create({
-      title: 'Agregar favorito',
-      message: 'Esta seguro que usted desea agregar la receta a su lista de favoritos?',
-      buttons: ['Cancelar',
-        {
-          text: 'Agregar',
-          handler: () => {
-            this.receta.favorito = !this.receta.favorito;
-            this._listaRecetasServicios.actualizarData();
-            console.log(this.receta.favorito);
-            this.navCtrl.pop();
-          }
-        }
-      ]
-    });
-    confirm.present();
+      let toast = this.toastCtrl.create({
+          message: 'La receta fue añadida a favoritos!',
+          duration: 5000,
+          position: 'bottom'
+      });
+      toast.present();
+      this.rest.postFavorito(this.receta).subscribe(data => console.log ("Backend"), offline => console.log ("Offline"));
   }
 
   eliminarFavorito() {
     let confirm = this.alertCtrl.create({
-      title: 'Eliminar favorito',
-      message: 'Esta seguro que usted desea eliminar la receta a su lista de favoritos?',
+      title: 'Quitar favorito',
+      message: '¿Estás seguro que querés eliminar la receta de la lista de favoritos?',
       buttons: ['Cancelar',
         {
           text: 'Eliminar',
           handler: () => {
-            this.receta.favorito = !this.receta.favorito;
-            this._listaRecetasServicios.actualizarData();
-            console.log(this.receta.favorito);
-            this.navCtrl.pop();
+            this.receta.favorito = false;
+            this.rest.deleteFavorito(this.receta.id).subscribe(data => console.log ("Backend"), offline => console.log ("Offline"));
           }
         }
       ]

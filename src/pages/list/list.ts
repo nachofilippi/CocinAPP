@@ -34,10 +34,10 @@ export class ListPage {
     ) {}
 
     ionViewWillEnter() {
-        this.rest.getRecetas().subscribe(data => {this.recetas = data}, offline => {this.recetas = offline;});
-        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
+        this.rest.getRecetas().subscribe(data => {this.recetas = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.cargarFavoritos();});
+        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});        
     }
-
+    
     irAgregar() {
         this.navCtrl.push(AgregarComponent)
     }
@@ -77,4 +77,15 @@ export class ListPage {
         console.log(i.completado);
     }
     
+    cargarFavoritos(){
+        this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));        
+    }
+    join(favoritos) {
+        for (let i = 0; i < favoritos.length; i++) {
+            for (let j = 0; j < this.recetas.length; j++) {
+                if (favoritos[i].id == this.recetas[j].id)
+                    this.recetas[j].favorito = true;
+            }
+        }
+    }    
 }
