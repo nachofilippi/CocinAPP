@@ -63,7 +63,7 @@ export class DetalleComponent implements OnInit {
   agregarFavorito() {
       let toast = this.toastCtrl.create({
           message: 'La receta fue añadida a favoritos!',
-          duration: 5000,
+          duration: 3000,
           position: 'bottom'
       });
       toast.present();
