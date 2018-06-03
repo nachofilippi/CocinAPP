@@ -43,6 +43,24 @@
     
     <ion-card>
         <ion-card-header>
+            <ion-label>Imágenes</ion-label>
+        </ion-card-header>
+        <ion-card-content>
+            <div style="display: flex;">
+                <button ion-button color="danger" outline (click)="takePhoto(1)" class="camera-icon"><ion-icon name="camera"></ion-icon></button>
+                <button ion-button color="danger" outline (click)="takePhoto(0)" class="camera-icon"><ion-icon name="images"></ion-icon></button>
+            </div>
+            <ion-slides pager *ngIf="receta.imagenes.length > 0" [autoplay]="3500" [loop]="true" [centeredSlides]="true" class="slides-imagenes">
+                <ion-slide class="slide-imagen" *ngFor="let imagen of receta.imagenes; let i = index">
+                    <img src="{{imagen}}" style="display:inline" alt="" class="imagen-receta">
+                    <ion-icon color="danger" outline class="borrar-icon"(click)="borrarImagen(i)" name="close"></ion-icon>
+                </ion-slide>
+            </ion-slides>
+        </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+        <ion-card-header>
             <ion-label>Ingredientes:</ion-label>
         </ion-card-header>
         <ion-card-content>

@@ -26,7 +26,7 @@ import { DetalleComponent } from '../pages/detalle/detalle.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
 import { OfflineProvider } from '../providers/rest/offline';
-
+import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
 import { LoginProvider } from '../providers/login/login';
 
@@ -66,7 +66,8 @@ import { LoginProvider } from '../providers/login/login';
     RestProvider,
     OfflineProvider,
     Facebook,
-    LoginProvider
+    LoginProvider,
+    Camera
   ]
 })
 export class AppModule {}

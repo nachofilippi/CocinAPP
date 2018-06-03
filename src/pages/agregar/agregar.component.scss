@@ -5,3 +5,26 @@ app-agregar {
 .button-block {
     width: 100%;
 }
+.slides-imagenes{
+    height: fit-content;
+}
+.slide-imagen{
+    max-height: 300px;
+    background-color: white;
+}
+.imagen-receta{
+    max-height: 300px!important;
+    display: inline;
+}
+.camera-icon{
+    width: 50%;
+    font-size: 50;
+    margin: 10px;
+    background-color: #fff;
+    height: fit-content;
+}
+.borrar-icon{
+    background: white;
+    z-index: 200;
+    position: absolute;
+}
