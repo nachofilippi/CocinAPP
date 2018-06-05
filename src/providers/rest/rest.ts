@@ -75,7 +75,9 @@ export class RestProvider {
     
     postFavorito(favorito: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
-        return this.http.post(this.baseUrl + '/usuario/favorito', favorito).pipe(map(this.extractData),
+        let usuario: any = {};
+        usuario = JSON.parse(localStorage.getItem("usuario"));
+        return this.http.post(this.baseUrl + '/usuario/favorito', {receta: favorito.id, usuario: usuario.email}).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.postFavorito(favorito));
             })
@@ -84,7 +86,9 @@ export class RestProvider {
     
     deleteFavorito(idReceta: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
-        return this.http.delete(this.baseUrl + '/usuario/favorito?'+"MAIL DEL USUARIO&idusr").pipe(map(this.extractData),
+        let usuario: any = {};
+        usuario = JSON.parse(localStorage.getItem("usuario"));
+        return this.http.delete(this.baseUrl + '/usuario/favorito?usuario=' + usuario.email + "&receta=" + idReceta).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.deleteFavorito(idReceta));
             })
@@ -93,9 +97,20 @@ export class RestProvider {
 
     getFavoritos(): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
-        return this.http.get(this.baseUrl + '/usuario/favorito/' + "MAIL DEL USUARIO").pipe(map(this.extractData),
+        let usuario: any = {};
+        usuario = JSON.parse(localStorage.getItem("usuario"));
+        return this.http.get(this.baseUrl + '/usuario/favorito/' + usuario.email).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.getFavoritos("MAIL DEL USUARIO"));
+            })
+        );
+    }
+    
+    postUsuario(usuario: any): Observable<{}> {
+        let offlineProvider: OfflineProvider = this.offline;
+        return this.http.post(this.baseUrl + '/usuario', usuario).pipe(map(this.extractData),
+            catchError(function () {
+                return Observable.throw(usuario);
             })
         );
     }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Facebook} from '@ionic-native/facebook';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import {RestProvider} from '../rest/rest'
 
 
 /*
@@ -16,7 +17,7 @@ export class LoginProvider {
     usuario: any = {};
 
 
-    constructor(public fb: Facebook, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+    constructor(public fb: Facebook, public alertCtrl: AlertController, public toastCtrl: ToastController, public rest: RestProvider) {
     }
 
     checkLogin() {
@@ -74,6 +75,7 @@ export class LoginProvider {
                                 this.usuario.nombre = res.name;
                                 this.usuario.email = res.email;
                                 localStorage.setItem("usuario", JSON.stringify(this.usuario));
+                                this.rest.postUsuario({nombre:res.name,mail:res.email,imagen:this.usuario.foto}).subscribe(function (data) { return console.log("Backend"); }, function (offline) { return console.log("Offline"); });
                                 resolve(this.usuario);
                             })
                             .catch(e => {
