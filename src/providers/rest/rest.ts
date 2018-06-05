@@ -99,7 +99,7 @@ export class RestProvider {
         let offlineProvider: OfflineProvider = this.offline;
         let usuario: any = {};
         usuario = JSON.parse(localStorage.getItem("usuario"));
-        return this.http.get(this.baseUrl + '/usuario/favorito/' + "MAIL DEL USUARIO").pipe(map(this.extractData),
+        return this.http.get(this.baseUrl + '/usuario/favorito/' + usuario.email).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.getFavoritos("MAIL DEL USUARIO"));
             })
