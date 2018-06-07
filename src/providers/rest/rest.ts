@@ -8,7 +8,7 @@ import {OfflineProvider} from '../rest/offline'
 @Injectable()
 export class RestProvider {
 
-    baseUrl: string = "http://localhost/CocinApi/web/app_dev.php/api";
+    baseUrl: string = "http://192.168.0.34/CocinApi/web/app_dev.php/api";
 
     constructor(public http: HttpClient, public offline: OfflineProvider) {
     }
@@ -72,7 +72,7 @@ export class RestProvider {
             })
         );
     }
-    
+
     postFavorito(favorito: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         let usuario: any = {};
@@ -83,7 +83,7 @@ export class RestProvider {
             })
         );
     }
-    
+
     deleteFavorito(idReceta: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         let usuario: any = {};
@@ -105,7 +105,7 @@ export class RestProvider {
             })
         );
     }
-    
+
     postUsuario(usuario: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         return this.http.post(this.baseUrl + '/usuario', usuario).pipe(map(this.extractData),
