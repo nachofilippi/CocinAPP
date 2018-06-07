@@ -88,17 +88,25 @@
   </ion-card>
   <ion-card>
       <ion-card-content>
-          <ion-list>
-              <ion-title class="label text-center" (click)="pasos=!pasos;">
-                  PASOS
-                  <ion-icon [hidden]="pasos" name="arrow-dropdown" style="float: right"></ion-icon>
-                  <ion-icon [hidden]="!pasos" name="arrow-dropup" style="float: right"></ion-icon>
-              </ion-title>
-              <ion-item [hidden]="!pasos" *ngFor="let paso of receta.pasos">
-                  {{paso.nombre}}
-          </ion-item>
-      </ion-list>
-  </ion-card-content>
+        <ion-list>
+          <ion-title class="label text-center" (click)="pasos=!pasos;">
+            PASOS
+            <ion-icon [hidden]="pasos" name="arrow-dropdown" style="float: right"></ion-icon>
+            <ion-icon [hidden]="!pasos" name="arrow-dropup" style="float: right"></ion-icon>
+          </ion-title>
+          <ion-slides pager *ngIf="pasos" style="height: fit-content" [paginationType]="fraction">
+
+            <ion-slide *ngFor="let paso of receta.pasos" style="margin-top: 15px;">
+              <h2 color="red" style="margin-bottom: 15px;font-size: 20px">{{paso.nombre}}</h2>
+              <h5 color="danger" style="margin-bottom: 35px;">{{paso.descripcion}}</h5>
+            </ion-slide>
+
+          </ion-slides>
+          <!-- <ion-item [hidden]="!pasos" *ngFor="let paso of receta.pasos">
+                                {{paso.nombre}}
+                              </ion-item> -->
+        </ion-list>
+      </ion-card-content>
 </ion-card>
 
   <!-- this fab is placed at bottom right -->
