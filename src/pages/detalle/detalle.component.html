@@ -60,10 +60,10 @@
     <ion-card-content>
         <!-- video -->
         <ion-list>
-            <ion-title class="label text-center">
+            <ion-title class="label text-center" (click)="video=!video;">
               VIDEO
-              <ion-icon [hidden]="video" name="arrow-dropdown" item-right (click)="video=!video;"></ion-icon>
-              <ion-icon [hidden]="!video" name="arrow-dropup" item-right (click)="video=!video;"></ion-icon>
+              <ion-icon [hidden]="video" name="arrow-dropdown" style="float: right"></ion-icon>
+              <ion-icon [hidden]="!video" name="arrow-dropup" style="float: right"></ion-icon>
           </ion-title>
             <ion-item [hidden]="!video" text-center>
                 <iframe style="width: 100%" [src]="receta.video | safeUrl" allowfullscreen text-center></iframe>
@@ -75,10 +75,10 @@
     <!-- ingredientes -->
     <ion-card-content>
       <ion-list>
-        <ion-title class="label text-center">
+        <ion-title class="label text-center" (click)="ingredientes=!ingredientes;">
           INGREDIENTES
-          <ion-icon [hidden]="ingredientes" name="arrow-dropdown" item-right (click)="ingredientes=!ingredientes;"></ion-icon>
-          <ion-icon [hidden]="!ingredientes" name="arrow-dropup" item-right (click)="ingredientes=!ingredientes;"></ion-icon>
+          <ion-icon [hidden]="ingredientes" name="arrow-dropdown" style="float: right"></ion-icon>
+          <ion-icon [hidden]="!ingredientes" name="arrow-dropup" style="float: right"></ion-icon>
       </ion-title>
         <ion-item [hidden]="!ingredientes" *ngFor="let item of receta.ingredientes" Descripcion icon-right>
           {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})
@@ -89,10 +89,10 @@
   <ion-card>
       <ion-card-content>
           <ion-list>
-              <ion-title class="label text-center">
+              <ion-title class="label text-center" (click)="pasos=!pasos;">
                   PASOS
-                  <ion-icon [hidden]="pasos" name="arrow-dropdown" item-right (click)="pasos=!pasos;"></ion-icon>
-                  <ion-icon [hidden]="!pasos" name="arrow-dropup" item-right (click)="pasos=!pasos;"></ion-icon>
+                  <ion-icon [hidden]="pasos" name="arrow-dropdown" style="float: right"></ion-icon>
+                  <ion-icon [hidden]="!pasos" name="arrow-dropup" style="float: right"></ion-icon>
               </ion-title>
               <ion-item [hidden]="!pasos" *ngFor="let paso of receta.pasos">
                   {{paso.nombre}}
