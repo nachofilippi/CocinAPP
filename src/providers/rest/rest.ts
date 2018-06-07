@@ -8,7 +8,7 @@ import {OfflineProvider} from '../rest/offline'
 @Injectable()
 export class RestProvider {
 
-    baseUrl: string = "http://192.168.43.187/CocinApi/web/app_dev.php/api";
+    baseUrl: string = "http://localhost/CocinApi/web/app_dev.php/api";
 
     constructor(public http: HttpClient, public offline: OfflineProvider) {
     }
