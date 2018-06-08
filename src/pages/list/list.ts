@@ -15,17 +15,10 @@ import {RestProvider} from '../../providers/rest/rest';
     templateUrl: 'list.html'
 })
 export class ListPage {
-    statusDificultad: boolean = false;
-    statusTiempo: boolean = false;
-    dificultad: number = 1;
-    tiempo: any = {lower: 10, upper: 120};
     recetas: any;
+    recetasSearch: any = [];
     enfermedades: any;
-    filtros: boolean = false;
-
-    onChange(ev: any) {
-        console.log('Changed', ev);
-    }
+    filtros: any = { input: "", dificultad: 1, tiempo: { lower: 10, upper: 120 }, enfermedades:[] };
 
     constructor(
         private navCtrl: NavController,
@@ -34,10 +27,10 @@ export class ListPage {
     ) {}
 
     ionViewWillEnter() {
-        this.rest.getRecetas().subscribe(data => {this.recetas = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.cargarFavoritos();});
-        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});        
+        this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.cargarFavoritos();});
+        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
     }
-    
+
     irAgregar() {
         this.navCtrl.push(AgregarComponent)
     }
@@ -76,9 +69,9 @@ export class ListPage {
 
         console.log(i.completado);
     }
-    
+
     cargarFavoritos(){
-        this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));        
+        this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));
     }
     join(favoritos) {
         for (let i = 0; i < favoritos.length; i++) {
@@ -87,5 +80,33 @@ export class ListPage {
                     this.recetas[j].favorito = true;
             }
         }
-    }    
+    }
+
+  filtrar(){
+    setTimeout(() => {
+      this.recetasSearch = this.recetas;
+      if (this.filtros.input && this.filtros.input.trim() != '') {
+        this.recetasSearch = this.recetasSearch.filter((receta) => {
+          return (receta.nombre.toLowerCase().indexOf(this.filtros.input.toLowerCase()) > -1);
+        })
+      }
+      if (this.filtros.dificultad && this.filtros.dificultad > 1) {
+        this.recetasSearch = this.recetasSearch.filter((receta) => {
+          return (receta.dificultad <= this.filtros.dificultad);
+        })
+      }
+      if (this.filtros.tiempo) {
+        this.recetasSearch = this.recetasSearch.filter((receta) => {
+          return (receta.tiempo <= this.filtros.tiempo.upper);
+        })
+      }
+      if (this.filtros.enfermedades.length > 0) {
+        this.filtros.enfermedades.forEach(enfermedad => {
+          this.recetasSearch = this.recetasSearch.filter((receta) => {
+            return (receta.apto_para.map(function (e) { return e.nombre; }).indexOf(enfermedad) > -1);
+          })
+        });
+      }
+    }, 100);
+  }
 }

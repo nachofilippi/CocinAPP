@@ -98,6 +98,8 @@ export class RestProvider {
     getFavoritos(): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         let usuario: any = this.getUsuario();
+        if (!usuario)
+          return Observable.throw(offlineProvider.getFavoritos());
         return this.http.get(this.baseUrl + '/usuario/favorito/' + usuario.email).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.getFavoritos());
