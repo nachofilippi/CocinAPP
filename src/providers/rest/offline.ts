@@ -55,7 +55,7 @@ export class OfflineProvider {
         localStorage.setItem("recetas", JSON.stringify(recetas));
         return receta;
     }
-    
+
     postFavorito(favorito: any): any {
         favorito.favorito = true;
         let favoritos: any = [];
@@ -66,7 +66,7 @@ export class OfflineProvider {
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
         return favorito;
     }
-    
+
     deleteFavorito(idReceta): any {
         let favoritos: any = [];
         if (localStorage.getItem("favoritos")) {
@@ -78,8 +78,8 @@ export class OfflineProvider {
         }
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
     }
-    
-    getFavoritos(mail: string): any {
+
+    getFavoritos(): any {
         let favoritos: any = [];
         if (localStorage.getItem("favoritos")) {
             favoritos = JSON.parse(localStorage.getItem("favoritos"));
