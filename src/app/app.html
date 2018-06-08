@@ -8,28 +8,27 @@
 
   <ion-content class="fuente">
     <!-- <ion-item>
-      <ion-label icon left floating>
-      <ion-icon ios="ios-search" md="md-search"></ion-icon>
-      Buscar</ion-label>
+        <ion-label icon left floating>
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+        Buscar</ion-label>
 
-      <ion-input type="text"></ion-input>
-    </ion-item> -->
+        <ion-input type="text"></ion-input>
+      </ion-item> -->
     <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                {{p.title}}
-        </button>
-        <button menuClose ion-item *ngFor="let p of proximamente; let i=index" (click)="alertProximamente(i)">
-                {{p.title}}
-                <ion-badge item-right color="danger">Próximamente</ion-badge>
-        </button>
-  </ion-list>
-    <ion-item>
-     <button menuClose ion-item (click)="abrirLogin()">
-     <ion-icon menuClose ios="ios-person" md="md-person"></ion-icon>
-      Mi perfil</button>
-
-    </ion-item>
-
+      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button>
+      <button menuClose ion-item *ngFor="let p of proximamente; let i=index" (click)="alertProximamente(i)">
+        {{p.title}}
+        <ion-badge item-right color="danger">Próximamente</ion-badge>
+      </button>
+    </ion-list>
+    <button menuClose ion-item (click)="abrirLogin()">
+      <ion-icon menuClose ios="ios-person" md="md-person"></ion-icon> Mi perfil
+    </button>
+    <button menuClose ion-item (click)="abrirFavoritos()">
+      <ion-icon menuClose name="star"></ion-icon> Favoritos
+    </button>
   </ion-content>
 
 </ion-menu>
