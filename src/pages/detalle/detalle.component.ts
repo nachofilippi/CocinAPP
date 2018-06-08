@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 
 @Component({
@@ -16,9 +17,10 @@ export class DetalleComponent implements OnInit {
   ingredientes: boolean = false;
   favorito: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private toastCtrl: ToastController, private rest: RestProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+     private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing) {
     this.receta = this.navParams.get("receta");
-  
+
   }
 
   clickStart(num) {
@@ -87,4 +89,31 @@ export class DetalleComponent implements OnInit {
     confirm.present();
   }
 
+  shareFacebook() {
+    this.socialSharing.shareViaFacebook("Miren lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
+
+  shareTwitter() {
+    this.socialSharing.shareViaTwitter("Miren lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
+
+  shareInstagram() {
+    this.socialSharing.shareViaInstagram("Miren lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
+
+  shareWhatsApp() {
+    this.socialSharing.shareViaWhatsApp("Mirá lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
 }

@@ -29,6 +29,7 @@ import { OfflineProvider } from '../providers/rest/offline';
 import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
 import { LoginProvider } from '../providers/login/login';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { LoginProvider } from '../providers/login/login';
     OfflineProvider,
     Facebook,
     LoginProvider,
-    Camera
+    Camera,
+    SocialSharing
   ]
 })
 export class AppModule {}
