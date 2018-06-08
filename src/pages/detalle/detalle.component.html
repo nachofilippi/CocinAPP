@@ -19,7 +19,11 @@
       <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
     </ion-item>
     <!-- imagen -->
-    <img src="{{receta.imagenes[0]}}">
+    <ion-slides pager [autoplay]="3500" [loop]="true" [centeredSlides]="true" class="slides-imagenes">
+      <ion-slide class="slide-imagen" *ngFor="let imagen of receta.imagenes; let i = index">
+        <img src="{{imagen}}" style="display:inline" alt="" class="imagen-receta">
+      </ion-slide>
+    </ion-slides>
     <!-- caracteristicas -->
     <ion-row>
       <ion-col>
