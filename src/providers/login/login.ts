@@ -26,7 +26,12 @@ export class LoginProvider {
             this.fb.getLoginStatus()
                 .then(res => {
                     if (res.status === "connected") {
+                      if (localStorage.getItem("usuario"))
                         resolve(JSON.parse(localStorage.getItem("usuario")));
+                      else {
+                        this.logout();
+                        reject();
+                      }
                     } else
                         reject();
                 })
@@ -35,7 +40,7 @@ export class LoginProvider {
         });
         return promise;
     }
-    
+
     solicitarLogin() {
         var promise = new Promise((resolve, reject) => {
 
@@ -103,7 +108,7 @@ export class LoginProvider {
 
         return promise;
     }
-    
+
     sinConexion() {
         let toast = this.toastCtrl.create({
             message: 'Sin conexión a internet',
