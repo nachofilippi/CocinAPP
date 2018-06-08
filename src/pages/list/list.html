@@ -10,31 +10,27 @@
 
 <ion-content padding>
   <!-- buscador -->
-  <ion-item>
-    <ion-label icon left floating>
-      <ion-icon ios="ios-search" md="md-search"></ion-icon>
-      Buscar</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+    <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
+    </ion-searchbar>
   <!-- filtros -->
   &nbsp;&nbsp;
   <ion-list>
     <ion-list-header text-center style="font-size: 20px">
-      <ion-icon [hidden]="filtros" name="arrow-dropdown" item-end (click)="filtros=!filtros;"></ion-icon>
-      <ion-icon [hidden]="!filtros" name="arrow-dropup" item-end (click)="filtros=!filtros;"></ion-icon>
-      FILTROS
+      <ion-icon [hidden]="filtrar" name="arrow-dropdown" item-end (click)="filtrar=!filtrar;"></ion-icon>
+      <ion-icon [hidden]="!filtrar" name="arrow-dropup" item-end (click)="filtrar=!filtrar;"></ion-icon>
+      filtrar
     </ion-list-header>
 
     <!-- filtro dificultas -->
-    <ion-list [hidden]="!filtros" >
+    <ion-list [hidden]="!filtrar" >
       <ion-list-header class="label label-ios text-center" style="font-size: 15px">
-        <ion-badge item-left color="danger">{{dificultad}}</ion-badge>
+        <ion-badge item-left color="danger">{{filtros.dificultad}}</ion-badge>
         Filtrar Dificultad de receta
         <ion-icon [hidden]="statusDificultad" name="arrow-dropdown" item-end (click)="statusDificultad=!statusDificultad;"></ion-icon>
         <ion-icon [hidden]="!statusDificultad" name="arrow-dropup" item-end (click)="statusDificultad=!statusDificultad;"></ion-icon>
       </ion-list-header>
       <ion-item [hidden]="!statusDificultad">
-        <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" [(ngModel)]="dificultad" color="danger">
+        <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" (ngModelChange)="filtrar()" [(ngModel)]="filtros.dificultad" color="danger">
           <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
           <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
           <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
@@ -43,16 +39,16 @@
     </ion-list>
 
     <!-- filtro tiempo -->
-    <ion-list [hidden]="!filtros">
+    <ion-list [hidden]="!filtrar">
       <ion-list-header class="label label-ios text-center" style="font-size: 15px">
-        <ion-badge item-left color="danger">{{tiempo.lower}}</ion-badge>
-        <ion-badge item-left color="danger">{{tiempo.upper}}</ion-badge>
+        <ion-badge item-left color="danger">{{filtros.tiempo.lower}}</ion-badge>
+        <ion-badge item-left color="danger">{{filtros.tiempo.upper}}</ion-badge>
         Filtrar Tiempo de preparacion
         <ion-icon [hidden]="statusTiempo" name="arrow-dropdown" item-end (click)="statusTiempo=!statusTiempo;"></ion-icon>
         <ion-icon [hidden]="!statusTiempo" name="arrow-dropup" item-end (click)="statusTiempo=!statusTiempo;"></ion-icon>
       </ion-list-header>
       <ion-item [hidden]="!statusTiempo">
-        <ion-range dualKnobs="true" pin="true" min="10" max="120" step="10" color="dark" [(ngModel)]="tiempo" (ionChange)="onChange($event)">
+        <ion-range dualKnobs="true" pin="true" min="10" max="120" step="10" color="dark" [(ngModel)]="filtros.tiempo" (ionChange)="filtrar()">
           <ion-label range-left color="secondary">10</ion-label>
           <ion-label range-right color="danger">120</ion-label>
         </ion-range>
@@ -61,16 +57,16 @@
 
 
   <!-- filto trastornos_alimenticios -->
-  <ion-item [hidden]="!filtros">
+  <ion-item [hidden]="!filtrar">
       <ion-label>Apto para</ion-label>
-      <ion-select multiple="true" okText="OK" cancelText="">
-          <ion-option *ngFor="let enfermedad of enfermedades">{{enfermedad.nombre}}</ion-option>
+      <ion-select multiple="true" okText="OK" cancelText="" [(ngModel)]="filtros.enfermedades" (ngModelChange)="filtrar()">
+          <ion-option value="{{enfermedad.nombre}}" *ngFor="let enfermedad of enfermedades">{{enfermedad.nombre}}</ion-option>
       </ion-select>
   </ion-item>
 
   &nbsp;&nbsp;
   <!-- titulo y cantidad de elementos -->
-  <ion-list *ngFor="let receta of recetas">
+  <ion-list *ngFor="let receta of recetasSearch">
       <ion-item color="light" class="text-center" >
           <ion-thumbnail item-start  >
               <img src="{{receta.imagenes[0]}}">
