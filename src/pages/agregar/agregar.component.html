@@ -9,28 +9,34 @@
 </ion-header>
 
 <ion-content padding>
-    <form (ngSubmit)="postReceta()" novalidate>
+    <form (ngSubmit)="postReceta()" novalidate #forma="ngForm">
         <ion-card>
             <ion-card-content>
                 <ion-item>
                     <ion-label floating>Nombre de receta</ion-label>
-                    <ion-input type="text" [(ngModel)]="receta.nombre" name="nombre"></ion-input>
+                    <ion-input class="form-control" type="text" [(ngModel)]="receta.nombre" name="nombre" required #nombre="ngModel"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Cantidad de comensales:</ion-label>
-                    <ion-input type="number" [(ngModel)]="receta.personas" name="personas"></ion-input>
+                    <ion-input class="form-control" type="number" [(ngModel)]="receta.personas" required name="personas" #personas="ngModel"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Dificultad:</ion-label>
-                    <ion-input type="number" [(ngModel)]="receta.dificultad" name="dificultad"></ion-input>
+                    <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad" color="danger">
+                      <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
+                      <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
+                    </ion-range>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Tiempo (Min.)</ion-label>
-                    <ion-input type="number" [(ngModel)]="receta.tiempo" name="tiempo"></ion-input>
+                    <ion-range dualKnobs="true" name="tiempo" pin="true" min="10" max="120" step="10" color="dark" [(ngModel)]="receta.tiempo">
+                      <ion-label range-left color="secondary">10</ion-label>
+                      <ion-label range-right color="danger">120</ion-label>
+                    </ion-range>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Video explicativo:</ion-label>
-                    <ion-input type="text" [(ngModel)]="receta.video" name="video"></ion-input>
+                    <ion-input class="form-control" type="text" [(ngModel)]="receta.video" name="video"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>Categoría de receta:</ion-label>
@@ -38,6 +44,8 @@
                         <ion-option value="{{categoria.id}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
                     </ion-select>
                 </ion-item>
+
+
             </ion-card-content>
         </ion-card>
 
@@ -47,10 +55,10 @@
             </ion-card-header>
             <ion-card-content>
                 <div style="display: flex;">
-                    <button type="button" ion-button color="danger" outline (click)="takePhoto(1)" class="camera-icon">
+                    <button type="button" ion-button color="danger" clear (click)="takePhoto(1)" class="camera-icon">
                         <ion-icon name="camera"></ion-icon>
                     </button>
-                    <button type="button" ion-button color="danger" outline (click)="takePhoto(0)" class="camera-icon">
+                    <button type="button" ion-button color="danger" clear (click)="takePhoto(0)" class="camera-icon">
                         <ion-icon name="images"></ion-icon>
                     </button>
                 </div>
@@ -141,5 +149,5 @@
             Crear Receta
         </button>
     </form>
-    
+
 </ion-content>

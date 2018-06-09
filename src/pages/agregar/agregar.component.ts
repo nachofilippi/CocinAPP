@@ -5,9 +5,14 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ListaRecetasServicios } from '../../app/servicios/lista-recetas';
 import {RestProvider} from '../../providers/rest/rest';
 
+
 @Component({
   selector: 'app-agregar',
-  templateUrl: 'agregar.component.html'
+  templateUrl: 'agregar.component.html',
+  styles: [`
+    .ng-invalid.ng-touched:not(form){
+      color:red;
+    }  `]
 })
 export class AgregarComponent implements OnInit {
 
@@ -23,9 +28,10 @@ export class AgregarComponent implements OnInit {
     public _listaRecetas: ListaRecetasServicios,
     public rest: RestProvider,
     private camera: Camera
-  ) { }
+  ) {}
 
-  ngOnInit() { 
+
+  ngOnInit() {
       this.receta={};
       this.receta.ingredientes=[];
       this.receta.pasos=[];
@@ -33,6 +39,7 @@ export class AgregarComponent implements OnInit {
       this.ingredientesElegidos=[];
       this.rest.getCategoriasRecetas().subscribe(data => {this.categorias = data}, offline => {this.categorias = offline;});
       this.rest.getIngredientes().subscribe(data => {this.ingredientes = data}, offline => {this.ingredientes = offline;});
+
     }
 
   agregar() {
@@ -49,13 +56,13 @@ export class AgregarComponent implements OnInit {
   }
 
   borrarPaso(i: number) {
-      this.receta.pasos.splice(i, 1);    
+      this.receta.pasos.splice(i, 1);
   }
-  
+
   borrarImagen(i: number) {
       this.receta.imagenes.splice(i, 1);
   }
-  
+
   borrarItem(i: number) {
       this.ingredientes.push(this.ingredientesElegidos[i]);
       this.ingredientesElegidos.splice(i, 1);
@@ -68,7 +75,7 @@ export class AgregarComponent implements OnInit {
       this.rest.postReceta(this.receta).subscribe(data => {console.log (data)}, offline => {console.log(offline)});
       this.navCtrl.pop();
   }
-  
+
   takePhoto(sourceType: number = 0) {
       //0 para galería - 1 para Cámara
       const options: CameraOptions = {
