@@ -29,7 +29,11 @@
       <ion-col>
         <ion-item>
           <div>Dificultad</div>
-          <div item-right>{{receta.dificultad}}</div>
+          <div item-right [hidden]="receta.dificultad > 1" style="color:green">Muy fácil</div>
+          <div item-right [hidden]="receta.dificultad!==2" style="color:rgb(116, 190, 4)" >Fácil</div>
+          <div item-right [hidden]="receta.dificultad!==3" style="color:#d1be12">Intermedio</div>
+          <div item-right [hidden]="receta.dificultad!==4" style="color:red">Dificil</div>
+          <div item-right [hidden]="receta.dificultad < 5" style="color:darkred">Muy dificil</div>
           </ion-item>
         <ion-item>
           <div>Tiempo de preparación</div>
