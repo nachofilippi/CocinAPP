@@ -45,7 +45,7 @@ export class DetalleComponent implements OnInit {
       toast.present();
       return;
     }
-    this.rest.puntuarReceta(this.receta.id, num+1).subscribe(()=>{});
+    this.rest.puntuarReceta(this.receta.id, num+1).subscribe(()=>{}, ()=>{});
     for (var i = 0; i < this.stars.length; i++) {
       this.stars[i].pintada = 0;
       if (i <= num)
@@ -94,7 +94,7 @@ export class DetalleComponent implements OnInit {
         this.stars[i - 1].pintada = 1;
     }
     this.rest.getPuntuaciones(this.receta.id).subscribe(
-      res => this.yaPuntuo = res[0].puntuacion);
+      res => this.yaPuntuo = res[0].puntuacion,()=>{});
 
     this.socialSharing.canShareVia("com.facebook.android").catch(
       () => this.socialSharing.canShareVia("com.facebook.ios").catch(() => this.share.facebook = false)

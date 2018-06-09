@@ -140,6 +140,8 @@ export class RestProvider {
 
     getPuntuaciones(receta: number = null): Observable<{}> {
       let usuario: any = this.getUsuario();
+      if (!usuario)
+        return Observable.throw([]);
       let queryString: string = '?usuario=' + usuario.email;
       if (receta)
         queryString += '&receta=' + receta
