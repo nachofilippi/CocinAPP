@@ -15,7 +15,7 @@
       <ion-icon item-start *ngIf="!receta.favorito" name="star-outline" color="danger" (click)="agregarFavorito()"></ion-icon>
       <ion-icon item-start *ngIf="receta.favorito" name="star" color="danger" (click)="eliminarFavorito()"></ion-icon>
       <h1 class="text-center">{{receta.nombre}}</h1>
-      <h2 class="text-center"> ({{receta.personas}} {{receta.personas>1?"comensales":"comensal"}})</h2>
+      <h2 class="text-center" [hidden]="receta.personas < 1"> ({{receta.personas}} {{receta.personas>1?"comensales":"comensal"}})</h2>
       <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
     </ion-item>
     <!-- imagen -->
@@ -30,11 +30,11 @@
         <ion-item>
           <div>Dificultad</div>
           <div item-right>{{receta.dificultad}}</div>
-        </ion-item>
+          </ion-item>
         <ion-item>
           <div>Tiempo de preparación</div>
           <div item-right>
-              <ion-icon name="time" item-right></ion-icon>
+              <ion-icon name="stopwatch" item-right></ion-icon>
               {{receta.tiempo}}'
           </div>
         </ion-item>
@@ -48,8 +48,9 @@
     <ion-item text-center>
 
         <button ion-button clear small *ngFor="let star of stars;let i= index" (click)="clickStart(i)">
-            <ion-icon *ngIf="star.click" name="star" color="danger" ></ion-icon>
-            <ion-icon *ngIf="!star.click" name="star-outline" color="danger"></ion-icon>
+            <ion-icon *ngIf="star.pintada==1 && !star.click" name="star-half" color="danger" ></ion-icon>
+            <ion-icon *ngIf="star.pintada==2 || star.click" name="star" color="danger" ></ion-icon>
+            <ion-icon *ngIf="!star.pintada && !star.click" name="star-outline" color="danger"></ion-icon>
         </button>
 
           <!-- <ion-col center text-center>
@@ -123,7 +124,7 @@
     </ion-fab-list>
     <ion-fab-list side="left">
      <button ion-fab color="danger" [hidden]="!share.instagram" (click)="shareInstagram()"><ion-icon name="logo-instagram"></ion-icon></button>
-     <button ion-fab color="danger" [hidden]="!share.whatsapp" (click)="shareWhatsApp()"><ion-icon name="logo-whatsapp"></ion-icon></button>
+     <button ion-fab color="danger" [hidden]="!share. whatsapp" (click)="shareWhatsApp()"><ion-icon name="logo-whatsapp"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 

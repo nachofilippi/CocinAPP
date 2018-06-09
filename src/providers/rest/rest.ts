@@ -27,7 +27,20 @@ export class RestProvider {
     getRecetas(): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         return this.http.get(this.baseUrl + '/receta').pipe(
-            map(this.extractData),
+            map((res) => {
+              let recetas = res as any[];
+              recetas.forEach(receta => {
+                let pts = 0;
+                receta.puntuaciones.forEach(puntuacion => {
+                  pts += puntuacion.puntuacion;
+                });
+                if (receta.puntuaciones.length)
+                  receta.puntuaciones = pts / receta.puntuaciones.length;
+                else
+                  delete receta.puntuaciones;
+              });
+              return recetas;
+            }),
             catchError(function () {
                 return Observable.throw(offlineProvider.getRecetas());
             })
@@ -115,14 +128,36 @@ export class RestProvider {
         );
     }
 
-  private getUsuario() {
-    if (localStorage.getItem("usuario"))
-      return JSON.parse(localStorage.getItem("usuario"));
-    return null;
-  }
+    puntuarReceta(receta: number, puntos: number): Observable<{}> {
+      let usuario: any = this.getUsuario();
+      let puntuacion: any = { usuario: usuario.email, receta: receta, puntuacion: puntos };
+      return this.http.post(this.baseUrl + '/usuario/puntuacion',puntuacion).pipe(map(this.extractData),
+          catchError(function () {
+              return Observable.throw({});
+          })
+      );
+    }
+
+    getPuntuaciones(receta: number = null): Observable<{}> {
+      let usuario: any = this.getUsuario();
+      let queryString: string = '?usuario=' + usuario.email;
+      if (receta)
+        queryString += '&receta=' + receta
+      return this.http.get(this.baseUrl + '/usuario/puntuacion'+queryString).pipe(map(this.extractData),
+          catchError(function (e) {
+              return Observable.throw(e);
+          })
+      );
+    }
+
+    private getUsuario() {
+      if (localStorage.getItem("usuario"))
+        return JSON.parse(localStorage.getItem("usuario"));
+      return null;
+    }
 
     private extractData(res: Response) {
-        let body = res;
-        return body || {};
+      let body = res;
+      return body || {};
     }
 }
