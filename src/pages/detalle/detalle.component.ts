@@ -18,6 +18,7 @@ export class DetalleComponent implements OnInit {
   ingredientes: boolean = false;
   favorito: boolean;
   share: any = { facebook: true, whatsapp: true, twitter: true, instagram: true };
+  yaPuntuo: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
     private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing, private login: LoginProvider) {
@@ -35,12 +36,30 @@ export class DetalleComponent implements OnInit {
   }
 
   pintarEstrellas(num) {
+    if (this.yaPuntuo){
+      let toast = this.toastCtrl.create({
+        message: 'Ya habías calificado a esta receta con ' + this.yaPuntuo + (this.yaPuntuo === 1 ? ' estrella!' : ' estrellas!'),
+        duration: 3000,
+        position: 'bottom'
+      });
+      toast.present();
+      return;
+    }
+    this.rest.puntuarReceta(this.receta.id, num+1).subscribe(()=>{});
     for (var i = 0; i < this.stars.length; i++) {
+      this.stars[i].pintada = 0;
       if (i <= num)
         this.stars[i].click = true;
       else
         this.stars[i].click = false;
     }
+    let toast = this.toastCtrl.create({
+      message: 'Gracias por calificar la receta!',
+      duration: 2500,
+      position: 'bottom'
+    });
+    toast.present();
+    this.yaPuntuo = num + 1;
   }
 
   borrarLista() {
@@ -63,11 +82,20 @@ export class DetalleComponent implements OnInit {
 
   ngOnInit() {
     this.stars = [];
-    this.stars.push({ "click": false });
-    this.stars.push({ "click": false });
-    this.stars.push({ "click": false });
-    this.stars.push({ "click": false });
-    this.stars.push({ "click": false });
+    this.stars.push({ click: false });
+    this.stars.push({ click: false });
+    this.stars.push({ click: false });
+    this.stars.push({ click: false });
+    this.stars.push({ click: false });
+    for (let i = 1; i <= 5; i++) {
+      if (i <= this.receta.puntuaciones)
+        this.stars[i - 1].pintada = 2;
+      else if (i - 1 < this.receta.puntuaciones)
+        this.stars[i - 1].pintada = 1;
+    }
+    this.rest.getPuntuaciones(this.receta.id).subscribe(
+      res => this.yaPuntuo = res[0].puntuacion);
+
     this.socialSharing.canShareVia("com.facebook.android").catch(
       () => this.socialSharing.canShareVia("com.facebook.ios").catch(() => this.share.facebook = false)
     );
