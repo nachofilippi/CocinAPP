@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { LoginProvider } from '../../providers/login/login';
 
 
 @Component({
@@ -19,21 +20,27 @@ export class DetalleComponent implements OnInit {
   share: any = { facebook: true, whatsapp: true, twitter: true, instagram: true };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-     private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing) {
+    private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing, private login: LoginProvider) {
     this.receta = this.navParams.get("receta");
-
   }
 
   clickStart(num) {
+    this.login.checkLogin().then(
+      () => this.pintarEstrellas(num),
+      () => this.login.solicitarLogin().then(
+        () => this.pintarEstrellas(num),
+        () => { }
+      )
+    );
+  }
 
+  pintarEstrellas(num) {
     for (var i = 0; i < this.stars.length; i++) {
       if (i <= num)
         this.stars[i].click = true;
       else
         this.stars[i].click = false;
-
     }
-
   }
 
   borrarLista() {
@@ -74,13 +81,21 @@ export class DetalleComponent implements OnInit {
   }
 
   agregarFavorito() {
-      let toast = this.toastCtrl.create({
-          message: 'La receta fue añadida a favoritos!',
-          duration: 3000,
-          position: 'bottom'
-      });
-      toast.present();
-      this.rest.postFavorito(this.receta).subscribe(data => console.log ("Backend"), offline => console.log ("Offline"));
+      this.login.checkLogin().then(
+        ()=>{this.addFav()},
+        ()=>{this.login.solicitarLogin().then(()=>this.addFav())}
+      );
+  }
+
+  addFav() {
+    let toast = this.toastCtrl.create({
+      message: 'La receta fue añadida a favoritos!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+    this.receta.favorito = true;
+    this.rest.postFavorito(this.receta).subscribe(data => console.log("Backend"), offline => console.log("Offline"));
   }
 
   eliminarFavorito() {

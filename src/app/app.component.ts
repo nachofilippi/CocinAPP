@@ -33,12 +33,11 @@ export class MyApp {
       { title: 'Inicio', component: HomePage },
       { title: 'Lista de Recetas', component: ListPage },
       { title: 'Ingredientes', component:IngredientesPage},
-      { title: 'Favoritos', component: FavoritosPage}
     ];
-    
+
     this.proximamente = [
-        {title: 'Viandas', 'descripcion': "Proximamente podrás blablabla"},
-        {title: 'Mi semana', 'descripcion': "Proximamente podrás blablabla"}
+        {title: 'Viandas', descripcion: "Proximamente podrás blablabla"},
+        {title: 'Mi semana', descripcion: "Proximamente podrás blablabla"}
     ];
 
   }
@@ -50,7 +49,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.offline.init();
-      
+
     });
   }
 
@@ -60,13 +59,20 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  abrirFavoritos() {
+    this.login.checkLogin().then((usr) => this.nav.setRoot(FavoritosPage), () => this.solicitarFavoritos());
+  }
+  solicitarFavoritos() {
+    this.login.solicitarLogin().then((usr) => this.nav.setRoot(FavoritosPage));
+  }
+
   abrirLogin(){
-      this.login.checkLogin().then((usr) => this.nav.setRoot(LoginPage, {usr}), () => this.solicitarLogin());   
+      this.login.checkLogin().then((usr) => this.nav.setRoot(LoginPage, {usr}), () => this.solicitarLogin());
   }
   solicitarLogin(){
       this.login.solicitarLogin().then(usr => this.nav.setRoot(LoginPage, {usr}));
   }
-  
+
   alertProximamente(i) {
       let alert = this.alertCtrl.create({
           title: this.proximamente[i].title,
@@ -76,5 +82,5 @@ export class MyApp {
       alert.present();
 
   }
-  
+
 }

@@ -7,6 +7,7 @@ import {DetalleComponent} from '../detalle/detalle.component';
 
 import {ListaItem} from '../../app/clases/index';
 import {RestProvider} from '../../providers/rest/rest';
+import {LoginProvider} from '../../providers/login/login';
 
 
 
@@ -23,7 +24,8 @@ export class ListPage {
     constructor(
         private navCtrl: NavController,
         public alertCtrl: AlertController,
-        public rest: RestProvider
+        public rest: RestProvider,
+        private login: LoginProvider
     ) {}
 
     ionViewWillEnter() {
@@ -70,8 +72,12 @@ export class ListPage {
         console.log(i.completado);
     }
 
-    cargarFavoritos(){
-        this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));
+    cargarFavoritos() {
+      this.login.checkLogin().then(
+        () => {
+          this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));
+        }
+      )
     }
     join(favoritos) {
         for (let i = 0; i < favoritos.length; i++) {
