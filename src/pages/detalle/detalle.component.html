@@ -42,8 +42,15 @@
               {{receta.tiempo}}'
           </div>
         </ion-item>
-        <ion-item>
-          <div>Apto para</div>
+        <ion-item [hidden]="receta.apto_para.length<1">
+            <div (click)="apto=!apto">
+              Apto para
+              <ion-icon [hidden]="apto" name="arrow-dropdown" style="float: right"></ion-icon>
+              <ion-icon [hidden]="!apto" name="arrow-dropup" style="float: right"></ion-icon>
+            </div>
+            <ion-item [hidden]="!apto" *ngFor="let enfermedad of receta.apto_para">
+              - {{enfermedad.nombre}}
+            </ion-item>
         </ion-item>
       </ion-col>
     </ion-row>
