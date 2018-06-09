@@ -16,7 +16,7 @@
       <ion-icon item-start *ngIf="receta.favorito" name="star" color="danger" (click)="eliminarFavorito()"></ion-icon>
       <h1 class="text-center">{{receta.nombre}}</h1>
       <h2 class="text-center" [hidden]="receta.personas < 1"> ({{receta.personas}} {{receta.personas>1?"comensales":"comensal"}})</h2>
-      <ion-icon item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarLista()"></ion-icon>
+      <ion-icon [hidden]="!puedeBorrar" item-right ios="ios-trash" md="md-trash" color="danger" (click)="borrarReceta()"></ion-icon>
     </ion-item>
     <!-- imagen -->
     <ion-slides pager [autoplay]="3500" [loop]="true" [centeredSlides]="true" class="slides-imagenes">
@@ -29,7 +29,11 @@
       <ion-col>
         <ion-item>
           <div>Dificultad</div>
-          <div item-right>{{receta.dificultad}}</div>
+          <div item-right [hidden]="receta.dificultad > 1" style="color:green">Muy fácil</div>
+          <div item-right [hidden]="receta.dificultad!==2" style="color:rgb(116, 190, 4)" >Fácil</div>
+          <div item-right [hidden]="receta.dificultad!==3" style="color:#d1be12">Intermedio</div>
+          <div item-right [hidden]="receta.dificultad!==4" style="color:red">Difícil</div>
+          <div item-right [hidden]="receta.dificultad < 5" style="color:darkred">Muy difícil</div>
           </ion-item>
         <ion-item>
           <div>Tiempo de preparación</div>
@@ -38,8 +42,15 @@
               {{receta.tiempo}}'
           </div>
         </ion-item>
-        <ion-item>
-          <div>Apto para</div>
+        <ion-item [hidden]="receta.apto_para.length<1">
+            <div (click)="apto=!apto">
+              Apto para
+              <ion-icon [hidden]="apto" name="arrow-dropdown" style="float: right"></ion-icon>
+              <ion-icon [hidden]="!apto" name="arrow-dropup" style="float: right"></ion-icon>
+            </div>
+            <ion-item [hidden]="!apto" *ngFor="let enfermedad of receta.apto_para">
+              - {{enfermedad.nombre}}
+            </ion-item>
         </ion-item>
       </ion-col>
     </ion-row>

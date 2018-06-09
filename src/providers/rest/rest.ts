@@ -88,6 +88,14 @@ export class RestProvider {
         );
     }
 
+    deleteReceta(idReceta: any): Observable<{}> {
+      return this.http.delete(this.baseUrl + '/receta/' + idReceta).pipe(map(this.extractData),
+          catchError(function () {
+              return Observable.throw({});
+          })
+      );
+  }
+
     postFavorito(favorito: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         let usuario: any = this.getUsuario();
@@ -140,6 +148,8 @@ export class RestProvider {
 
     getPuntuaciones(receta: number = null): Observable<{}> {
       let usuario: any = this.getUsuario();
+      if (!usuario)
+        return Observable.throw([]);
       let queryString: string = '?usuario=' + usuario.email;
       if (receta)
         queryString += '&receta=' + receta
