@@ -117,12 +117,13 @@
   <ion-fab bottom right >
     <button ion-fab mini color="dark"> <ion-icon name="share"></ion-icon></button>
     <ion-fab-list side="top">
-      <button ion-fab color="primary" ><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab color="primary"><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab color="danger" [hidden]="!share.facebook" (click)="shareFacebook()"><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab color="danger" [hidden]="!share.twitter" (click)="shareTwitter()"><ion-icon name="logo-twitter"></ion-icon></button>
 
     </ion-fab-list>
     <ion-fab-list side="left">
-     <button ion-fab color="danger"><ion-icon name="logo-googleplus"></ion-icon></button>
+     <button ion-fab color="danger" [hidden]="!share.instagram" (click)="shareInstagram()"><ion-icon name="logo-instagram"></ion-icon></button>
+     <button ion-fab color="danger" [hidden]="!share.whatsapp" (click)="shareWhatsApp()"><ion-icon name="logo-whatsapp"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 

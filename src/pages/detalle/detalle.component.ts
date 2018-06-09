@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { LoginProvider } from '../../providers/login/login';
 
 
@@ -16,11 +17,11 @@ export class DetalleComponent implements OnInit {
   video: boolean = false;
   ingredientes: boolean = false;
   favorito: boolean;
+  share: any = { facebook: true, whatsapp: true, twitter: true, instagram: true };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-     private toastCtrl: ToastController, private rest: RestProvider, private login: LoginProvider) {
+    private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing, private login: LoginProvider) {
     this.receta = this.navParams.get("receta");
-
   }
 
   clickStart(num) {
@@ -67,6 +68,16 @@ export class DetalleComponent implements OnInit {
     this.stars.push({ "click": false });
     this.stars.push({ "click": false });
     this.stars.push({ "click": false });
+    this.socialSharing.canShareVia("com.facebook.android").catch(
+      () => this.socialSharing.canShareVia("com.facebook.ios").catch(() => this.share.facebook = false)
+    );
+    this.socialSharing.canShareVia("com.twitter.android").catch(
+      () => this.socialSharing.canShareVia("com.twitter.ios").catch(() => this.share.twitter = false)
+    );
+    this.socialSharing.canShareVia("com.instagram.android").catch(
+      () => this.socialSharing.canShareVia("com.instagram.ios").catch(() => this.share.instagram = false)
+    );
+    this.socialSharing.canShareVia("com.whatsapp").catch(() => this.share.whatsapp = false)
   }
 
   agregarFavorito() {
@@ -104,4 +115,31 @@ export class DetalleComponent implements OnInit {
     confirm.present();
   }
 
+  shareFacebook() {
+    this.socialSharing.shareViaFacebook("Miren lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
+
+  shareTwitter() {
+    this.socialSharing.shareViaTwitter("Miren lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
+
+  shareInstagram() {
+    this.socialSharing.shareViaInstagram("Miren lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
+
+  shareWhatsApp() {
+    this.socialSharing.shareViaWhatsApp("Mirá lo que estoy cocinando gracias a CocinApp!!", this.receta.imagenes[0]).then(
+      () => { },
+      () => { }
+    );
+  }
 }
