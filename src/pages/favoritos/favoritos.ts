@@ -20,6 +20,7 @@ export class FavoritosPage implements OnInit {
     }
 
     verFavorito(receta) {
+        receta.favorito = true;
         this.navCtrl.push(DetalleComponent, {receta});
     }
 }
