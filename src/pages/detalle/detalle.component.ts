@@ -16,6 +16,7 @@ export class DetalleComponent implements OnInit {
   stars: any;
   video: boolean = false;
   ingredientes: boolean = false;
+  puedeBorrar: boolean = false;
   favorito: boolean;
   share: any = { facebook: true, whatsapp: true, twitter: true, instagram: true };
   yaPuntuo: number;
@@ -62,20 +63,36 @@ export class DetalleComponent implements OnInit {
     this.yaPuntuo = num + 1;
   }
 
-  borrarLista() {
+  borrarReceta() {
     let confirm = this.alertCtrl.create({
       title: 'Borrar receta',
       message: 'Esta seguro que usted desea borrar la receta?',
-      buttons: [{text:'Cancelar',cssClass:'alert-button'},
-        {
-          text: 'Eliminar',
-          handler: () => {
-            console.log('Eliminar');
-            this.navCtrl.pop();
-          },
-          cssClass:'alert-button'
-        }
-      ]
+      buttons: [{ text: 'Cancelar', cssClass: 'alert-button' },
+      {
+        text: 'Eliminar',
+        handler: () => {
+          this.rest.deleteReceta(this.receta.id).subscribe(
+            () => {
+              let toast = this.toastCtrl.create({
+                message: 'La receta fue eliminada',
+                duration: 2500,
+                position: 'bottom'
+              });
+              toast.present();
+              this.navCtrl.pop();
+            }, () => {
+              let toast = this.toastCtrl.create({
+                message: 'No se pudo eliminar la receta. Verificá tu conexión a internet',
+                duration: 2500,
+                position: 'bottom'
+              });
+              toast.present();
+              this.navCtrl.pop();
+            }
+          );
+        },
+        cssClass: 'alert-button'
+      }]
     });
     confirm.present();
   }
@@ -93,6 +110,13 @@ export class DetalleComponent implements OnInit {
       else if (i - 1 < this.receta.puntuaciones)
         this.stars[i - 1].pintada = 1;
     }
+
+    if (localStorage.getItem("usuario")) {
+      let usuario: any = JSON.parse(localStorage.getItem("usuario"));
+      if (this.receta.creador && usuario.email === this.receta.creador.mail)
+        this.puedeBorrar = true;
+    }
+
     this.rest.getPuntuaciones(this.receta.id).subscribe(
       res => this.yaPuntuo = res[0].puntuacion,()=>{});
 

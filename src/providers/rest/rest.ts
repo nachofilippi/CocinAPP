@@ -88,6 +88,14 @@ export class RestProvider {
         );
     }
 
+    deleteReceta(idReceta: any): Observable<{}> {
+      return this.http.delete(this.baseUrl + '/receta/' + idReceta).pipe(map(this.extractData),
+          catchError(function () {
+              return Observable.throw({});
+          })
+      );
+  }
+
     postFavorito(favorito: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
         let usuario: any = this.getUsuario();
