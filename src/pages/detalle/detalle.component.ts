@@ -16,6 +16,7 @@ export class DetalleComponent implements OnInit {
   video: boolean = false;
   ingredientes: boolean = false;
   favorito: boolean;
+  share: any = { facebook: true, whatsapp: true, twitter: true, instagram: true };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
      private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing) {
@@ -60,6 +61,16 @@ export class DetalleComponent implements OnInit {
     this.stars.push({ "click": false });
     this.stars.push({ "click": false });
     this.stars.push({ "click": false });
+    this.socialSharing.canShareVia("com.facebook.android").catch(
+      () => this.socialSharing.canShareVia("com.facebook.ios").catch(() => this.share.facebook = false)
+    );
+    this.socialSharing.canShareVia("com.twitter.android").catch(
+      () => this.socialSharing.canShareVia("com.twitter.ios").catch(() => this.share.twitter = false)
+    );
+    this.socialSharing.canShareVia("com.instagram.android").catch(
+      () => this.socialSharing.canShareVia("com.instagram.ios").catch(() => this.share.instagram = false)
+    );
+    this.socialSharing.canShareVia("com.whatsapp").catch(() => this.share.whatsapp = false)
   }
 
   agregarFavorito() {
