@@ -18,7 +18,7 @@
                     <!-- {{favorito.foto}} -->
                     <img src="{{favorito.imagenes[0]}}" alt="">
                 </ion-avatar>
-                <h3>({{ favorito.personas }} personas)</h3>
+                <h3>({{favorito.personas}} {{favorito.personas===1?' persona':' personas'}} )</h3>
                 <ion-icon item-end name="arrow-dropright" (click)="verFavorito(favorito)"></ion-icon>
             </ion-item>
         </ng-container>
