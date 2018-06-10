@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <button ion-button outline color="danger" style="float: right;" (click)="dismiss()">
+    <button style="border: transparent!important;float: right!important;" ion-button outline color="danger" (click)="dismiss()">
       <ion-icon name="close"></ion-icon>
     </button>
   </ion-navbar>
@@ -15,13 +15,14 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-item text-wrap style="font-style: italic!important;
+        color: darksalmon!important;">
+      *Valores diarios en base a una dieta de 2000 kcal u 8400 kJ. Sus valores diarios pueden ser mayores o menores dependiendo
+      de sus necesidades energéticas
+    </ion-item>
     <ion-item *ngFor="let info of datos">
       <ion-label>{{info.label}}</ion-label>
       <div item-end>{{info_nutricional[info.atr]}} {{info.unidad}}</div>
-    </ion-item>
-    <ion-item text-wrap>
-      *Valores diarios en base a una dieta de 2000 kcal u 8400 kJ. Sus valores diarios pueden ser mayores o menores dependiendo
-      de sus necesidades energéticas
     </ion-item>
   </ion-list>
 </ion-content>
