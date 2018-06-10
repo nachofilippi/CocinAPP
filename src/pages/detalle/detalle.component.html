@@ -27,6 +27,12 @@
     <!-- caracteristicas -->
     <ion-row>
       <ion-col>
+        <ion-item (click)="verInfoNutricional()">
+          <div>Ver información nutricional</div>
+          <div item-right>
+              <ion-icon name="arrow-dropright" item-right></ion-icon>
+          </div>
+        </ion-item>
         <ion-item>
           <div>Dificultad</div>
           <div item-right [hidden]="receta.dificultad > 1" style="color:green">Muy fácil</div>

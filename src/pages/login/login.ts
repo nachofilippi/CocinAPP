@@ -18,6 +18,6 @@ export class LoginPage {
     }
 
     logout() {
-        this.login.logout().then(() => this.navCtrl.setPages([{page: HomePage}]));
+        this.login.logout().then(() => this.navCtrl.setPages([{page: HomePage}]),()=>{});
     }
 }

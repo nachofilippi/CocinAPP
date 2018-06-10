@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LoginProvider } from '../../providers/login/login';
+import {InfoNutricionalPage} from '../info-nutricional/info-nutricional'
 
 
 @Component({
@@ -22,7 +23,8 @@ export class DetalleComponent implements OnInit {
   yaPuntuo: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-    private toastCtrl: ToastController, private rest: RestProvider, public socialSharing: SocialSharing, private login: LoginProvider) {
+    private toastCtrl: ToastController, private rest: RestProvider, public modalCtrl: ModalController,
+    public socialSharing: SocialSharing, private login: LoginProvider) {
     this.receta = this.navParams.get("receta");
   }
 
@@ -135,7 +137,7 @@ export class DetalleComponent implements OnInit {
   agregarFavorito() {
       this.login.checkLogin().then(
         ()=>{this.addFav()},
-        ()=>{this.login.solicitarLogin().then(()=>this.addFav())}
+        ()=>{this.login.solicitarLogin().then(()=>this.addFav(), ()=>{})}
       );
   }
 
@@ -194,4 +196,11 @@ export class DetalleComponent implements OnInit {
       () => { }
     );
   }
+
+  verInfoNutricional() {
+    let info_nutricional = this.receta.info_nutricional;
+    let profileModal = this.modalCtrl.create(InfoNutricionalPage, { info_nutricional }, { cssClass: 'info-nutricional-modal' });
+    profileModal.present();
+  }
+
 }
