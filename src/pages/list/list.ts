@@ -5,7 +5,6 @@ import {AgregarComponent} from '../agregar/agregar.component';
 import {AlertController} from 'ionic-angular';
 import {DetalleComponent} from '../detalle/detalle.component';
 
-import {ListaItem} from '../../app/clases/index';
 import {RestProvider} from '../../providers/rest/rest';
 import {LoginProvider} from '../../providers/login/login';
 
@@ -34,26 +33,22 @@ export class ListPage {
     }
 
     irAgregar() {
-        this.navCtrl.push(AgregarComponent)
+        this.navCtrl.push(AgregarComponent);
     }
 
     showConfirm() {
         let confirm = this.alertCtrl.create({
             title: 'Crear nueva receta',
-            message: 'Desea usted crear una nueva receta propia?',
+            message: '¿Querés crear una nueva receta?',
             buttons: [
                 {
                     text: 'Cancelar',
-                    handler: () => {
-                        console.log('Cancelar cliqueado');
-                    },
                     cssClass:'alert-button'
                 },
                 {
-                    text: 'Aceptar',
+                    text: 'Sí',
                     handler: () => {
                         this.irAgregar();
-                        console.log('Aceptar cliqueado');
                     },
                     cssClass: 'alert-button'
                 }
@@ -64,12 +59,6 @@ export class ListPage {
 
     verDetalle(receta) {
         this.navCtrl.push(DetalleComponent, {receta});
-    }
-
-    actualizar(i: ListaItem) {
-        i.completado = !i.completado;
-
-        console.log(i.completado);
     }
 
     cargarFavoritos() {

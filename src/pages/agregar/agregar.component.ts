@@ -25,7 +25,7 @@ export class AgregarComponent implements OnInit {
     private camera: Camera
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
       this.receta={};
       this.receta.ingredientes=[];
       this.receta.pasos=[];
@@ -49,13 +49,13 @@ export class AgregarComponent implements OnInit {
   }
 
   borrarPaso(i: number) {
-      this.receta.pasos.splice(i, 1);    
+      this.receta.pasos.splice(i, 1);
   }
-  
+
   borrarImagen(i: number) {
       this.receta.imagenes.splice(i, 1);
   }
-  
+
   borrarItem(i: number) {
       this.ingredientes.push(this.ingredientesElegidos[i]);
       this.ingredientesElegidos.splice(i, 1);
@@ -65,10 +65,10 @@ export class AgregarComponent implements OnInit {
       this.ingredientesElegidos.forEach((value)=> {
           this.receta.ingredientes.push ({"ingrediente":value.id,"cantidad":value.cantidad});
       });
-      this.rest.postReceta(this.receta).subscribe(data => {console.log (data)}, offline => {console.log(offline)});
+      this.rest.postReceta(this.receta).subscribe(data => {}, offline => {});
       this.navCtrl.pop();
   }
-  
+
   takePhoto(sourceType: number = 0) {
       //0 para galería - 1 para Cámara
       const options: CameraOptions = {

@@ -66,7 +66,7 @@ export class DetalleComponent implements OnInit {
   borrarReceta() {
     let confirm = this.alertCtrl.create({
       title: 'Borrar receta',
-      message: 'Esta seguro que usted desea borrar la receta?',
+      message: '¿Estás seguro que querés borrar la receta?',
       buttons: [{ text: 'Cancelar', cssClass: 'alert-button' },
       {
         text: 'Eliminar',
@@ -147,7 +147,7 @@ export class DetalleComponent implements OnInit {
     });
     toast.present();
     this.receta.favorito = true;
-    this.rest.postFavorito(this.receta).subscribe(data => console.log("Backend"), offline => console.log("Offline"));
+    this.rest.postFavorito(this.receta).subscribe(data => {}, offline => {});
   }
 
   eliminarFavorito() {
@@ -159,7 +159,7 @@ export class DetalleComponent implements OnInit {
           text: 'Eliminar',
           handler: () => {
             this.receta.favorito = false;
-            this.rest.deleteFavorito(this.receta.id).subscribe(data => console.log ("Backend"), offline => console.log ("Offline"));
+            this.rest.deleteFavorito(this.receta.id).subscribe(data => {}, offline => {});
           }
         }
       ]
