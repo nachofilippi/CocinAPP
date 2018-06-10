@@ -16,6 +16,7 @@ import { ListPage } from '../pages/list/list';
 import { IngredientesPage } from '../pages/ingredientes/ingredientes.component';
 import { LoginPage }  from '../pages/login/login';
 import { FavoritosPage } from '../pages/favoritos/favoritos';
+import { InfoNutricionalPage } from '../pages/info-nutricional/info-nutricional';
 
 
 // otras importaciones
@@ -42,7 +43,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     SafeUrlPipe,
     DetalleComponent,
     LoginPage,
-    FavoritosPage
+    FavoritosPage,
+    InfoNutricionalPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     AgregarComponent,
     DetalleComponent,
     LoginPage,
-    FavoritosPage
+    FavoritosPage,
+    InfoNutricionalPage
   ],
   providers: [
     StatusBar,

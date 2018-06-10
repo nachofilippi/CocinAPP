@@ -65,7 +65,7 @@ export class ListPage {
       this.login.checkLogin().then(
         () => {
           this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));
-        }
+        },()=>{}
       )
     }
     join(favoritos) {
