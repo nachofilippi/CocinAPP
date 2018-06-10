@@ -2,6 +2,7 @@ import {NavController} from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {RestProvider} from '../../providers/rest/rest';
 import { DetalleComponent } from '../detalle/detalle.component';
+import { ListPage } from '../list/list';
 
 @Component({
     selector: 'page-favoritos',
@@ -22,5 +23,9 @@ export class FavoritosPage implements OnInit {
     verFavorito(receta) {
         receta.favorito = true;
         this.navCtrl.push(DetalleComponent, {receta});
+    }
+
+    verRecetas(){
+      this.navCtrl.push(ListPage);
     }
 }
