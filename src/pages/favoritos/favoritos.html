@@ -9,18 +9,21 @@
 </ion-header>
 
 <ion-content class="categories">
-    <h2 class="favoritos-title">Favoritos</h2>
-    <ion-list>
-        <ng-container *ngFor="let favorito of favoritos; let i = index">
-            <ion-item>
-                <h1>{{ favorito.nombre }}</h1>
-                <ion-avatar item-start>
-                    <!-- {{favorito.foto}} -->
-                    <img src="{{favorito.imagenes[0]}}" alt="">
-                </ion-avatar>
-                <h3>({{favorito.personas}} {{favorito.personas===1?' persona':' personas'}} )</h3>
-                <ion-icon item-end name="arrow-dropright" (click)="verFavorito(favorito)"></ion-icon>
-            </ion-item>
-        </ng-container>
-    </ion-list>
+  <h2 class="favoritos-title">Favoritos</h2>
+  <ion-list *ngIf="favoritos.length>0">
+    <ion-item *ngFor="let favorito of favoritos; let i = index">
+      <h1>{{ favorito.nombre }}</h1>
+      <ion-avatar item-start>
+        <img src="{{favorito.imagenes[0]}}" alt="">
+      </ion-avatar>
+      <h3>({{favorito.personas}} {{favorito.personas===1?' persona':' personas'}} )</h3>
+      <ion-icon item-end name="arrow-dropright" (click)="verFavorito(favorito)"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="favoritos.length<1" style="display:flex;justify-content:center;align-items:center;width:100%;height:80%;">
+    <div style="text-align: center">
+      <p>Por el momento no tenés ningún favorito</p>
+      <button ion-button round color="danger" (click)="verRecetas()">Ver recetas</button>
+    </div>
+  </div>
 </ion-content>
