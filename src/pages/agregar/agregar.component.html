@@ -21,8 +21,10 @@
                     <ion-input type="number" [(ngModel)]="receta.personas" name="personas"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label floating>Dificultad:</ion-label>
-                    <ion-input type="number" [(ngModel)]="receta.dificultad" name="dificultad"></ion-input>
+                  <ion-label>Dificultad</ion-label>
+                  <ion-select [(ngModel)]="receta.dificultad" name="dificultad">
+                    <ion-option value="{{dificultad.numero}}" *ngFor="let dificultad of dificultades">{{dificultad.nombre}}</ion-option>
+                  </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Tiempo (Min.)</ion-label>
@@ -141,5 +143,5 @@
             Crear Receta
         </button>
     </form>
-    
+
 </ion-content>

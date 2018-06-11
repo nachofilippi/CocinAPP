@@ -11,12 +11,19 @@ import {RestProvider} from '../../providers/rest/rest';
 })
 export class AgregarComponent implements OnInit {
 
-    receta: any;
-    categorias: any;
-    ingredientes: any;
-    ingredientesElegidos: any;
+  receta: any;
+  categorias: any;
+  ingredientes: any;
+  ingredientesElegidos: any;
   item: any;
   cantidadItem: number;
+  dificultades: any = [
+    {nombre: "Muy fácil", numero:1},
+    {nombre: "Fácil", numero:2},
+    {nombre: "Intermedio", numero:3},
+    {nombre: "Difícil", numero:4},
+    {nombre: "Muy difícil", numero:5},
+  ];
 
   constructor(public alertCtrl: AlertController,
     public navCtrl: NavController,
