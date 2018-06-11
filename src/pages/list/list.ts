@@ -40,7 +40,7 @@ export class ListPage {
     ) {}
 
     ionViewWillEnter() {
-        this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.cargarFavoritos();});
+        this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.recetasSearch = offline; this.cargarFavoritos();});
         this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
         this.rest.getIngredientes().subscribe(data => {this.ingredientes = data}, offline => {this.ingredientes = offline;});
         this.rest.getCategoriasRecetas().subscribe(data => { this.categorias = data }, offline => { this.categorias = offline; });

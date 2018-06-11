@@ -13,11 +13,21 @@ export class OfflineProvider {
     }
 
     getRecetas(): any {
-        let recetas: any = [];
-        if (localStorage.getItem("recetas")) {
-            recetas = JSON.parse(localStorage.getItem("recetas"));
-        }
-        return recetas;
+      let recetas: any = [];
+      if (localStorage.getItem("recetas")) {
+        recetas = JSON.parse(localStorage.getItem("recetas"));
+      }
+      recetas.forEach(receta => {
+        let pts = 0;
+        receta.puntuaciones.forEach(puntuacion => {
+          pts += puntuacion.puntuacion;
+        });
+        if (receta.puntuaciones.length)
+          receta.puntuaciones = pts / receta.puntuaciones.length;
+        else
+          delete receta.puntuaciones;
+      });
+      return recetas;
     }
 
     getEnfermedades(): any {
@@ -45,15 +55,22 @@ export class OfflineProvider {
     }
 
     postReceta(receta: any): any {
-        let recetas: any = [];
-        if (localStorage.getItem("recetas")) {
-            recetas = JSON.parse(localStorage.getItem("recetas"));
-        }
-        for (let i = 0; i < recetas.ingredientes.length; i++)
-            recetas.ingredientes[i] = {nombre: recetas.ingredientes[i].cantidad, cantidad: recetas.ingredientes[i].cantidad};
-        recetas.push(receta);
-        localStorage.setItem("recetas", JSON.stringify(recetas));
-        return receta;
+      let recetas: any = [];console.log (receta);
+      if (localStorage.getItem("recetas")) {
+        recetas = JSON.parse(localStorage.getItem("recetas"));
+      }
+      receta.puntuaciones = [];
+      let items: any=[];
+      receta.ingredientes.forEach(item => {
+        let ingrediente: any= this.getIngredientes().filter((ingre) => {
+          return (ingre.id === item.ingrediente);
+        })[0];
+        items.push({ ingrediente: ingrediente, cantidad: item.cantidad });
+      });
+      receta.ingredientes= items;
+      recetas.push(receta);
+      localStorage.setItem("recetas", JSON.stringify(recetas));
+      return receta;
     }
 
     postFavorito(favorito: any): any {
