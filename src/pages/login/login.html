@@ -10,10 +10,10 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item>{{usuario.nombre}}</ion-item>
-        <ion-item>{{usuario.email}}</ion-item>
         <ion-item><img src="{{usuario.foto}}" class="foto-perfil"></ion-item>
-        <button ion-button item-left color="primary" block round large (click)="logout()">
+        <ion-item text-center>{{usuario.nombre}}</ion-item>
+        <ion-item text-center>{{usuario.email}}</ion-item>
+        <button ion-button full large color="primary" (click)="logout()" class="cerrar-sesion">
                 <ion-icon name="exit"></ion-icon>&nbsp;
             Cerrar sesión
         </button>
