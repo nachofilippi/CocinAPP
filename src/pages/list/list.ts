@@ -20,6 +20,7 @@ export class ListPage {
     recetasSearch: any = [];
     enfermedades: any;
     ingredientes: any;
+    categorias: any = [];
     filtros: any = { input: "", dificultad: 1, tiempo: { lower: 10, upper: 120 }, enfermedades:[], ingredientes:[] };
 
     constructor(
@@ -34,6 +35,7 @@ export class ListPage {
         this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.cargarFavoritos();});
         this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
         this.rest.getIngredientes().subscribe(data => {this.ingredientes = data}, offline => {this.ingredientes = offline;});
+        this.rest.getCategoriasRecetas().subscribe(data => { this.categorias = data }, offline => { this.categorias = offline; });
     }
 
     irAgregar() {
@@ -87,6 +89,11 @@ export class ListPage {
       if (this.filtros.input && this.filtros.input.trim() != '') {
         this.recetasSearch = this.recetasSearch.filter((receta) => {
           return (receta.nombre.toLowerCase().indexOf(this.filtros.input.toLowerCase()) > -1);
+        })
+      }
+      if (this.filtros.categoria) {
+        this.recetasSearch = this.recetasSearch.filter((receta) => {
+          return (receta.categoria.nombre === this.filtros.categoria);
         })
       }
       if (this.filtros.dificultad && this.filtros.dificultad > 1) {
