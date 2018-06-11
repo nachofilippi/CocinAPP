@@ -74,7 +74,7 @@
   <ion-list *ngFor="let receta of recetasSearch">
       <ion-item color="light" class="text-center" >
           <ion-thumbnail item-start  >
-              <img src="{{receta.imagenes[0]}}">
+                <img src="{{receta.imagenes[0]}}">
           </ion-thumbnail>
           <h2> {{ receta.nombre }}</h2>
           <ion-icon [hidden]="receta.open" name="arrow-dropdown" item-right (click)="receta.open=!receta.open;"></ion-icon>
@@ -84,7 +84,7 @@
       <!-- elementos -->
       <ion-list [hidden]="!receta.open">
           <ion-item *ngFor="let item of receta.ingredientes">
-              <ion-label>{{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
+              <ion-label> - {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
           </ion-item>
       </ion-list>
   </ion-list>
