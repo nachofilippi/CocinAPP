@@ -64,6 +64,11 @@
       </ion-select>
   </ion-item>
 
+  <ion-item [hidden]="!filtrar" (click)="seleccionarIngredientes()">
+      <ion-label>Ingredientes</ion-label>
+      <ion-icon name="arrow-dropdown" item-right></ion-icon>
+  </ion-item>
+
   &nbsp;&nbsp;
   <!-- titulo y cantidad de elementos -->
   <ion-list *ngFor="let receta of recetasSearch">
@@ -78,7 +83,7 @@
       </ion-item>
       <!-- elementos -->
       <ion-list [hidden]="!receta.open">
-          <ion-item *ngFor="let item of receta.ingredientes" (click)="actualizar(item)">
+          <ion-item *ngFor="let item of receta.ingredientes">
               <ion-label>{{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
           </ion-item>
       </ion-list>

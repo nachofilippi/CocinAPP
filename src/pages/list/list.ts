@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 
-import {NavController} from 'ionic-angular';
+import {NavController, ModalController} from 'ionic-angular';
 import {AgregarComponent} from '../agregar/agregar.component';
 import {AlertController} from 'ionic-angular';
 import {DetalleComponent} from '../detalle/detalle.component';
 
 import {RestProvider} from '../../providers/rest/rest';
 import {LoginProvider} from '../../providers/login/login';
+import { IngredientesPage } from '../ingredientes/ingredientes.component';
 
 
 
@@ -18,18 +19,21 @@ export class ListPage {
     recetas: any;
     recetasSearch: any = [];
     enfermedades: any;
-    filtros: any = { input: "", dificultad: 1, tiempo: { lower: 10, upper: 120 }, enfermedades:[] };
+    ingredientes: any;
+    filtros: any = { input: "", dificultad: 1, tiempo: { lower: 10, upper: 120 }, enfermedades:[], ingredientes:[] };
 
     constructor(
         private navCtrl: NavController,
         public alertCtrl: AlertController,
         public rest: RestProvider,
-        private login: LoginProvider
+        private login: LoginProvider,
+        public modalCtrl: ModalController
     ) {}
 
     ionViewWillEnter() {
         this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.cargarFavoritos();});
         this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
+        this.rest.getIngredientes().subscribe(data => {this.ingredientes = data}, offline => {this.ingredientes = offline;});
     }
 
     irAgregar() {
@@ -102,6 +106,28 @@ export class ListPage {
           })
         });
       }
+      if (this.filtros.ingredientes.length > 0) {
+        this.filtros.ingredientes.forEach(ingrediente => {
+          this.recetasSearch = this.recetasSearch.filter((receta) => {
+            return (receta.ingredientes.map(function (e) { return e.ingrediente.id; }).indexOf(ingrediente.id) > -1);
+          })
+        });
+      }
     }, 100);
+  }
+
+  seleccionarIngredientes() {
+    let ingredientes = this.ingredientes;
+    let modal = this.modalCtrl.create(IngredientesPage, { ingredientes }, { cssClass: 'info-nutricional-modal' });
+    modal.onDidDismiss(data => {
+      if (data) {
+        this.ingredientes = data;
+        this.filtros.ingredientes = this.ingredientes.filter((ingrediente) => {
+          return (ingrediente.elegido);
+        });
+        this.filtrar();
+      }
+    });
+    modal.present();
   }
 }
