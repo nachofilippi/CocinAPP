@@ -109,7 +109,6 @@ export class RestProvider {
         } catch (e) {
           return Observable.throw(offlineProvider.postFavorito(favorito));
         }
-        let usuario: any = this.getUsuario();
         return this.http.post(this.baseUrl + '/usuario/favorito', {receta: favorito.id, usuario: email}).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.postFavorito(favorito));

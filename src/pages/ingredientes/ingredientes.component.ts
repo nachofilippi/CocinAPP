@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IngredientesLista } from '../../app/clases/ingredientesLista';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest'
 @Component({
   selector: 'page-ingredientes',
