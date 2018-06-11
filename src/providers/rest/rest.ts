@@ -78,14 +78,18 @@ export class RestProvider {
     }
 
     postReceta(receta: any): Observable<{}> {
-        let offlineProvider: OfflineProvider = this.offline;
+      let offlineProvider: OfflineProvider = this.offline;
+      try {
         let usuario: any = this.getUsuario();
         receta.creador = usuario.email;
-        return this.http.post(this.baseUrl + '/receta', receta).pipe(map(this.extractData),
-            catchError(function () {
-                return Observable.throw(offlineProvider.postReceta(receta));
-            })
-        );
+      } catch (e) {
+        return Observable.throw(offlineProvider.postReceta(receta));
+      }
+      return this.http.post(this.baseUrl + '/receta', receta).pipe(map(this.extractData),
+        catchError(function () {
+          return Observable.throw(offlineProvider.postReceta(receta));
+        })
+      );
     }
 
     deleteReceta(idReceta: any): Observable<{}> {
@@ -98,8 +102,15 @@ export class RestProvider {
 
     postFavorito(favorito: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
+        let email: string;
+        try {
+          let usuario: any = this.getUsuario();
+          email = usuario.email;
+        } catch (e) {
+          return Observable.throw(offlineProvider.postFavorito(favorito));
+        }
         let usuario: any = this.getUsuario();
-        return this.http.post(this.baseUrl + '/usuario/favorito', {receta: favorito.id, usuario: usuario.email}).pipe(map(this.extractData),
+        return this.http.post(this.baseUrl + '/usuario/favorito', {receta: favorito.id, usuario: email}).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.postFavorito(favorito));
             })
@@ -108,8 +119,14 @@ export class RestProvider {
 
     deleteFavorito(idReceta: any): Observable<{}> {
         let offlineProvider: OfflineProvider = this.offline;
-        let usuario: any = this.getUsuario();
-        return this.http.delete(this.baseUrl + '/usuario/favorito?usuario=' + usuario.email + "&receta=" + idReceta).pipe(map(this.extractData),
+        let email: string;
+        try {
+          let usuario: any = this.getUsuario();
+          email = usuario.email;
+        } catch (e) {
+          return Observable.throw(offlineProvider.deleteFavorito(idReceta));
+        }
+        return this.http.delete(this.baseUrl + '/usuario/favorito?usuario=' + email + "&receta=" + idReceta).pipe(map(this.extractData),
             catchError(function () {
                 return Observable.throw(offlineProvider.deleteFavorito(idReceta));
             })
@@ -137,12 +154,16 @@ export class RestProvider {
     }
 
     puntuarReceta(receta: number, puntos: number): Observable<{}> {
-      let usuario: any = this.getUsuario();
-      let puntuacion: any = { usuario: usuario.email, receta: receta, puntuacion: puntos };
-      return this.http.post(this.baseUrl + '/usuario/puntuacion',puntuacion).pipe(map(this.extractData),
-          catchError(function () {
-              return Observable.throw({});
-          })
+      let usuario: any;
+      let puntuacion: any;
+      try {
+        usuario = this.getUsuario();
+        puntuacion = { usuario: usuario.email, receta: receta, puntuacion: puntos };
+      } catch (e) { return Observable.throw({}) }
+      return this.http.post(this.baseUrl + '/usuario/puntuacion', puntuacion).pipe(map(this.extractData),
+        catchError(function () {
+          return Observable.throw({});
+        })
       );
     }
 
