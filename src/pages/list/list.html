@@ -29,21 +29,12 @@
     </ion-item>
 
     <!-- filtro dificultas -->
-    <ion-list [hidden]="!filtrar" >
-      <ion-list-header class="label label-ios text-center" style="font-size: 15px">
-        <ion-badge item-left color="danger">{{filtros.dificultad}}</ion-badge>
-        Filtrar Dificultad de receta
-        <ion-icon [hidden]="statusDificultad" name="arrow-dropdown" item-end (click)="statusDificultad=!statusDificultad;"></ion-icon>
-        <ion-icon [hidden]="!statusDificultad" name="arrow-dropup" item-end (click)="statusDificultad=!statusDificultad;"></ion-icon>
-      </ion-list-header>
-      <ion-item [hidden]="!statusDificultad">
-        <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" (ngModelChange)="filtrar()" [(ngModel)]="filtros.dificultad" color="danger">
-          <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
-          <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
-          <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
-        </ion-range>
-      </ion-item>
-    </ion-list>
+    <ion-item [hidden]="!filtrar">
+      <ion-label>Dificultad</ion-label>
+      <ion-select [(ngModel)]="filtros.dificultad" (ngModelChange)="filtrar()">
+        <ion-option value="{{dificultad.numero}}" *ngFor="let dificultad of dificultades">{{dificultad.nombre}}</ion-option>
+      </ion-select>
+    </ion-item>
 
     <!-- filtro tiempo -->
     <ion-list [hidden]="!filtrar">

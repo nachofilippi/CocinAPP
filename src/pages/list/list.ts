@@ -21,7 +21,15 @@ export class ListPage {
     enfermedades: any;
     ingredientes: any;
     categorias: any = [];
-    filtros: any = { input: "", dificultad: 1, tiempo: { lower: 10, upper: 120 }, enfermedades:[], ingredientes:[] };
+    dificultades: any = [
+      { nombre: "", numero: 0 },
+      { nombre: "Muy fácil", numero: 1 },
+      { nombre: "Fácil", numero: 2 },
+      { nombre: "Intermedio", numero: 3 },
+      { nombre: "Difícil", numero: 4 },
+      { nombre: "Muy difícil", numero: 5 },
+    ];
+    filtros: any = { input: "", tiempo: { lower: 10, upper: 120 }, enfermedades:[], ingredientes:[] };
 
     constructor(
         private navCtrl: NavController,
@@ -96,9 +104,9 @@ export class ListPage {
           return (receta.categoria.nombre === this.filtros.categoria);
         })
       }
-      if (this.filtros.dificultad && this.filtros.dificultad > 1) {
+      if (this.filtros.dificultad && this.filtros.dificultad > 0) {
         this.recetasSearch = this.recetasSearch.filter((receta) => {
-          return (receta.dificultad <= this.filtros.dificultad);
+          return (receta.dificultad <= this.filtros.dificultad && receta.dificultad >= this.filtros.dificultad);
         })
       }
       if (this.filtros.tiempo) {
