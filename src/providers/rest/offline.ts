@@ -55,7 +55,7 @@ export class OfflineProvider {
     }
 
     postReceta(receta: any): any {
-      let recetas: any = [];console.log (receta);
+      let recetas: any = [];
       if (localStorage.getItem("recetas")) {
         recetas = JSON.parse(localStorage.getItem("recetas"));
       }
