@@ -1,75 +1,34 @@
 <ion-header>
   <ion-navbar color="danger">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Ingredientes</ion-title>
   </ion-navbar>
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 <ion-content padding>
-  <!-- buscador -->
-  <ion-searchbar (ionInput)="getItems($event)">Buscar</ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      {{ item }}
-    </ion-item>
-  </ion-list>
-  <!-- ingredientes -->
-  <ion-list>
-    <ion-item>
-      <ion-label>Comensales</ion-label>
-      <ion-select [(ngModel)]="comensales" multiple="true" cancelText="Cancelar" okText="Aceptar">
-        <ion-option value="uno_Persona">1 persona</ion-option>
-        <ion-option value="dos_Persona">2 persona</ion-option>
-        <ion-option value="tres_Persona">3 persona</ion-option>
-        <ion-option value="cuatro_Persona">4 persona</ion-option>
-        <ion-option value="cinco_Persona">5 persona</ion-option>
-        <ion-option value="seis_Persona">6 persona</ion-option>
-        <ion-option value="siete_Persona">7 persona</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <ion-label>Categorias</ion-label>
-      <ion-select [(ngModel)]="categorias" multiple="true" cancelText="Cancelar" okText="Aceptar">
-        <ion-option value="Carnes de vaca">Carnes de vaca</ion-option>
-        <ion-option value="Vegetales">Vegetales</ion-option>
-        <ion-option value="Carnes de pollo">Carnes de pollo</ion-option>
-        <ion-option value="Carnes de pescado">Carnes de pescado</ion-option>
-        <ion-option value="Quesos">Quesos</ion-option>
-        <ion-option value="Fiambres">Fiambres</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-item>
-      <ion-label>Ingredientes</ion-label>
-      <ion-select [(ngModel)]="ingredientes" multiple="true" cancelText="Cancelar" okText="Aceptar">
-        <ion-option value="Brocoli">Brocoli</ion-option>
-        <ion-option value="Acelga">Acelga</ion-option>
-        <ion-option value="Aji">Aji</ion-option>
-        <ion-option value="Apio">Apio</ion-option>
-        <ion-option value="Lechuga">Lechuga</ion-option>
-        <ion-option value="Cebolla">Cebolla</ion-option>
-        <ion-option value="Zanahoria">Zanahoria</ion-option>
-        <ion-option value="Muzzarella">Muzzarella</ion-option>
-        <ion-option value="Azul">Azul</ion-option>
-        <ion-option value="Cuatro quesos">Cuatro quesos</ion-option>
-        <ion-option value="Gouda">Gouda</ion-option>
-        <ion-option value="Cheddar">Cheddar</ion-option>
-        <ion-option value="Provolone">Provolone</ion-option>
-        <ion-option value="Camembert">Camembert</ion-option>
-        <ion-option value="Parmesano">Parmesano</ion-option>
-        <!-- <ion-option [(ngRepeat)]="ingredientes" value="Ingredientes">{{ingredientes}}</ion-option> -->
-      </ion-select>
-    </ion-item>
-  </ion-list>
+  <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
+  </ion-searchbar>
+  <ion-item>
+    <ion-label>Categoría</ion-label>
+    <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()">
+      <ion-option value="{{categoria.nombre}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
+    </ion-select>
+  </ion-item>
 
-  <!-- boton buscar -->
-  <button ion-button outline round block color="danger">Buscar receta</button>
+  <ion-scroll scrollX="true" style="height: 60%">
+      <ion-list>
+          <ion-item *ngFor="let ingrediente of ingredientesSearch; let i = index">
+            <ion-label>{{ingrediente.nombre}}</ion-label>
+            <ion-checkbox [(ngModel)]="ingrediente.elegido" (ngModelChange)="seleccionar(i)"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+    </ion-scroll>
 
-
+  <div style="margin: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;display:flex;width: 100%">
+    <button ion-button outline block (click)="dismiss()" style="width:50%">Cancelar</button>
+    <button ion-button outline block (click)="dismissData()" style="width:50%">OK</button>
+  </div>
 
 </ion-content>
