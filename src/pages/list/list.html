@@ -21,6 +21,13 @@
       filtrar
     </ion-list-header>
 
+    <ion-item [hidden]="!filtrar">
+      <ion-label>Categoría</ion-label>
+      <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()">
+        <ion-option value="{{categoria.nombre}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
+      </ion-select>
+    </ion-item>
+
     <!-- filtro dificultas -->
     <ion-list [hidden]="!filtrar" >
       <ion-list-header class="label label-ios text-center" style="font-size: 15px">
