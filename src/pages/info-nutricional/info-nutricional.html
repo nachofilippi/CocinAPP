@@ -5,10 +5,8 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <button style="border: transparent!important;float: right!important;" ion-button outline color="danger" (click)="dismiss()">
-      <ion-icon name="close"></ion-icon>
-    </button>
+  <ion-navbar color="danger">
+    <ion-title>Información nutricional</ion-title>
   </ion-navbar>
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
@@ -26,3 +24,8 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<ion-fab bottom right>
+  <button ion-fab mini color="danger" (click)="dismiss()">
+    <ion-icon name="close"></ion-icon>
+  </button>
+</ion-fab>
