@@ -19,7 +19,7 @@ export const recetas: any =
             },
             "apto_para": [{id:1, nombre:"Celíacos"}, {id:2, nombre:"Diabetes"}],
             "pasos": [{"nombre":"Paso 1", "descripcion": "¿Le puede ganar Delpo a Nadal?El historial es favorable a Rafa, pero Del Potro tiene razones para ilusionarse de cara a la semi del viernes. Aquí, números y análisis."}, {"nombre":"Paso 2", "descripcion": "Hola"}],
-            "puntuaciones":[{puntuacion:1},{puntuacion:3},{puntuacion:5},{puntuacion:5}]
+            "puntuaciones":[{puntuacion:1, usuario:{}},{puntuacion:3, usuario:{}},{puntuacion:5, usuario:{}},{puntuacion:5, usuario:{}}]
         }
     ];
 

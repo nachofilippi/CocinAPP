@@ -89,6 +89,7 @@ export class ListPage {
                     this.recetas[j].favorito = true;
             }
         }
+      this.recetasSearch = this.recetas;
     }
 
   filtrar(){

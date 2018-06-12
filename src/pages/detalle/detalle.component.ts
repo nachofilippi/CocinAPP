@@ -120,7 +120,7 @@ export class DetalleComponent implements OnInit {
     }
 
     this.rest.getPuntuaciones(this.receta.id).subscribe(
-      res => this.yaPuntuo = res[0].puntuacion,()=>{});
+      res => this.yaPuntuo = res[0].puntuacion, (data) => { if (data) this.yaPuntuo = data });
 
     this.socialSharing.canShareVia("com.facebook.android").catch(
       () => this.socialSharing.canShareVia("com.facebook.ios").catch(() => this.share.facebook = false)

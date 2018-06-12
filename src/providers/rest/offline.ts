@@ -104,6 +104,41 @@ export class OfflineProvider {
         return favoritos;
     }
 
+    puntuarReceta(id_receta: number, puntos: number): any {
+      let recetas: any = [];
+      let usuario:any={};
+      if (localStorage.getItem("recetas")) {
+        recetas = JSON.parse(localStorage.getItem("recetas"));
+      }
+      if (localStorage.getItem("usuario")) {
+        usuario = JSON.parse(localStorage.getItem("usuario"));
+      }
+      recetas.forEach(receta => {
+        if (receta.id===id_receta)
+          receta.puntuaciones.push ({puntuacion: puntos, usuario: usuario});
+      });
+      localStorage.setItem("recetas", JSON.stringify(recetas));
+      return recetas;
+    }
+
+    getPuntuaciones(id_receta: number, usuario: any) {
+      let recetas: any = [];
+      let puntuacion: any;
+      if (localStorage.getItem("recetas")) {
+        recetas = JSON.parse(localStorage.getItem("recetas"));
+      }
+      recetas.forEach(receta => {
+        if (receta.id === id_receta) {
+          receta.puntuaciones.forEach(pts => {
+            if (pts.usuario.email === usuario.email) {
+              return puntuacion = pts;
+            }
+          });
+        }
+      });
+      return puntuacion;
+    }
+
     init() {
         if (!localStorage.getItem("ingredientes")) {
             localStorage.setItem("ingredientes", JSON.stringify(ingredientes));
