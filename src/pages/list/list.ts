@@ -52,7 +52,7 @@ export class ListPage {
 
     mostrarCargando(){
       this.loading = this.loadingCtrl.create({
-        content: 'Cargando...'
+        content: 'Cargando recetas...'
       });
 
       this.loading.present();

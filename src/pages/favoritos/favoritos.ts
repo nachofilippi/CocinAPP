@@ -1,4 +1,4 @@
-import {NavController} from 'ionic-angular';
+import {NavController, LoadingController} from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {RestProvider} from '../../providers/rest/rest';
 import { DetalleComponent } from '../detalle/detalle.component';
@@ -11,12 +11,26 @@ import { ListPage } from '../list/list';
 export class FavoritosPage implements OnInit {
 
     favoritos: any = [];
+    loading: any;
 
     ngOnInit(): void {
-        this.rest.getFavoritos().subscribe(data => this.favoritos = data, offline => this.favoritos = offline);
+      this.mostrarCargando();
+        this.rest.getFavoritos().subscribe(data => {this.favoritos = data; this.dismissLoading();}, offline => {this.favoritos = offline; this.dismissLoading();});
     }
 
-    constructor(public navCtrl: NavController, public rest: RestProvider) {
+    mostrarCargando() {
+      this.loading = this.loadingCtrl.create({
+        content: 'Cargando favoritos...'
+      });
+
+      this.loading.present();
+    }
+
+    dismissLoading() {
+      this.loading.dismiss();
+    }
+
+    constructor(public navCtrl: NavController, public rest: RestProvider, public loadingCtrl: LoadingController) {
 
     }
 
