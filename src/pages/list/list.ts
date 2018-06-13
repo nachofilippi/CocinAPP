@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {NavController, ModalController} from 'ionic-angular';
+import {NavController, ModalController, LoadingController} from 'ionic-angular';
 import {AgregarComponent} from '../agregar/agregar.component';
 import {AlertController} from 'ionic-angular';
 import {DetalleComponent} from '../detalle/detalle.component';
@@ -21,6 +21,7 @@ export class ListPage {
     enfermedades: any;
     ingredientes: any;
     categorias: any = [];
+    count: number = 0;
     dificultades: any = [
       { nombre: "", numero: 0 },
       { nombre: "Muy fácil", numero: 1 },
@@ -29,6 +30,7 @@ export class ListPage {
       { nombre: "Difícil", numero: 4 },
       { nombre: "Muy difícil", numero: 5 },
     ];
+    loading: any;
     filtros: any = { input: "", tiempo: { lower: 10, upper: 120 }, enfermedades:[], ingredientes:[] };
 
     constructor(
@@ -36,14 +38,33 @@ export class ListPage {
         public alertCtrl: AlertController,
         public rest: RestProvider,
         private login: LoginProvider,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        public loadingCtrl: LoadingController
     ) {}
 
     ionViewWillEnter() {
+      this.mostrarCargando();
         this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos();}, offline => {this.recetas = offline; this.recetasSearch = offline; this.cargarFavoritos();});
-        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data}, offline => {this.enfermedades = offline;});
-        this.rest.getIngredientes().subscribe(data => {this.ingredientes = data}, offline => {this.ingredientes = offline;});
-        this.rest.getCategoriasRecetas().subscribe(data => { this.categorias = data }, offline => { this.categorias = offline; });
+        this.rest.getEnfermedades().subscribe(data => {this.enfermedades = data; this.dismissLoading();}, offline => {this.enfermedades = offline; this.dismissLoading();});
+        this.rest.getIngredientes().subscribe(data => {this.ingredientes = data; this.dismissLoading();}, offline => {this.ingredientes = offline; this.dismissLoading();});
+        this.rest.getCategoriasRecetas().subscribe(data => { this.categorias = data;this.dismissLoading(); }, offline => { this.categorias = offline;this.dismissLoading(); });
+    }
+
+    mostrarCargando(){
+      this.loading = this.loadingCtrl.create({
+        content: 'Cargando...'
+      });
+
+      this.loading.present();
+    }
+
+    dismissLoading (){
+      this.count++;
+      if (this.count===4){
+      this.count=0;
+      this.loading.dismiss();
+      }
+
     }
 
     irAgregar() {
@@ -79,7 +100,8 @@ export class ListPage {
       this.login.checkLogin().then(
         () => {
           this.rest.getFavoritos().subscribe(data => this.join(data), offline => this.join(offline));
-        },()=>{}
+          this.dismissLoading();
+        },()=>{this.dismissLoading();}
       )
     }
     join(favoritos) {
