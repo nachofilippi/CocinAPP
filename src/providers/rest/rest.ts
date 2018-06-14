@@ -7,7 +7,7 @@ import {OfflineProvider} from '../rest/offline';
 
 @Injectable()
 export class RestProvider {
-    timeout: number = 5000;
+    timeout: number = 3000;
     baseUrl: string = "http://192.168.0.35/CocinApi/web/app_dev.php/api";
 
     constructor(public http: HttpClient, public offline: OfflineProvider) {
