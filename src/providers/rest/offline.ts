@@ -140,6 +140,16 @@ export class OfflineProvider {
     }
 
     init() {
+      if (!localStorage.getItem("yaEntro")){
+        localStorage.removeItem("ingredientes");
+        localStorage.removeItem("recetas");
+        localStorage.removeItem("enfermedades");
+        localStorage.removeItem("categorias_recetas");
+        localStorage.removeItem("categorias_ingredientes");
+        localStorage.removeItem("favoritos");
+        localStorage.setItem("yaEntro", JSON.stringify("llala"));
+      }
+
         if (!localStorage.getItem("ingredientes")) {
             localStorage.setItem("ingredientes", JSON.stringify(ingredientes));
         }
