@@ -3,71 +3,69 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>{{ receta.nombre | placeholder:'Nueva receta'}} {{ receta.personas?"("+ (receta.personas>1?receta.personas+' personas':receta.personas+ ' persona')+")":''}} </ion-title>
+        <ion-title>{{ receta.nombre | placeholder:'Nueva receta'}} {{ receta.personas?"("+ (receta.personas>1?receta.personas+' personas':receta.personas+
+            ' persona')+")":''}} </ion-title>
     </ion-navbar>
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
-    <form (ngSubmit)="postReceta()" novalidate #forma="ngForm">
+    <form (ngSubmit)="postReceta()" #forma="ngForm">
         <ion-card>
             <ion-card-content>
                 <ion-item>
-                    <ion-label floating>Nombre de receta</ion-label>
-                    <ion-input class="form-control" type="text" [(ngModel)]="receta.nombre" name="nombre" required #nombre="ngModel"></ion-input>
+                    <ion-input class="form-control" type="text" [(ngModel)]="receta.nombre" name="nombre" placeholder="Nombre de receta" required
+                        #nombre="ngModel"></ion-input>
                 </ion-item>
                 <div class="form-error" *ngIf="nombre.errors && (nombre.dirty || nombre.touched)">
-                    <p style="color: red; margin-left: 20px" [hidden]="!nombre.errors.required">Campo requerido.</p>
+                    <p style="color: red; margin-left: 160px" [hidden]="!nombre.errors.required">Campo requerido.</p>
                 </div>
                 <ion-item>
-                    <ion-label floating>Cantidad de comensales:</ion-label>
-                    <ion-input class="form-control" type="number" [(ngModel)]="receta.personas" required name="personas" #personas="ngModel"></ion-input>
+                    <ion-input class="form-control" type="number" [(ngModel)]="receta.personas" required name="personas" placeholder="Cantidad de comensales:"
+                        #personas="ngModel"></ion-input>
                 </ion-item>
                 <div class="form-error" *ngIf="personas.errors && (personas.dirty || personas.touched)">
-                    <p style="color: red; margin-left: 20px" [hidden]="!personas.errors.required">Campo requerido.</p>
+                    <p style="color: red; margin-left: 160px" [hidden]="!personas.errors.required">Campo requerido.</p>
                 </div>
                 <ion-item>
-                    <ion-label floating>Dificultad:</ion-label>
-                    <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad" color="danger">
-                      <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
-                      <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
-                    </ion-range>
+                    <ion-input class="form-control" type="number" [(ngModel)]="receta.tiempo" required name="tiempo" placeholder="Tiempo (Min.)"
+                        #tiempo="ngModel" required></ion-input>
                 </ion-item>
+                <div class="form-error" *ngIf="tiempo.errors && (tiempo.dirty || tiempo.touched)">
+                    <p style="color: red; margin-left: 160px" [hidden]="!tiempo.errors.required">Campo requerido.</p>
+                </div>
                 <ion-item>
-                    <ion-label floating>Tiempo (Min.)</ion-label>
-                    <ion-input class="form-control" type="number" [(ngModel)]="receta.tiempo" required name="tiempo" #tiempo="ngModel" required></ion-input>
+                    <ion-input class="form-control" type="text" [(ngModel)]="receta.video" name="video" placeholder="Video explicativo:" #video="ngModel" required></ion-input>
                 </ion-item>
-                <!-- <div class="form-error" *ngIf="tiempo.errors && (tiempo.dirty || tiempo.touched)">
-                    <p style="color: red; margin-left: 20px" [hidden]="!tiempo.errors.required">Campo requerido.</p>
-                </div> -->
-                <ion-item>
-                    <ion-label floating>Video explicativo:</ion-label>
-                    <ion-input class="form-control" type="text" [(ngModel)]="receta.video" name="video" required></ion-input>
-                </ion-item>
-                <!-- <div class="form-error" *ngIf="video.errors && (video.dirty || video.touched)">
-                    <p style="color: red; margin-left: 20px" [hidden]="!video.errors.required">Campo requerido.</p>
-                </div> -->
+                <div class="form-error" *ngIf="video.errors && (video.dirty || video.touched)">
+                    <p style="color: red; margin-left: 160px" [hidden]="!video.errors.required">Campo requerido.</p>
+                </div>
                 <ion-item>
                     <ion-label>Categoría de receta:</ion-label>
                     <ion-select okText="OK" cancelText="" [(ngModel)]="receta.categoria" name="categoria">
                         <ion-option value="{{categoria.id}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
                     </ion-select>
                 </ion-item>
-
-
+                <ion-item>
+                    <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad"
+                        color="danger">
+                        <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
+                        <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
+                    </ion-range>
+                </ion-item>
             </ion-card-content>
         </ion-card>
-
+        <!-- Imagenes -->
         <ion-card>
             <ion-card-header>
                 <ion-label>Imágenes</ion-label>
             </ion-card-header>
             <ion-card-content>
                 <div style="display: flex;">
-                    <button type="button" ion-button color="danger" clear (click)="takePhoto(1)" class="camera-icon">
+                    <button type="button" style="margin: 0;" ion-button color="danger" clear (click)="takePhoto(1)" class="camera-icon">
                         <ion-icon name="camera"></ion-icon>
                     </button>
-                    <button type="button" ion-button color="danger" clear (click)="takePhoto(0)" class="camera-icon">
+                    <button type="button" style="margin: 0;" ion-button color="danger" clear (click)="takePhoto(0)" class="camera-icon">
                         <ion-icon name="images"></ion-icon>
                     </button>
                 </div>
@@ -79,7 +77,7 @@
                 </ion-slides>
             </ion-card-content>
         </ion-card>
-
+        <!-- Ingredientes -->
         <ion-card>
             <ion-card-header>
                 <ion-label>Ingredientes:</ion-label>
@@ -116,7 +114,7 @@
                 </ion-card>
             </ion-card-content>
         </ion-card>
-
+        <!-- Instrucciones -->
         <ion-card>
             <ion-card-header>
                 <ion-label>Instrucciones:</ion-label>
@@ -152,7 +150,7 @@
                 </ion-card>
             </ion-card-content>
         </ion-card>
-
+        <!-- Crear receta button -->
         <button type="submit" ion-button icon left color="danger" outline class="button-block">
             <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
             Crear Receta
