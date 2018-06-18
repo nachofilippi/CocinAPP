@@ -16,10 +16,16 @@
                     <ion-label floating>Nombre de receta</ion-label>
                     <ion-input class="form-control" type="text" [(ngModel)]="receta.nombre" name="nombre" required #nombre="ngModel"></ion-input>
                 </ion-item>
+                <div class="form-error" *ngIf="nombre.errors && (nombre.dirty || nombre.touched)">
+                    <p style="color: red; margin-left: 20px" [hidden]="!nombre.errors.required">Campo requerido.</p>
+                </div>
                 <ion-item>
                     <ion-label floating>Cantidad de comensales:</ion-label>
                     <ion-input class="form-control" type="number" [(ngModel)]="receta.personas" required name="personas" #personas="ngModel"></ion-input>
                 </ion-item>
+                <div class="form-error" *ngIf="personas.errors && (personas.dirty || personas.touched)">
+                    <p style="color: red; margin-left: 20px" [hidden]="!personas.errors.required">Campo requerido.</p>
+                </div>
                 <ion-item>
                     <ion-label floating>Dificultad:</ion-label>
                     <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad" color="danger">
@@ -29,15 +35,18 @@
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Tiempo (Min.)</ion-label>
-                    <ion-range dualKnobs="true" name="tiempo" pin="true" min="10" max="120" step="10" color="dark" [(ngModel)]="receta.tiempo">
-                      <ion-label range-left color="secondary">10</ion-label>
-                      <ion-label range-right color="danger">120</ion-label>
-                    </ion-range>
+                    <ion-input class="form-control" type="number" [(ngModel)]="receta.tiempo" required name="tiempo" #tiempo="ngModel" required></ion-input>
                 </ion-item>
+                <!-- <div class="form-error" *ngIf="tiempo.errors && (tiempo.dirty || tiempo.touched)">
+                    <p style="color: red; margin-left: 20px" [hidden]="!tiempo.errors.required">Campo requerido.</p>
+                </div> -->
                 <ion-item>
                     <ion-label floating>Video explicativo:</ion-label>
-                    <ion-input class="form-control" type="text" [(ngModel)]="receta.video" name="video"></ion-input>
+                    <ion-input class="form-control" type="text" [(ngModel)]="receta.video" name="video" required></ion-input>
                 </ion-item>
+                <!-- <div class="form-error" *ngIf="video.errors && (video.dirty || video.touched)">
+                    <p style="color: red; margin-left: 20px" [hidden]="!video.errors.required">Campo requerido.</p>
+                </div> -->
                 <ion-item>
                     <ion-label>Categoría de receta:</ion-label>
                     <ion-select okText="OK" cancelText="" [(ngModel)]="receta.categoria" name="categoria">
