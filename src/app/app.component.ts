@@ -34,8 +34,8 @@ export class MyApp {
     ];
 
     this.proximamente = [
-        {title: 'Viandas', descripcion: "Proximamente podrás blablabla"},
-        {title: 'Mi semana', descripcion: "Proximamente podrás blablabla"}
+        {title: 'Viandas', descripcion: "Dedicado para aquellas personas que almuerzan en su trabajo, <b>CocinApp</b> te permitirá tener a tu disposición comidas de fácil y rápida preparación, para que puedas llevar a la oficina."},
+        {title: 'Mi semana', descripcion: "Próximamente, <b>CocinApp</b> te traerá una nueva opción que te permitirá planificar las comidas de tu semana y te indicará qué ingredientes debes comprar para que puedas hacer todas las compras de una sola vez!"}
     ];
 
   }
