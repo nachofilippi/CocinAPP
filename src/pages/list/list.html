@@ -1,17 +1,17 @@
 <ion-header>
-    <ion-navbar color="danger">
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Lista de Recetas</ion-title>
-    </ion-navbar>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista de Recetas</ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
   <!-- buscador -->
-    <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
-    </ion-searchbar>
+  <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
+  </ion-searchbar>
   <!-- filtros -->
   &nbsp;&nbsp;
   <ion-list>
@@ -38,7 +38,7 @@
 
     <!-- filtro tiempo -->
     <ion-list [hidden]="!filtrar">
-      <ion-list-header class="label label-ios text-center" style="font-size: 15px">
+      <ion-list-header class="label label-ios text-center" style="font-size: 15px;border-bottom: 0px;">
         <ion-badge item-left color="danger">{{filtros.tiempo.lower}}</ion-badge>
         <ion-badge item-left color="danger">{{filtros.tiempo.upper}}</ion-badge>
         Filtrar Tiempo de preparacion
@@ -54,13 +54,13 @@
     </ion-list>
 
 
-  <!-- filto trastornos_alimenticios -->
-  <ion-item [hidden]="!filtrar">
-      <ion-label>Apto para</ion-label>
-      <ion-select multiple="true" okText="OK" cancelText="" [(ngModel)]="filtros.enfermedades" (ngModelChange)="filtrar()">
+    <!-- filto trastornos_alimenticios -->
+      <ion-item [hidden]="!filtrar" style="border-bottom: 0px;font-size: 18px">
+          <ion-label>Apto para</ion-label>
+        <ion-select multiple="true" okText="OK" cancelText="" [(ngModel)]="filtros.enfermedades" (ngModelChange)="filtrar()">
           <ion-option value="{{enfermedad.nombre}}" *ngFor="let enfermedad of enfermedades">{{enfermedad.nombre}}</ion-option>
-      </ion-select>
-  </ion-item>
+        </ion-select>
+      </ion-item>
 
   <ion-item [hidden]="!filtrar" (click)="seleccionarIngredientes()">
       <ion-label>Ingredientes</ion-label>
@@ -85,7 +85,7 @@
               <ion-label> - {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
           </ion-item>
       </ion-list>
-  </ion-list>
+    </ion-list>
 
   </ion-list>
   <!-- boton de agregar -->
