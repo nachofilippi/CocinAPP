@@ -5,9 +5,14 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ListaRecetasServicios } from '../../app/servicios/lista-recetas';
 import {RestProvider} from '../../providers/rest/rest';
 
+
 @Component({
   selector: 'app-agregar',
-  templateUrl: 'agregar.component.html'
+  templateUrl: 'agregar.component.html',
+  styles: [`
+    .ng-invalid.ng-touched:not(form){
+      color:red;
+    }  `]
 })
 export class AgregarComponent implements OnInit {
 
@@ -30,7 +35,8 @@ export class AgregarComponent implements OnInit {
     public _listaRecetas: ListaRecetasServicios,
     public rest: RestProvider,
     private camera: Camera
-  ) { }
+  ) {}
+
 
   ngOnInit() {
       this.receta={};
@@ -40,6 +46,7 @@ export class AgregarComponent implements OnInit {
       this.ingredientesElegidos=[];
       this.rest.getCategoriasRecetas().subscribe(data => {this.categorias = data}, offline => {this.categorias = offline;});
       this.rest.getIngredientes().subscribe(data => {this.ingredientes = data}, offline => {this.ingredientes = offline;});
+
     }
 
   agregar() {
