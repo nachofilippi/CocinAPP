@@ -47,13 +47,13 @@
                     </ion-select>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Dificultad:</ion-label>
-                    <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad"
-                        color="danger">
-                        <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
-                        <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
-                    </ion-range>
+                  <ion-label style="color: grey">Dificultad:</ion-label>
                 </ion-item>
+                <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad"
+                  color="danger">
+                  <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
+                  <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
+                </ion-range>
             </ion-card-content>
         </ion-card>
         <!-- Imagenes -->
@@ -152,7 +152,7 @@
             </ion-card-content>
         </ion-card>
         <!-- Crear receta button -->
-        <button type="submit" ion-button icon left color="danger" outline class="button-block">
+        <button type="submit" ion-button icon left color="danger" outline class="button-block" (click)="postReceta()">
             <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
             Crear Receta
         </button>
