@@ -102,8 +102,9 @@
           <ion-icon [hidden]="ingredientes" name="arrow-dropdown" style="float: right"></ion-icon>
           <ion-icon [hidden]="!ingredientes" name="arrow-dropup" style="float: right"></ion-icon>
       </ion-title>
-        <ion-item [hidden]="!ingredientes" *ngFor="let item of receta.ingredientes" Descripcion icon-right>
-          {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})
+        <ion-item style="font-size: 25px" [hidden]="!ingredientes" *ngFor="let item of receta.ingredientes" Descripcion icon-right>
+          {{item.ingrediente.nombre}} 
+          <p item-right style="font-size: 25px">({{item.cantidad}} {{item.ingrediente.unidad}})</p>
         </ion-item>
       </ion-list>
     </ion-card-content>
@@ -119,8 +120,8 @@
           <ion-slides pager *ngIf="pasos" style="height: fit-content" [paginationType]="fraction">
 
             <ion-slide *ngFor="let paso of receta.pasos" style="margin-top: 15px;">
-              <h2 color="red" style="margin-bottom: 15px;font-size: 20px">{{paso.nombre}}</h2>
-              <h5 color="danger" style="margin-bottom: 35px;">{{paso.descripcion}}</h5>
+              <h2 color="red" style="margin-bottom: 15px;font-size: 30px">{{paso.nombre}}</h2>
+              <h5 color="danger" style="margin-bottom: 35px;font-size: 30px">{{paso.descripcion}}</h5>
             </ion-slide>
 
           </ion-slides>
