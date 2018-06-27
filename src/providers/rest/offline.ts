@@ -114,8 +114,14 @@ export class OfflineProvider {
         usuario = JSON.parse(localStorage.getItem("usuario"));
       }
       recetas.forEach(receta => {
-        if (receta.id===id_receta)
-          receta.puntuaciones.push ({puntuacion: puntos, usuario: usuario});
+        if (receta.id === id_receta) {
+          receta.puntuaciones.forEach((puntuacion, index) => {
+            if (puntuacion.usuario.email === usuario.email)
+              receta.puntuaciones.splice(index, 1);
+
+          });
+          receta.puntuaciones.push({ puntuacion: puntos, usuario: usuario });
+        }
       });
       localStorage.setItem("recetas", JSON.stringify(recetas));
       return recetas;

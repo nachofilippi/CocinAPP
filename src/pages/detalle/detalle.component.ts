@@ -39,7 +39,7 @@ export class DetalleComponent implements OnInit {
   }
 
   pintarEstrellas(num) {
-    if (this.yaPuntuo){
+    if (this.yaPuntuo === num + 1) {
       let toast = this.toastCtrl.create({
         message: 'Ya habías calificado a esta receta con ' + this.yaPuntuo + (this.yaPuntuo === 1 ? ' estrella!' : ' estrellas!'),
         duration: 3000,
@@ -48,21 +48,53 @@ export class DetalleComponent implements OnInit {
       toast.present();
       return;
     }
-    this.rest.puntuarReceta(this.receta.id, num+1).subscribe(()=>{}, ()=>{});
-    for (var i = 0; i < this.stars.length; i++) {
-      this.stars[i].pintada = 0;
-      if (i <= num)
-        this.stars[i].click = true;
-      else
-        this.stars[i].click = false;
+    if (this.yaPuntuo) {
+      let confirm = this.alertCtrl.create({
+        message: 'Ya habías calificado a esta receta con ' + this.yaPuntuo + (this.yaPuntuo === 1 ? ' estrella!' : ' estrellas! Querés modicar esta puntuación?'),
+        buttons: [{
+          text: 'No', cssClass: 'alert-button'
+        },
+        {
+          text: 'Sí',
+          handler: () => {
+            this.rest.puntuarReceta(this.receta.id, num + 1).subscribe(() => { }, () => { });
+            for (var i = 0; i < this.stars.length; i++) {
+              this.stars[i].pintada = 0;
+              if (i <= num)
+                this.stars[i].click = true;
+              else
+                this.stars[i].click = false;
+            }
+            let toast = this.toastCtrl.create({
+              message: 'Gracias por calificar la receta!',
+              duration: 2500,
+              position: 'bottom'
+            });
+            toast.present();
+            this.yaPuntuo = num + 1;
+          },
+          cssClass: 'alert-button'
+        }]
+      });
+      confirm.present();
     }
-    let toast = this.toastCtrl.create({
-      message: 'Gracias por calificar la receta!',
-      duration: 2500,
-      position: 'bottom'
-    });
-    toast.present();
-    this.yaPuntuo = num + 1;
+    else{
+      this.rest.puntuarReceta(this.receta.id, num + 1).subscribe(() => { }, () => { });
+      for (var i = 0; i < this.stars.length; i++) {
+        this.stars[i].pintada = 0;
+        if (i <= num)
+          this.stars[i].click = true;
+        else
+          this.stars[i].click = false;
+      }
+      let toast = this.toastCtrl.create({
+        message: 'Gracias por calificar la receta!',
+        duration: 2500,
+        position: 'bottom'
+      });
+      toast.present();
+      this.yaPuntuo = num + 1;
+    }
   }
 
   borrarReceta() {
