@@ -71,11 +71,11 @@ export class LoginProvider {
     loginFacebook() {
 
         var promise = new Promise((resolve, reject) => {
-            this.fb.login(['public_profile', 'user_friends', 'email'])
+            this.fb.login(['public_profile'])
                 .then(res => {
                     if (res.status === "connected") {
                         this.usuario.foto = "https://graph.facebook.com/" + res.authResponse.userID + "/picture?width=720&height=720";
-                        this.fb.api("/" + res.authResponse.userID + "/?fields=id,email,name,picture,gender", ["public_profile"])
+                        this.fb.api("/" + res.authResponse.userID + "/?fields=email,name", ["public_profile"])
                             .then(res => {
                                 this.usuario.nombre = res.name;
                                 this.usuario.email = res.email;
