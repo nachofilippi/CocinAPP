@@ -71,21 +71,26 @@
   <!-- titulo y cantidad de elementos -->
   <ion-list *ngFor="let receta of recetasSearch">
       <ion-item color="light" class="text-center" >
-          <ion-thumbnail item-start  >
+          <ion-thumbnail item-start  (click)="verDetalle(receta)">
                 <img src="{{receta.imagenes[0]}}">
           </ion-thumbnail>
-          <h2> {{ receta.nombre }}</h2>
+          <h2 (click)="verDetalle(receta)"> {{ receta.nombre }}</h2>
           <ion-icon [hidden]="receta.open" name="arrow-dropdown" item-right (click)="receta.open=!receta.open;"></ion-icon>
           <ion-icon [hidden]="!receta.open" name="arrow-dropup" item-right (click)="receta.open=!receta.open;"></ion-icon>
-          <ion-icon name="information-circle" item-left  color="danger" (click)="verDetalle(receta)"></ion-icon>
+          <!-- <ion-icon name="information-circle" item-left  color="danger" (click)="verDetalle(receta)"></ion-icon> -->
       </ion-item>
       <!-- elementos -->
       <ion-list [hidden]="!receta.open">
-          <ion-item *ngFor="let item of receta.ingredientes">
-              <ion-label> - {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
-          </ion-item>
+        <ion-item *ngFor="let item of receta.ingredientes">
+          <ion-label> - {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
+        </ion-item>
+        <ion-item (click)="verDetalle(receta)">
+          <ion-label class="hipervinculo-detalle">
+            <a><ion-icon name="eye" item-right></ion-icon>  Ver detalle</a>
+          </ion-label>
+        </ion-item>
       </ion-list>
-    </ion-list>
+  </ion-list>
 
   </ion-list>
   <!-- boton de agregar -->
