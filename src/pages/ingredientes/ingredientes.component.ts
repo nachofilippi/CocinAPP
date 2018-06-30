@@ -46,8 +46,7 @@ export class IngredientesPage implements OnInit {
       }
       if (this.filtros.categoria) {
         this.ingredientesSearch = this.ingredientesSearch.filter((ingrediente) => {
-
-          return (ingrediente.categoria.nombre === this.filtros.categoria);
+          return ingrediente.categoria?(ingrediente.categoria.nombre.toLowerCase().indexOf(this.filtros.categoria.toLowerCase()) > -1):false;
         })
       }
     }, 100);
@@ -58,6 +57,13 @@ export class IngredientesPage implements OnInit {
       if (element.id === this.ingredientesSearch[i].id)
         element.elegido = this.ingredientesSearch[i].elegido;
     });
+  }
+
+  borrarSeleccion() {
+    this.ingredientes.forEach(element => {
+      element.elegido = false;
+    });
+    this.ingredientesSearch = this.ingredientes;
   }
 
   dismissData() {

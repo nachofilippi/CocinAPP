@@ -2,34 +2,33 @@
   <ion-navbar color="danger">
     <ion-title>Ingredientes</ion-title>
   </ion-navbar>
+  <ion-navbar >
+    <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
+    </ion-searchbar>
+    <ion-item>
+      <ion-label>Categoría</ion-label>
+      <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()">
+        <ion-option value="{{categoria.nombre}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
+      </ion-select>
+    </ion-item>  </ion-navbar>
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
-<ion-content padding>
-  <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
-  </ion-searchbar>
-  <ion-item>
-    <ion-label>Categoría</ion-label>
-    <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()">
-      <ion-option value="{{categoria.nombre}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
-    </ion-select>
-  </ion-item>
 
+<ion-content padding>
   <ion-list>
     <ion-item *ngFor="let ingrediente of ingredientesSearch; let i = index">
       <ion-label>{{ingrediente.nombre}}</ion-label>
       <ion-checkbox [(ngModel)]="ingrediente.elegido" (ngModelChange)="seleccionar(i)"></ion-checkbox>
     </ion-item>
   </ion-list>
-
-  <ion-fab bottom left>
-    <button ion-fab mini color="danger" (click)="dismiss()">
-      <ion-icon name="close"></ion-icon>
-    </button>
-  </ion-fab>
-  <ion-fab bottom right>
-    <button ion-fab mini color="secondary" (click)="dismissData()">
-      <ion-icon name="checkmark"></ion-icon>
-    </button>
-  </ion-fab>
-
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div style="text-align: center">
+      <button (click)="borrarSeleccion()" ion-button outline style="padding: 3px;width: 25%">Borrar selección</button>
+      <button (click)="dismiss()" ion-button outline style="padding: 3px;width: 25%">Cancelar</button>
+      <button (click)="dismissData()" ion-button outline style="padding: 3px;width: 25%">Aceptar</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
