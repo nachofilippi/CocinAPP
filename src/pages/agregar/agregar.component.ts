@@ -4,7 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { ListaRecetasServicios } from '../../app/servicios/lista-recetas';
 import {RestProvider} from '../../providers/rest/rest';
-
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar',
@@ -16,27 +16,32 @@ import {RestProvider} from '../../providers/rest/rest';
 })
 export class AgregarComponent implements OnInit {
 
-  receta: any;
+  receta: any={};
+  recetaForm : FormGroup;
   categorias: any;
   ingredientes: any;
   ingredientesElegidos: any;
   item: any;
   cantidadItem: number;
-  dificultades: any = [
-    {nombre: "Muy fácil", numero:1},
-    {nombre: "Fácil", numero:2},
-    {nombre: "Intermedio", numero:3},
-    {nombre: "Difícil", numero:4},
-    {nombre: "Muy difícil", numero:5},
-  ];
+  paso_nombre: string = '';
+  paso_descripcion: string = '';
 
   constructor(public alertCtrl: AlertController,
     public navCtrl: NavController,
     public _listaRecetas: ListaRecetasServicios,
     public rest: RestProvider,
-    private camera: Camera
-  ) {}
-
+    private camera: Camera,
+    private formBuilder: FormBuilder
+  ) {
+    this.recetaForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      personas: ['', Validators.required],
+      tiempo: ['', Validators.required],
+      video: ['', Validators.required],
+      categoria: [''],
+      dificultad: ['']
+    });
+  }
 
   ngOnInit() {
       this.receta={};
@@ -50,16 +55,24 @@ export class AgregarComponent implements OnInit {
     }
 
   agregar() {
+    if (!this.cantidadItem || !this.item)
+      return;
       let item: any;
       item={};
       item=this.ingredientes[this.item];
       item.cantidad = this.cantidadItem;
       this.ingredientesElegidos.push(item);
       this.ingredientes.splice (this.item,1);
+      this.cantidadItem=null;
+      this.item = null;
   }
 
-  agregarPaso(nombre:string, descripcion:string) {
-      this.receta.pasos.push({"nombre": nombre, "descripcion": descripcion});
+  agregarPaso() {
+    if (!this.paso_nombre || !this.paso_descripcion)
+    return;
+      this.receta.pasos.push({"nombre": this.paso_nombre, "descripcion": this.paso_descripcion});
+      this.paso_nombre='';
+      this.paso_descripcion='';
   }
 
   borrarPaso(i: number) {
@@ -79,6 +92,12 @@ export class AgregarComponent implements OnInit {
       this.ingredientesElegidos.forEach((value)=> {
           this.receta.ingredientes.push ({"ingrediente":value.id,"cantidad":value.cantidad});
       });
+      this.receta.nombre=this.recetaForm.value.nombre;
+      this.receta.categoria=this.recetaForm.value.categoria;
+      this.receta.dificultad=this.recetaForm.value.dificultad;
+      this.receta.personas=this.recetaForm.value.personas;
+      this.receta.tiempo=this.recetaForm.value.tiempo;
+      this.receta.video=this.recetaForm.value.video;
       this.rest.postReceta(this.receta).subscribe(data => {}, offline => {});
       this.navCtrl.pop();
   }
