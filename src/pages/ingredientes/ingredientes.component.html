@@ -7,7 +7,7 @@
     </ion-searchbar>
     <ion-item>
       <ion-label>Categoría</ion-label>
-      <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()">
+      <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()" cancelText="Cancelar" okText="Aceptar">
         <ion-option value="{{categoria.nombre}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
       </ion-select>
     </ion-item>  </ion-navbar>
