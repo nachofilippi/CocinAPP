@@ -8,6 +8,7 @@ import { DetalleComponent } from '../detalle/detalle.component';
 import { RestProvider } from '../../providers/rest/rest';
 import { LoginProvider } from '../../providers/login/login';
 import { FiltrosPage } from '../filtros/filtros';
+import { OrdenarPage } from '../ordenar/ordenar';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class ListPage {
   ];
   loading: any;
   filtros: any = {};
+  ordenActual:number =0;
 
   constructor(
     private navCtrl: NavController,
@@ -175,4 +177,97 @@ export class ListPage {
     });
     filtrosModal.present();
   }
+
+  verOrden() {
+    let ordenActual= this.ordenActual;
+    let ordenModal = this.modalCtrl.create(OrdenarPage, {ordenActual}, { cssClass: 'info-nutricional-modal' });
+
+    ordenModal.onDidDismiss((i) => {
+      this.ordenar(i);
+    });
+    ordenModal.present();
+  }
+
+  ordenar(i: number) {
+    i= +i;
+    this.ordenActual=i;
+    switch (i) {
+      case 0: {
+        this.sortArray(this.recetas, 'nombre', "ASC");
+        this.sortArray(this.recetasSearch, 'nombre', "ASC");
+        break;
+      }
+      case 1: {
+        this.sortArray(this.recetas, 'nombre', "DESC");
+        this.sortArray(this.recetasSearch, 'nombre', "DESC");
+        break;
+      }
+      case 2: {
+        this.sortArray(this.recetas, 'dificultad', "DESC");
+        this.sortArray(this.recetasSearch, 'dificultad', "DESC");
+        break;
+      }
+      case 3: {
+        this.sortArray(this.recetas, 'dificultad', "ASC");
+        this.sortArray(this.recetasSearch, 'dificultad', "ASC");
+        break;
+      }
+      case 4: {
+        this.sortArray(this.recetas, 'puntos', "DESC");
+        this.sortArray(this.recetasSearch, 'puntos', "DESC");
+        break;
+      }
+      case 5: {
+        this.sortArray(this.recetas, 'puntos', "ASC");
+        this.sortArray(this.recetasSearch, 'puntos', "ASC");
+        break;
+      }
+      case 6: {
+        this.sortArray(this.recetas, 'tiempo', "DESC");
+        this.sortArray(this.recetasSearch, 'tiempo', "DESC");
+        break;
+      }
+      case 7: {
+        this.sortArray(this.recetas, 'tiempo', "ASC");
+        this.sortArray(this.recetasSearch, 'tiempo', "ASC");
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  }
+
+  sortArray(array, propiedad: string, order: "ASC" | "DESC"): void {
+    let i: number = (order === "ASC" ? 1 : -1);
+    if (propiedad !== 'puntos') {
+      array.sort((a, b) => {
+        if (a[propiedad] < b[propiedad])
+          return -1 * i;
+        if (a[propiedad] > b[propiedad])
+          return 1 * i;
+        return 0;
+      });
+    }
+    else {
+      array.sort((a, b) => {
+        if (a.calcularPromedio< b.calcularPromedio)
+          return -1 * i;
+        if (a.calcularPromedio > b.calcularPromedio)
+          return 1 * i;
+        return 0;
+      });
+    }
+  }
+
+  calcularPromedio(receta: any) {
+    if (!receta.puntuaciones.length)
+      return 0;
+    let sum: number = 0;
+    receta.puntuaciones.forEach(element => {
+      sum += element.puntuacion;
+    });
+    return sum / receta.puntuaciones.length;
+  }
+
 }
