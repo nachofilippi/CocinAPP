@@ -1,161 +1,149 @@
 <ion-header>
-    <ion-navbar color="danger">
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>{{ receta.nombre | placeholder:'Nueva receta'}} {{ receta.personas?"("+ (receta.personas>1?receta.personas+' personas':receta.personas+
-            ' persona')+")":''}} </ion-title>
-    </ion-navbar>
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{ receta.nombre | placeholder:'Nueva receta'}} {{ receta.personas?"("+ (receta.personas>1?receta.personas+' personas':receta.personas+
+      ' persona')+")":''}} </ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
-    <form (ngSubmit)="postReceta()" #forma="ngForm">
-        <ion-card>
-            <ion-card-content>
-                <ion-item>
-                    <ion-input class="form-control" type="text" [(ngModel)]="receta.nombre" name="nombre" placeholder="Nombre de receta" required
-                        #nombre="ngModel"></ion-input>
-                </ion-item>
-                <div class="form-error" *ngIf="nombre.errors && (nombre.dirty || nombre.touched)">
-                    <p style="color: red; margin-left: 160px" [hidden]="!nombre.errors.required">Campo requerido.</p>
-                </div>
-                <ion-item>
-                    <ion-input class="form-control" type="number" [(ngModel)]="receta.personas" required name="personas" placeholder="Cantidad de comensales:"
-                        #personas="ngModel"></ion-input>
-                </ion-item>
-                <div class="form-error" *ngIf="personas.errors && (personas.dirty || personas.touched)">
-                    <p style="color: red; margin-left: 160px" [hidden]="!personas.errors.required">Campo requerido.</p>
-                </div>
-                <ion-item>
-                    <ion-input class="form-control" type="number" [(ngModel)]="receta.tiempo" required name="tiempo" placeholder="Tiempo (Min.)"
-                        #tiempo="ngModel" required></ion-input>
-                </ion-item>
-                <div class="form-error" *ngIf="tiempo.errors && (tiempo.dirty || tiempo.touched)">
-                    <p style="color: red; margin-left: 160px" [hidden]="!tiempo.errors.required">Campo requerido.</p>
-                </div>
-                <ion-item>
-                    <ion-input class="form-control" type="text" [(ngModel)]="receta.video" name="video" placeholder="Video explicativo:" #video="ngModel" required></ion-input>
-                </ion-item>
-                <div class="form-error" *ngIf="video.errors && (video.dirty || video.touched)">
-                    <p style="color: red; margin-left: 160px" [hidden]="!video.errors.required">Campo requerido.</p>
-                </div>
-                <ion-item>
-                    <ion-label>Categoría de receta:</ion-label>
-                    <ion-select okText="OK" cancelText="" [(ngModel)]="receta.categoria" name="categoria">
-                        <ion-option value="{{categoria.id}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                  <ion-label style="color: grey">Dificultad:</ion-label>
-                </ion-item>
-                <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" name="dificultad" [(ngModel)]="receta.dificultad"
-                  color="danger">
-                  <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
-                  <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
-                </ion-range>
-            </ion-card-content>
-        </ion-card>
-        <!-- Imagenes -->
-        <ion-card>
-            <ion-card-header>
-                <ion-label>Imágenes</ion-label>
-            </ion-card-header>
-            <ion-card-content>
-                <div style="display: flex;">
-                    <button type="button" style="margin: 0;" ion-button color="danger" clear (click)="takePhoto(1)" class="camera-icon">
-                        <ion-icon name="camera"></ion-icon>
-                    </button>
-                    <button type="button" style="margin: 0;" ion-button color="danger" clear (click)="takePhoto(0)" class="camera-icon">
-                        <ion-icon name="images"></ion-icon>
-                    </button>
-                </div>
-                <ion-slides pager *ngIf="receta.imagenes.length > 0" [autoplay]="3500" [loop]="true" [centeredSlides]="true" class="slides-imagenes">
-                    <ion-slide class="slide-imagen" *ngFor="let imagen of receta.imagenes; let i = index">
-                        <img src="{{imagen}}" style="display:inline" alt="" class="imagen-receta">
-                        <ion-icon color="danger" outline class="borrar-icon" (click)="borrarImagen(i)" name="close"></ion-icon>
-                    </ion-slide>
-                </ion-slides>
-            </ion-card-content>
-        </ion-card>
-        <!-- Ingredientes -->
-        <ion-card>
-            <ion-card-header>
-                <ion-label>Ingredientes:</ion-label>
-            </ion-card-header>
-            <ion-card-content>
-                <ion-item>
-                    <ion-label>Ingrediente:</ion-label>
-                    <ion-select [(ngModel)]="item" name="ingrediente">
-                        <ion-option value="{{i}}" *ngFor="let ingrediente of ingredientes; let i=index">{{ingrediente.nombre}}</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Cantidad:</ion-label>
-                    <ion-input type="number" [(ngModel)]="cantidadItem" name="cantidadItem"></ion-input>
-                </ion-item>
-                <button (click)="agregar()" type="button" ion-button color="danger" outline class="button-block">Agregar</button>
-                <ion-card *ngIf="ingredientesElegidos.length > 0">
-                    <ion-card-header>
-                        <ion-label>Ingredientes agregados</ion-label>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <ion-list>
-                            <ion-item *ngFor="let item of ingredientesElegidos; let i = index">
-                                <button type="button" ion-button color="dark" clear>
-                                    {{ item.nombre }} ({{item.cantidad}} {{item.unidad}})
-                                </button>
-                                <button type="button" (click)="borrarItem(i)" ion-button outline item-right color="danger">
-                                    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-                                    Borrar ingrediente
-                                </button>
-                            </ion-item>
-                        </ion-list>
-                    </ion-card-content>
-                </ion-card>
-            </ion-card-content>
-        </ion-card>
-        <!-- Instrucciones -->
-        <ion-card>
-            <ion-card-header>
-                <ion-label>Instrucciones:</ion-label>
-            </ion-card-header>
-            <ion-card-content>
-                Crear paso:
-                <ion-item>
-                    <ion-label floating>Nombre</ion-label>
-                    <ion-input [(ngModel)]="paso_nombre" type="text" name="paso_nombre"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Descripción</ion-label>
-                    <ion-textarea [(ngModel)]="paso_descripcion" name="paso_descripcion"></ion-textarea>
-                </ion-item>
-                <button type="button" (click)="agregarPaso(paso_nombre, paso_descripcion)" ion-button color="danger" outline class="button-block">Agregar</button>
-                <ion-card *ngIf="receta.pasos.length > 0">
-                    <ion-card-header>
-                        <ion-label>Instrucciones creadas</ion-label>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <ion-list>
-                            <ion-item *ngFor="let paso of receta.pasos; let i = index">
-                                <button ion-button color="dark" clear>
-                                    {{ paso.nombre }}
-                                </button>
-                                <button (click)="borrarPaso(i)" ion-button outline item-right color="danger">
-                                    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-                                    Borrar paso
-                                </button>
-                            </ion-item>
-                        </ion-list>
-                    </ion-card-content>
-                </ion-card>
-            </ion-card-content>
-        </ion-card>
-        <!-- Crear receta button -->
-        <button type="submit" ion-button icon left color="danger" outline class="button-block" (click)="postReceta()">
-            <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
-            Crear Receta
-        </button>
-    </form>
+  <ion-card>
 
+    <form [formGroup]="recetaForm">
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cantidad de comensales</ion-label>
+        <ion-input type="number" formControlName="personas"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tiempo de preparación (Min.)</ion-label>
+        <ion-input type="number" formControlName="tiempo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Video</ion-label>
+        <ion-input type="text" formControlName="video"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Categoría</ion-label>
+        <ion-select okText="Aceptar" cancelText="Cancelar" formControlName="categoria">
+          <ion-option value="{{categoria.id}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label style="color:#999">Dificultad</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-range class="borde" pin="true" min="1" max="5" step="1" snaps="true" formControlName="dificultad" color="danger" style="padding-top: 0">
+          <ion-icon range-left color="secondary" name="alert-outline"></ion-icon>
+          <ion-icon range-right color="danger" name="alert-outline"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </form>
+  </ion-card>
+
+
+  <!-- Imagenes -->
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Imágenes</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <div style="display: flex;">
+        <button type="button" style="margin: 0;" ion-button color="danger" clear (click)="takePhoto(1)" class="camera-icon">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <button type="button" style="margin: 0;" ion-button color="danger" clear (click)="takePhoto(0)" class="camera-icon">
+          <ion-icon name="images"></ion-icon>
+        </button>
+      </div>
+      <ion-slides pager *ngIf="receta.imagenes.length > 0" [autoplay]="3500" [loop]="true" [centeredSlides]="true" class="slides-imagenes">
+        <ion-slide class="slide-imagen" *ngFor="let imagen of receta.imagenes; let i = index">
+          <img src="{{imagen}}" style="display:inline" alt="" class="imagen-receta">
+          <ion-icon color="danger" outline class="borrar-icon" (click)="borrarImagen(i)" name="close"></ion-icon>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+  <!-- Ingredientes -->
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Ingredientes</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Ingrediente</ion-label>
+        <ion-select [(ngModel)]="item" name="ingrediente" cancelText="Cancelar" okText="Aceptar">
+          <ion-option value="{{i}}" *ngFor="let ingrediente of ingredientes; let i=index">{{ingrediente.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cantidad {{item?"("+ingredientes[item].unidad+")":''}}</ion-label>
+        <ion-input type="number" [(ngModel)]="cantidadItem" name="cantidadItem"></ion-input>
+      </ion-item>
+      <button (click)="agregar()" type="button" ion-button color="danger" outline class="button-block">Agregar</button>
+      <ion-card *ngIf="ingredientesElegidos.length > 0">
+        <ion-card-header>
+          <ion-label>Ingredientes agregados</ion-label>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let item of ingredientesElegidos; let i = index">
+              <button type="button" ion-button color="dark" clear>
+                {{ item.nombre }} ({{item.cantidad}} {{item.unidad}})
+              </button>
+              <button type="button" (click)="borrarItem(i)" ion-button outline item-right color="danger">
+                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                Borrar ingrediente
+              </button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <!-- Instrucciones -->
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Instrucciones</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-input [(ngModel)]="paso_nombre" type="text" name="paso_nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Descripción</ion-label>
+        <ion-textarea [(ngModel)]="paso_descripcion" name="paso_descripcion"></ion-textarea>
+      </ion-item>
+      <button type="button" (click)="agregarPaso()" ion-button color="danger" outline class="button-block">Agregar</button>
+      <ion-card *ngIf="receta.pasos.length > 0">
+        <ion-card-header>
+          <ion-label>Instrucciones creadas</ion-label>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let paso of receta.pasos; let i = index">
+              <button ion-button color="dark" clear>
+                {{ paso.nombre }}
+              </button>
+              <button (click)="borrarPaso(i)" ion-button outline item-right color="danger">
+                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                Borrar paso
+              </button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <button type="submit" ion-button icon left color="danger" outline class="button-block" (click)="postReceta()" [disabled]="!recetaForm.valid || !ingredientesElegidos.length || !receta.imagenes.length || !receta.pasos.length">
+    <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+    Crear Receta
+  </button>
 </ion-content>
