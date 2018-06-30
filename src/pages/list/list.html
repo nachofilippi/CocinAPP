@@ -5,13 +5,18 @@
     </button>
     <ion-title>Lista de Recetas <ion-icon (click)="verFiltros()" name="ios-funnel" item-right style="float:right;font-size: 1.5em;"></ion-icon></ion-title>
   </ion-navbar>
+  <ion-navbar>
+
+  <!-- buscador -->
+  <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
+  </ion-searchbar>
+</ion-navbar>
+
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
 
 <ion-content padding>
-  <!-- buscador -->
-  <ion-searchbar [(ngModel)]="filtros.input" (ionInput)="filtrar()" autocomplete="on" placeholder="Buscar">
-  </ion-searchbar>
+
   <!-- filtros -->
   &nbsp;&nbsp;
   <ion-list>
