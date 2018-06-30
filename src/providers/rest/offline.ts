@@ -59,6 +59,9 @@ export class OfflineProvider {
     if (localStorage.getItem("recetas")) {
       recetas = JSON.parse(localStorage.getItem("recetas"));
     }
+    receta.apto_para=[];
+    receta.id= Math.floor(Math.random() * 9999) + 1050;
+    receta.imagenes=['https://www.freeiconspng.com/uploads/restaurant-icon-png-7.png'];
     receta.puntuaciones = [];
     let items: any = [];
     receta.ingredientes.forEach(item => {
