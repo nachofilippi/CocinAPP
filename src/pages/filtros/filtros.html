@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Filtros</ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item (click)="drop.categoria=!drop.categoria; updateDrops()">
+    <ion-label>Categoría</ion-label>
+    <ion-icon [hidden]="drop.categoria" name="arrow-dropdown" item-right></ion-icon>
+    <ion-icon [hidden]="!drop.categoria" name="arrow-dropup" item-right></ion-icon>
+  </ion-item>
+  <ion-list [hidden]="!drop.categoria">
+    <ion-item *ngFor="let categoria of categorias">
+      <ion-label>{{categoria.nombre}}</ion-label>
+      <ion-checkbox color="danger" [(ngModel)]="categoria.checked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-item (click)="drop.dificultad=!drop.dificultad; updateDrops()">
+    <ion-label>Dificultad</ion-label>
+    <ion-icon [hidden]="drop.dificultad" name="arrow-dropdown" item-right></ion-icon>
+    <ion-icon [hidden]="!drop.dificultad" name="arrow-dropup" item-right></ion-icon>
+  </ion-item>
+  <ion-list [hidden]="!drop.dificultad">
+    <ion-item *ngFor="let dificultad of dificultades">
+      <ion-label>{{dificultad.nombre}}</ion-label>
+      <ion-checkbox color="danger" [(ngModel)]="dificultad.checked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-item (click)="drop.tiempo=!drop.tiempo; updateDrops()">
+    <ion-label>Tiempo de preparación (Min.)</ion-label>
+    <ion-icon [hidden]="drop.tiempo" name="arrow-dropdown" item-right></ion-icon>
+    <ion-icon [hidden]="!drop.tiempo" name="arrow-dropup" item-right></ion-icon>
+  </ion-item>
+  <ion-item [hidden]="!drop.tiempo">
+    <ion-range dualKnobs="true" pin="true" min="10" max="180" step="10" color="dark" [(ngModel)]="filtros.tiempo">
+      <ion-label range-left color="secondary">10</ion-label>
+      <ion-label range-right color="danger">180</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <ion-item (click)="drop.comensales=!drop.comensales; updateDrops()">
+    <ion-label>Cantidad de comensales</ion-label>
+    <ion-icon [hidden]="drop.comensales" name="arrow-dropdown" item-right></ion-icon>
+    <ion-icon [hidden]="!drop.comensales" name="arrow-dropup" item-right></ion-icon>
+  </ion-item>
+  <ion-item [hidden]="!drop.comensales">
+    <ion-range dualKnobs="true" pin="true" min="1" max="15" step="1" color="dark" [(ngModel)]="filtros.comensales">
+      <ion-label range-left color="secondary">1</ion-label>
+      <ion-label range-right color="danger">15</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <ion-item (click)="drop.apto=!drop.apto; updateDrops()">
+    <ion-label>Apto para</ion-label>
+    <ion-icon [hidden]="drop.apto" name="arrow-dropdown" item-right></ion-icon>
+    <ion-icon [hidden]="!drop.apto" name="arrow-dropup" item-right></ion-icon>
+  </ion-item>
+  <ion-list [hidden]="!drop.apto">
+    <ion-item *ngFor="let enfermedad of enfermedades">
+      <ion-label>{{enfermedad.nombre}}</ion-label>
+      <ion-checkbox color="danger" [(ngModel)]="enfermedad.checked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-item (click)="drop.ingredientes=!drop.ingredientes; updateDrops()">
+    <ion-label>Ingredientes</ion-label>
+    <ion-badge item-right color="danger">{{cantIngredientes?cantIngredientes:'Todos'}}</ion-badge>
+    <ion-icon [hidden]="drop.ingredientes" name="arrow-dropdown" item-right></ion-icon>
+    <ion-icon [hidden]="!drop.ingredientes" name="arrow-dropup" item-right></ion-icon>
+  </ion-item>
+  <ion-list [hidden]="!drop.ingredientes">
+    <ion-item (click)="seleccionarIngredientes()">
+      <ion-label class="hipervinculo-detalle">
+        <a>Seleccionar ingredientes</a>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div style="float: right">
+      <button (click)="borrarFiltros()" ion-button outline>Borrar filtros</button>
+      <button (click)="dismiss()" ion-button outline>Cancelar</button>
+      <button (click)="aceptar()" ion-button outline>Aplicar</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
