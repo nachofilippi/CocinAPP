@@ -183,7 +183,8 @@ export class ListPage {
     let ordenModal = this.modalCtrl.create(OrdenarPage, {ordenActual}, { cssClass: 'info-nutricional-modal' });
 
     ordenModal.onDidDismiss((i) => {
-      this.ordenar(i);
+      if (i > -1)
+        this.ordenar(i);
     });
     ordenModal.present();
   }
@@ -213,8 +214,8 @@ export class ListPage {
         break;
       }
       case 4: {
-        this.sortArray(this.recetas, 'puntos', "DESC");
-        this.sortArray(this.recetasSearch, 'puntos', "DESC");
+        this.sortArray(this.recetas, 'puntuaciones', "DESC");
+        this.sortArray(this.recetasSearch, 'puntuaciones', "DESC");
         break;
       }
       case 5: {
@@ -240,34 +241,13 @@ export class ListPage {
 
   sortArray(array, propiedad: string, order: "ASC" | "DESC"): void {
     let i: number = (order === "ASC" ? 1 : -1);
-    if (propiedad !== 'puntos') {
-      array.sort((a, b) => {
-        if (a[propiedad] < b[propiedad])
-          return -1 * i;
-        if (a[propiedad] > b[propiedad])
-          return 1 * i;
-        return 0;
-      });
-    }
-    else {
-      array.sort((a, b) => {
-        if (a.calcularPromedio< b.calcularPromedio)
-          return -1 * i;
-        if (a.calcularPromedio > b.calcularPromedio)
-          return 1 * i;
-        return 0;
-      });
-    }
-  }
-
-  calcularPromedio(receta: any) {
-    if (!receta.puntuaciones.length)
+    array.sort((a, b) => {
+      if (a[propiedad] < b[propiedad])
+        return -1 * i;
+      if (a[propiedad] > b[propiedad])
+        return 1 * i;
       return 0;
-    let sum: number = 0;
-    receta.puntuaciones.forEach(element => {
-      sum += element.puntuacion;
     });
-    return sum / receta.puntuaciones.length;
   }
 
 }
