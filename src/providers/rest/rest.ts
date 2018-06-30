@@ -37,7 +37,7 @@ export class RestProvider {
                 if (receta.puntuaciones.length)
                   receta.puntuaciones = pts / receta.puntuaciones.length;
                 else
-                  delete receta.puntuaciones;
+                  receta.puntuaciones = 0;
               });
               return recetas;
             }),
