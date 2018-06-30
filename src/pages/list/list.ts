@@ -32,6 +32,7 @@ export class ListPage {
   ];
   loading: any;
   filtros: any = {};
+  refresher: any = null;
   ordenActual:number =0;
 
   constructor(
@@ -70,7 +71,11 @@ export class ListPage {
     if (this.count === 4) {
       this.count = 0;
       this.filtrar();
+      this.ordenar(this.ordenActual);
       this.loading.dismiss();
+      if (this.refresher)
+        this.refresher.complete();
+      this.refresher = null;
     }
   }
 
@@ -250,4 +255,13 @@ export class ListPage {
     });
   }
 
+  doRefresh(refresher) {
+    this.count=0;
+    this.refresher= refresher;
+    this.mostrarCargando();
+    this.rest.getRecetas().subscribe(data => { this.recetas = data; this.recetasSearch = data; this.cargarFavoritos(); }, offline => { this.recetas = offline; this.recetasSearch = offline; this.cargarFavoritos(); });
+    this.rest.getEnfermedades().subscribe(data => { this.enfermedades = data; this.dismissLoading(); }, offline => { this.enfermedades = offline; this.dismissLoading(); });
+    this.rest.getIngredientes().subscribe(data => { this.ingredientes = data; this.dismissLoading(); }, offline => { this.ingredientes = offline; this.dismissLoading(); });
+    this.rest.getCategoriasRecetas().subscribe(data => { this.categorias = data; this.dismissLoading(); }, offline => { this.categorias = offline; this.dismissLoading(); });
+  }
 }

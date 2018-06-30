@@ -20,6 +20,11 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          refreshingText="Actualizando...">
+        </ion-refresher-content>
+      </ion-refresher>
 
   <!-- filtros -->
   &nbsp;&nbsp;
