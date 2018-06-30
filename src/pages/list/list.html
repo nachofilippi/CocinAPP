@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Lista de Recetas</ion-title>
+    <ion-title>Lista de Recetas <ion-icon (click)="verFiltros()" name="ios-funnel" item-right style="float:right;font-size: 1.5em;"></ion-icon></ion-title>
   </ion-navbar>
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
 </ion-header>
@@ -15,58 +15,6 @@
   <!-- filtros -->
   &nbsp;&nbsp;
   <ion-list>
-    <ion-list-header text-center style="font-size: 20px">
-      <ion-icon [hidden]="filtrar" name="arrow-dropdown" item-end (click)="filtrar=!filtrar;"></ion-icon>
-      <ion-icon [hidden]="!filtrar" name="arrow-dropup" item-end (click)="filtrar=!filtrar;"></ion-icon>
-      filtrar
-    </ion-list-header>
-
-    <ion-item [hidden]="!filtrar">
-      <ion-label>Categoría</ion-label>
-      <ion-select [(ngModel)]="filtros.categoria" (ngModelChange)="filtrar()">
-        <ion-option value="{{categoria.nombre}}" *ngFor="let categoria of categorias">{{categoria.nombre}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <!-- filtro dificultas -->
-    <ion-item [hidden]="!filtrar">
-      <ion-label>Dificultad</ion-label>
-      <ion-select [(ngModel)]="filtros.dificultad" (ngModelChange)="filtrar()">
-        <ion-option value="{{dificultad.numero}}" *ngFor="let dificultad of dificultades">{{dificultad.nombre}}</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <!-- filtro tiempo -->
-    <ion-list [hidden]="!filtrar">
-      <ion-list-header class="label label-ios text-center" style="font-size: 15px;border-bottom: 0px;">
-        <ion-badge item-left color="danger">{{filtros.tiempo.lower}}</ion-badge>
-        <ion-badge item-left color="danger">{{filtros.tiempo.upper}}</ion-badge>
-        Filtrar Tiempo de preparacion
-        <ion-icon [hidden]="statusTiempo" name="arrow-dropdown" item-end (click)="statusTiempo=!statusTiempo;"></ion-icon>
-        <ion-icon [hidden]="!statusTiempo" name="arrow-dropup" item-end (click)="statusTiempo=!statusTiempo;"></ion-icon>
-      </ion-list-header>
-      <ion-item [hidden]="!statusTiempo">
-        <ion-range dualKnobs="true" pin="true" min="10" max="120" step="10" color="dark" [(ngModel)]="filtros.tiempo" (ionChange)="filtrar()">
-          <ion-label range-left color="secondary">10</ion-label>
-          <ion-label range-right color="danger">120</ion-label>
-        </ion-range>
-      </ion-item>
-    </ion-list>
-
-
-    <!-- filto trastornos_alimenticios -->
-      <ion-item [hidden]="!filtrar" style="border-bottom: 0px;font-size: 18px">
-          <ion-label>Apto para</ion-label>
-        <ion-select multiple="true" okText="OK" cancelText="" [(ngModel)]="filtros.enfermedades" (ngModelChange)="filtrar()">
-          <ion-option value="{{enfermedad.nombre}}" *ngFor="let enfermedad of enfermedades">{{enfermedad.nombre}}</ion-option>
-        </ion-select>
-      </ion-item>
-
-  <ion-item [hidden]="!filtrar" (click)="seleccionarIngredientes()">
-      <ion-label>Ingredientes</ion-label>
-      <ion-icon name="arrow-dropdown" item-right></ion-icon>
-  </ion-item>
-
   &nbsp;&nbsp;
   <!-- titulo y cantidad de elementos -->
   <ion-list *ngFor="let receta of recetasSearch">
