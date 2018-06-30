@@ -115,11 +115,11 @@
     <ion-card-content>
       Crear paso:
       <ion-item>
-        <ion-label floating>Nombre</ion-label>
+        <ion-label>Nombre</ion-label>
         <ion-input [(ngModel)]="paso_nombre" type="text" name="paso_nombre"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Descripción</ion-label>
+        <ion-label>Descripción</ion-label>
         <ion-textarea [(ngModel)]="paso_descripcion" name="paso_descripcion"></ion-textarea>
       </ion-item>
       <button type="button" (click)="agregarPaso()" ion-button color="danger" outline class="button-block">Agregar</button>
