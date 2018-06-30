@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Ordenar por</ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+</ion-header>
+
+<ion-content padding>
+  <ion-list radio-group [(ngModel)]="seleccion">
+    <ion-item *ngFor="let criterio of criterios;let i=index">
+      <ion-radio value="{{criterio.clave}}"></ion-radio>
+      <ion-label>{{criterio.valor}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <div style="float: right">
+        <button (click)="dismiss(0)" ion-button outline>Cancelar</button>
+        <button (click)="dismiss(seleccion)" ion-button outline>Aceptar</button>
+      </div>
+    </ion-toolbar>
+  </ion-footer>

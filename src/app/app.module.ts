@@ -18,6 +18,7 @@ import { LoginPage }  from '../pages/login/login';
 import { FavoritosPage } from '../pages/favoritos/favoritos';
 import { InfoNutricionalPage } from '../pages/info-nutricional/info-nutricional';
 import { FiltrosPage } from '../pages/filtros/filtros';
+import { OrdenarPage } from '../pages/ordenar/ordenar';
 
 // otras importaciones
 import { StatusBar } from '@ionic-native/status-bar';
@@ -45,7 +46,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     LoginPage,
     FavoritosPage,
     InfoNutricionalPage,
-    FiltrosPage
+    FiltrosPage,
+    OrdenarPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     LoginPage,
     FavoritosPage,
     InfoNutricionalPage,
-    FiltrosPage
+    FiltrosPage,
+    OrdenarPage
   ],
   providers: [
     StatusBar,
