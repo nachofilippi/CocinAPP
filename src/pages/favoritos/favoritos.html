@@ -11,13 +11,13 @@
 <ion-content class="categories">
   <h2 class="favoritos-title">Favoritos</h2>
   <ion-list *ngIf="favoritos.length>0">
-    <ion-item *ngFor="let favorito of favoritos; let i = index">
+    <ion-item *ngFor="let favorito of favoritos; let i = index" (click)="verFavorito(favorito)">
       <h1>{{ favorito.nombre }}</h1>
       <ion-avatar item-start>
         <img src="{{favorito.imagenes[0]}}" alt="">
       </ion-avatar>
       <h3>({{favorito.personas}} {{favorito.personas===1?' persona':' personas'}} )</h3>
-      <ion-icon item-end name="arrow-dropright" (click)="verFavorito(favorito)"></ion-icon>
+      <ion-icon item-end name="arrow-dropright"></ion-icon>
     </ion-item>
   </ion-list>
   <div *ngIf="favoritos.length<1" style="display:flex;justify-content:center;align-items:center;width:100%;height:80%;">

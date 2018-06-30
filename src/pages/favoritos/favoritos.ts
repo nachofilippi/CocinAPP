@@ -1,5 +1,5 @@
 import {NavController, LoadingController} from 'ionic-angular';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RestProvider} from '../../providers/rest/rest';
 import { DetalleComponent } from '../detalle/detalle.component';
 import { ListPage } from '../list/list';
@@ -8,13 +8,13 @@ import { ListPage } from '../list/list';
     selector: 'page-favoritos',
     templateUrl: 'favoritos.html'
 })
-export class FavoritosPage implements OnInit {
+export class FavoritosPage {
 
     favoritos: any = [];
     loading: any;
 
-    ngOnInit(): void {
-      this.mostrarCargando();
+    ionViewDidEnter(){
+        this.mostrarCargando();
         this.rest.getFavoritos().subscribe(data => {this.favoritos = data; this.dismissLoading();}, offline => {this.favoritos = offline; this.dismissLoading();});
     }
 
