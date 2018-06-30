@@ -73,12 +73,12 @@
   <!-- Ingredientes -->
   <ion-card>
     <ion-card-header>
-      <ion-label>Ingredientes:</ion-label>
+      <ion-label>Ingredientes</ion-label>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
         <ion-label>Ingrediente</ion-label>
-        <ion-select [(ngModel)]="item" name="ingrediente">
+        <ion-select [(ngModel)]="item" name="ingrediente" cancelText="Cancelar" okText="Aceptar">
           <ion-option value="{{i}}" *ngFor="let ingrediente of ingredientes; let i=index">{{ingrediente.nombre}}</ion-option>
         </ion-select>
       </ion-item>
@@ -110,10 +110,9 @@
   <!-- Instrucciones -->
   <ion-card>
     <ion-card-header>
-      <ion-label>Instrucciones:</ion-label>
+      <ion-label>Instrucciones</ion-label>
     </ion-card-header>
     <ion-card-content>
-      Crear paso:
       <ion-item>
         <ion-label>Nombre</ion-label>
         <ion-input [(ngModel)]="paso_nombre" type="text" name="paso_nombre"></ion-input>
