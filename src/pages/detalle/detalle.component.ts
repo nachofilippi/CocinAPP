@@ -5,7 +5,8 @@ import { ToastController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { LoginProvider } from '../../providers/login/login';
-import {InfoNutricionalPage} from '../info-nutricional/info-nutricional'
+import {InfoNutricionalPage} from '../info-nutricional/info-nutricional';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 
 @Component({
@@ -21,10 +22,11 @@ export class DetalleComponent implements OnInit {
   favorito: boolean;
   share: any = { facebook: true, whatsapp: true, twitter: true, instagram: true };
   yaPuntuo: number;
+  reproduciendo: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
     private toastCtrl: ToastController, private rest: RestProvider, public modalCtrl: ModalController,
-    public socialSharing: SocialSharing, private login: LoginProvider) {
+    public socialSharing: SocialSharing, private login: LoginProvider, private tts: TextToSpeech) {
     this.receta = this.navParams.get("receta");
   }
 
@@ -233,6 +235,23 @@ export class DetalleComponent implements OnInit {
     let info_nutricional = this.receta.info_nutricional;
     let profileModal = this.modalCtrl.create(InfoNutricionalPage, { info_nutricional }, { cssClass: 'info-nutricional-modal' });
     profileModal.present();
+  }
+
+  reproducir(texto: string) {
+    this.reproduciendo = true;
+    this.tts.speak({ text: texto, locale: 'es-ES' })
+      .then(() => this.reproduciendo = false)
+      .catch((reason: any) => console.log(reason));
+  }
+
+  stop() {
+    this.reproduciendo = false;
+    this.tts.speak("").then(() => {})
+      .catch((reason: any) => console.log(reason));;
+  }
+
+  ionViewWillLeave(){
+    this.stop();
   }
 
 }

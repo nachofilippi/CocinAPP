@@ -119,7 +119,7 @@
           <ion-slides pager *ngIf="pasos" style="height: fit-content" [paginationType]="fraction">
 
             <ion-slide *ngFor="let paso of receta.pasos" style="margin-top: 15px;">
-              <h2 color="red" style="margin-bottom: 15px;font-size: 20px">{{paso.nombre}}</h2>
+              <h2 color="red" style="margin-bottom: 15px;font-size: 20px">{{paso.nombre}}<ion-icon name="volume-up" color="danger" style="float: right" (click)="reproducir(paso.descripcion)" [hidden]="reproduciendo"></ion-icon><ion-icon [hidden]="!reproduciendo" name="hand" color="danger" style="float: right" (click)="stop()"></ion-icon></h2>
               <h5 color="danger" style="margin-bottom: 35px;font-size: 14px;font-family: serif;">{{paso.descripcion}}</h5>
             </ion-slide>
 
