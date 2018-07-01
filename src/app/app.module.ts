@@ -32,6 +32,7 @@ import { Camera } from '@ionic-native/camera';
 import { Facebook } from '@ionic-native/facebook';
 import { LoginProvider } from '../providers/login/login';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     Facebook,
     LoginProvider,
     Camera,
-    SocialSharing
+    SocialSharing,
+    TextToSpeech
   ]
 })
 export class AppModule {}
