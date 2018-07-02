@@ -44,7 +44,8 @@
       <!-- elementos -->
       <ion-list [hidden]="!receta.open">
         <ion-item *ngFor="let item of receta.ingredientes">
-          <ion-label> - {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})</ion-label>
+          <ion-label>{{item.ingrediente.nombre}}</ion-label>
+          <p item-right style="color: black;font-size: 16px;">{{item.cantidad}} {{item.ingrediente.unidad}}</p>
         </ion-item>
         <ion-item (click)="verDetalle(receta)">
           <ion-label class="hipervinculo-detalle">

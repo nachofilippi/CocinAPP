@@ -103,7 +103,8 @@
           <ion-icon [hidden]="!ingredientes" name="arrow-dropup" style="float: right"></ion-icon>
       </ion-title>
         <ion-item [hidden]="!ingredientes" *ngFor="let item of receta.ingredientes" Descripcion icon-right>
-          {{item.ingrediente.nombre}} ({{item.cantidad}} {{item.ingrediente.unidad}})
+          <ion-label>{{item.ingrediente.nombre}}</ion-label>
+          <p item-right style="color: black;font-size: 16px;">{{item.cantidad}} {{item.ingrediente.unidad}}</p>
         </ion-item>
       </ion-list>
     </ion-card-content>
