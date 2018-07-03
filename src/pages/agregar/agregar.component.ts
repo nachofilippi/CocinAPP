@@ -120,7 +120,6 @@ export class AgregarComponent implements OnInit {
   }
 
   validar(){
-    this.changeFocus();
     let array:any=[];
     array=this.ingredientesElegidos.filter(ing=> {
      return !ing.cantidad || ing.cantidad < 1;
