@@ -70,6 +70,22 @@ export class OfflineProvider {
       })[0];
       items.push({ ingrediente: ingrediente, cantidad: item.cantidad });
     });
+    receta.info_nutricional = {
+      "id": 140,
+      "cantidad": 0,
+      "calorias": (Math.floor(Math.random() * 400) + 100)*receta.personas,
+      "grasas_totales": (Math.floor(Math.random() * 200) + 20)*receta.personas,
+      "sodio": (Math.floor(Math.random() * 40) + 0)*receta.personas,
+      "carbohidratos": (Math.floor(Math.random() * 100) + 20)*receta.personas,
+      "fibras": (Math.floor(Math.random() * 150) + 0)*receta.personas,
+      "proteinas": (Math.floor(Math.random() * 50) + 1)*receta.personas,
+      "calcio": (Math.floor(Math.random() * 30) + 0)*receta.personas,
+      "hierro": (Math.floor(Math.random() * 30) + 1)*receta.personas,
+      "potasio": (Math.floor(Math.random() * 50) + 1)*receta.personas,
+      "colesterol": (Math.floor(Math.random() * 50) + 0)*receta.personas,
+      "magnesio": (Math.floor(Math.random() * 20) + 0)*receta.personas,
+      "zinc": (Math.floor(Math.random() * 20) + 0)*receta.personas
+    };
     receta.ingredientes = items;
     recetas.push(receta);
     localStorage.setItem("recetas", JSON.stringify(recetas));
