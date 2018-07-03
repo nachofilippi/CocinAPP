@@ -142,7 +142,7 @@
       </ion-card>
     </ion-card-content>
   </ion-card>
-  <button type="submit" ion-button icon left color="danger" outline class="button-block" (click)="postReceta()" [disabled]="!recetaForm.valid || !ingredientesElegidos.length || !receta.imagenes.length || !receta.pasos.length">
+  <button type="submit" ion-button icon left color="danger" outline class="button-block" (click)="postReceta()" [disabled]="!recetaForm.valid || !ingredientesElegidos.length">
     <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
     Crear Receta
   </button>
