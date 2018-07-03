@@ -18,7 +18,7 @@
   <ion-list>
     <ion-item *ngFor="let ingrediente of ingredientesSearch; let i = index">
       <ion-label>{{ingrediente.nombre}}</ion-label>
-      <ion-checkbox [(ngModel)]="ingrediente.elegido" (ngModelChange)="seleccionar(i)"></ion-checkbox>
+      <ion-checkbox color="danger" [(ngModel)]="ingrediente.elegido" (ngModelChange)="seleccionar(i)"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>
