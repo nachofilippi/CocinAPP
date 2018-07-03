@@ -92,7 +92,8 @@ export class AgregarComponent implements OnInit {
       if (element.id === id)
         element.elegido = false;
     });
-      this.ingredientesElegidos.splice(i, 1);
+    this.ingredientesElegidos.splice(i, 1);
+    this.changeFocus();
   }
 
   postReceta() {
@@ -119,6 +120,7 @@ export class AgregarComponent implements OnInit {
   }
 
   validar(){
+    this.changeFocus();
     let array:any=[];
     array=this.ingredientesElegidos.filter(ing=> {
      return !ing.cantidad || ing.cantidad < 1;
@@ -154,9 +156,22 @@ export class AgregarComponent implements OnInit {
         this.ingredientesElegidos = data.filter((ingrediente) => {
           return (ingrediente.elegido);
         });
+        this.changeFocus();
       }
     });
     modal.present();
+  }
+
+  changeFocus(){
+    this.ingredientesElegidos.forEach(element => {
+      delete element.focus;
+    });
+    this.ingredientesElegidos.some(element => {
+      if (!element.cantidad){
+        element.focus=true;
+        return true;
+      }
+    });
   }
 
   crearReceta() {

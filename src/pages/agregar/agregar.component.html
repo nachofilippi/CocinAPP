@@ -83,7 +83,8 @@
           <ion-label style="color:black">
             {{ item.nombre }} ({{item.unidad}})
           </ion-label>
-          <ion-input required name="cantidad" type="number" min="1" [(ngModel)]="item.cantidad" style="text-align: right!important"></ion-input>
+          <ion-input autofocus *ngIf="item.focus" required name="cantidad" type="number" min="1" [(ngModel)]="item.cantidad" style="text-align: right!important"></ion-input>
+          <ion-input *ngIf="!item.focus" required name="cantidad" type="number" min="1" [(ngModel)]="item.cantidad" style="text-align: right!important"></ion-input>
           <button type="button" (click)="borrarItem(i, item.id)" ion-button item-right color="danger">
             <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
           </button>
