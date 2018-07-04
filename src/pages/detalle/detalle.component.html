@@ -77,7 +77,7 @@
           </ion-col> -->
     </ion-item>
   </ion-card>
-  <ion-card *ngIf="receta.creador">
+  <ion-card *ngIf="receta.creador && receta.creador.nombre">
     <ion-card-content>
       <ion-title class="label text-center" (click)="video=!video;">
         CREADA POR
