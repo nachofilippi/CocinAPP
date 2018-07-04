@@ -78,6 +78,21 @@
     </ion-item>
   </ion-card>
   <ion-card>
+    <ion-card-content>
+      <ion-title class="label text-center" (click)="video=!video;">
+        CREADA POR
+        <ion-icon [hidden]="video" name="arrow-dropdown" style="float: right"></ion-icon>
+        <ion-icon [hidden]="!video" name="arrow-dropup" style="float: right"></ion-icon>
+      </ion-title>
+      <ion-item *ngIf="receta.creador" style="text-align: center;">
+        <h1 style="font-size: 20px;">{{ receta.creador.nombre }}</h1>
+        <ion-avatar item-start>
+          <img style="width: 60px;height: 60px;" src="{{receta.creador.imagen}}" alt="">
+        </ion-avatar>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
     <!-- ingredientes -->
     <ion-card-content>
         <!-- video -->
