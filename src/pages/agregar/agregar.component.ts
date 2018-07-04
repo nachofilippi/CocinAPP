@@ -107,6 +107,8 @@ export class AgregarComponent implements OnInit {
     this.receta.personas = this.recetaForm.value.personas;
     this.receta.tiempo = this.recetaForm.value.tiempo;
     this.receta.video = this.recetaForm.value.video;
+    if (!this.receta.video || this.receta.video === '')
+      this.receta.video = 'https://www.youtube.com/embed/bB2v6QfsimE';
     this.rest.postReceta(this.receta).subscribe(data => { }, offline => { });
     let toast = this.toastCtrl.create({
       message: "Tu receta creada correctamente! Muchas gracias por colaborar con CocinApp.",
