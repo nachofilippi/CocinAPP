@@ -40,7 +40,7 @@ export class AgregarComponent implements OnInit {
     this.recetaForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       personas: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(15)])],
-      tiempo: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(180)])],
+      tiempo: ['', Validators.compose([Validators.required, Validators.min(10), Validators.max(180)])],
       video: [''],
       categoria: ['', Validators.required],
       dificultad: [0, Validators.required]
