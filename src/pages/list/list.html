@@ -36,7 +36,7 @@
           <ion-thumbnail item-start  (click)="verDetalle(receta)">
                 <img src="{{receta.imagenes[0]}}">
           </ion-thumbnail>
-          <h2 (click)="verDetalle(receta)"> {{ receta.nombre }}</h2>
+          <h2 (click)="verDetalle(receta)" text-wrap> {{ receta.nombre }}</h2>
           <ion-icon [hidden]="receta.open" name="arrow-dropdown" item-right (click)="receta.open=!receta.open;"></ion-icon>
           <ion-icon [hidden]="!receta.open" name="arrow-dropup" item-right (click)="receta.open=!receta.open;"></ion-icon>
           <!-- <ion-icon name="information-circle" item-left  color="danger" (click)="verDetalle(receta)"></ion-icon> -->
