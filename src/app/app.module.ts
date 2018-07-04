@@ -19,6 +19,7 @@ import { FavoritosPage } from '../pages/favoritos/favoritos';
 import { InfoNutricionalPage } from '../pages/info-nutricional/info-nutricional';
 import { FiltrosPage } from '../pages/filtros/filtros';
 import { OrdenarPage } from '../pages/ordenar/ordenar';
+import { CopiarMailPage } from '../pages/copiar-mail/copiar-mail';
 
 // otras importaciones
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,6 +34,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { LoginProvider } from '../providers/login/login';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { Clipboard } from '@ionic-native/clipboard';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     FavoritosPage,
     InfoNutricionalPage,
     FiltrosPage,
-    OrdenarPage
+    OrdenarPage,
+    CopiarMailPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     FavoritosPage,
     InfoNutricionalPage,
     FiltrosPage,
-    OrdenarPage
+    OrdenarPage,
+    CopiarMailPage
   ],
   providers: [
     StatusBar,
@@ -79,7 +83,8 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     LoginProvider,
     Camera,
     SocialSharing,
-    TextToSpeech
+    TextToSpeech,
+    Clipboard
   ]
 })
 export class AppModule {}

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Copiar mail </ion-title>
+  </ion-navbar>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
+</ion-header>
+
+<ion-content padding>
+
+  <h1 style="font-size: 24px;margin-top:25px; text-align: center">Esta pantalla es sólo para la demostración. Hacé click en el nombre de tu grupo para copiar la dirección de mail al portapapeles
+    y poder loguearte con mayor facilidad!
+  </h1>
+  <h1 style="font-size: 28px; margin-top:18px; text-align: center">La contraseña es: <div style="font-family: sans-serif">cocinapp</div></h1>
+  <ion-list>
+    <ion-item *ngFor="let item of items" (click)="click(item.email)">
+      <ion-label text-wrap style="font-size: 20px;margin-top: 8px;">{{item.nombre}}: {{item.email}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

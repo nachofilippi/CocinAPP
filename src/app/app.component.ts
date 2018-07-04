@@ -11,7 +11,7 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import {OfflineProvider} from '../providers/rest/offline';
 import { FavoritosPage } from '../pages/favoritos/favoritos';
-
+import { CopiarMailPage } from '../pages/copiar-mail/copiar-mail';
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +20,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
+  copy: number = 0;
   pages: Array<{title: string, component: any}>;
   proximamente: Array<{title: string, descripcion: string}>;
 
@@ -79,6 +79,15 @@ export class MyApp {
       });
       alert.present();
 
+  }
+
+  copiar() {
+    this.copy++;
+    if (this.copy === 7) {
+      this.copy = 0;
+      this.nav.setRoot(HomePage);
+      this.nav.push(CopiarMailPage);
+    }
   }
 
 }
