@@ -10,7 +10,7 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item style="height: 70%;"><img src="{{usuario.foto}}" class="foto-perfil"></ion-item>
+        <ion-item style="height: 70%;text-align: center"><img [ngStyle]="{'width': usuario.email==='alicia_efoxfev_mogliani@tfbnw.net'?'70%':'100%'}" src="{{usuario.foto}}" class="foto-perfil"></ion-item>
         <ion-item text-center>{{usuario.nombre}}</ion-item>
         <ion-item text-center>{{usuario.email}}</ion-item>
         <button ion-button full large color="primary" (click)="logout()" class="cerrar-sesion">
