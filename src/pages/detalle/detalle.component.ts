@@ -233,6 +233,7 @@ export class DetalleComponent implements OnInit {
 
   verInfoNutricional() {
     let info_nutricional = this.receta.info_nutricional;
+    info_nutricional.comensales= this.receta.personas;
     let profileModal = this.modalCtrl.create(InfoNutricionalPage, { info_nutricional }, { cssClass: 'info-nutricional-modal' });
     profileModal.present();
   }

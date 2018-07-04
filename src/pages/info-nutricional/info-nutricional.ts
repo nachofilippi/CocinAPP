@@ -31,7 +31,10 @@ export class InfoNutricionalPage {
     {label:"Zinc", atr:"zinc", unidad:"mg"},
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-    this.info_nutricional = this.navParams.get("info_nutricional");
+    this.info_nutricional = Object.assign({}, this.navParams.get("info_nutricional"));
+    this.datos.forEach(element => {
+      this.info_nutricional[element.atr]=Math.floor (this.info_nutricional[element.atr]/this.info_nutricional.comensales);
+    });
   }
 
   dismiss() {
