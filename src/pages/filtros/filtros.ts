@@ -59,7 +59,7 @@ export class FiltrosPage {
 
   mostrarCargando() {
     this.loading = this.loadingCtrl.create({
-      content: 'Cargando recetas...'
+      content: 'Cargando filtros...'
     });
 
     this.loading.present();
